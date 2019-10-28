@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+	<style type="text/css">
+    table.hovertable {
+	width:100%;
+    font-family: verdana,arial,sans-serif;
+    font-size:11px;
+    color:#333333;
+    border-width: 1px;
+    border-color: #999999;
+    border-collapse: collapse;
+	}
+	table.hovertable th {
+		background-color:#c3dde0;
+		border-width: 1px;
+		padding: 8px;
+		border-style: solid;
+		border-color: #a9c6c9;
+	}
+	table.hovertable tr {
+		background-color:#d4e3e5;
+	}
+	table.hovertable tr:hover {
+		background-color:#aaa;
+	}
+	table.hovertable td {
+		text-align:center;
+		border-width: 1px;
+		padding: 8px;
+		border-style: solid;
+		border-color: #a9c6c9;
+	}
+	</style>
+</head>
+<body>
+    <!-- CSS goes in the document HEAD or added to your external stylesheet -->
+
+	<table class="hovertable" id="table">
+	<tr>
+		<th>创建时间</th><th>商品信息</th><th>状态</th><th>返利</th>
+	</tr>
+	</table>
+    <script src="http://libs.baidu.com/jquery/2.1.4/jquery.min.js"></script>
+    <script src="js/Tools.js"></script>
+    <script >
+        var name = lx.request("name");
+        lx.ajax("/getShowLs?name="+name,function (data) {
+            data.rows.forEach(function (v) {
+                $("#table").append(`<tr><td>${v.add_time}</td><td>${v.title}</td><td>${v.status}</td><td>${v.fx}</td></tr>`);
+            })
+        });
+    </script>
+        
+    
+</body>
+</html>
