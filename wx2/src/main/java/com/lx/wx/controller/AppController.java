@@ -103,7 +103,7 @@ public class AppController {
                         msg = parse(str,"暂未找到优惠信息!\n"
                                 +"一一一一一温馨提示一一一一\n" +
                                 "回复“提现”可以提取当前余.额\n" +
-                                "回复“查询”可以获取账.单信息");
+                                "回复“查询”可以获取账.单信息!");
                     }else {
                         msg = parseTW(str,t);
                     }
