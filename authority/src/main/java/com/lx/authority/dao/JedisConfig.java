@@ -24,8 +24,8 @@ public class JedisConfig extends CachingConfigurerSupport {
     public JedisPool redisPoolFactory(Environment environment){
         JedisPoolConfig jedisPoolConfig = new JedisPoolConfig();
         jedisPoolConfig.setMaxIdle(Integer.parseInt(Optional.ofNullable(environment.getProperty("spring.redis.pool.max-idle")).orElse("8")));
-        jedisPoolConfig.setMaxWaitMillis(Long.parseLong(Optional.ofNullable(environment.getProperty("spring.redis.pool.max-wait")).orElse("1000")));
-        jedisPoolConfig.setMaxTotal(Integer.parseInt(Optional.ofNullable(environment.getProperty("spring.redis.pool.max-active")).orElse("200")));
+        jedisPoolConfig.setMaxWaitMillis(Long.parseLong(Optional.ofNullable(environment.getProperty("spring.redis.pool.max-wait")).orElse("3000")));
+        jedisPoolConfig.setMaxTotal(Integer.parseInt(Optional.ofNullable(environment.getProperty("spring.redis.pool.max-active")).orElse("500")));
         jedisPoolConfig.setMinIdle(Integer.parseInt(Optional.ofNullable(environment.getProperty("spring.redis.pool.min-idle")).orElse("0")));
         String host = Optional.ofNullable(environment.getProperty("spring.redis.host")).orElse("localhost");
         int port = Integer.parseInt(Optional.ofNullable(environment.getProperty("spring.redis.port")).orElse("6379"));

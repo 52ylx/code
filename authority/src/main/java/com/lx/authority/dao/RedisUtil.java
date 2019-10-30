@@ -12,6 +12,7 @@ import redis.clients.jedis.JedisPool;
 import redis.clients.jedis.Pipeline;
 import redis.clients.jedis.Response;
 
+import javax.annotation.PostConstruct;
 import java.io.IOException;
 import java.util.*;
 import java.util.function.Consumer;
@@ -262,58 +263,41 @@ public class RedisUtil {
     }
     /** 备份*/
      public void backup(){
-         exec(jedis->{jedis.save();});
+         exec(jedis->{jedis.bgsave();});
      }
 
-
-    //说明:执行lua脚本 分页查询hash
-    /**{ ylx } 2019/10/16 17:02 */
-    private String luaHash = null;
+    //获取分页
     public List listPage(String key,String limit,String page,String find){
-//        String lua = "local fields = redis.call(\"HVALS\", KEYS[1]);local limit = tonumber(KEYS[2]);local page = tonumber(KEYS[3]);local result = {};local res={0};local j=0; for i, v in ipairs(fields) do  res[1]=i; if i>(page-1)*limit and i<=page*limit then j = j+1; result[j] = v; end; end;res[2]=result; return res;";
         String lua = "local fields = redis.call(\"HVALS\", KEYS[1]);local limit = tonumber(KEYS[2]);local page = tonumber(KEYS[3]);local result = {};local res={0};local j=0;local k=0; for i, v in ipairs(fields) do if string.len(KEYS[4])== 0 or string.find(v,KEYS[4]) then k=k+1; res[1]=k; if i>(page-1)*limit and i<=page*limit then j = j+1; result[j] = v; end; end;end;res[2]=result; return res;";
-        if(luaHash == null){
-            luaHash = exec(jedis -> {
-                return jedis.scriptLoad(lua);
-            });
-        }
-        return (List)exec(jedis -> {
-            return  jedis.evalsha(luaHash,4,key,limit,page,find);
-        });
+        return evalsha(lua,key,limit,page,find);
     }
-   //使用redis 进行限流操作 start
     /** 每分钟限制多少次 */
-    public long minuteLimit(String key , int count, Supplier<Boolean> supp){
-        return limit(key,count,60,supp);
+    public long minuteLimit(String key , int limit, Supplier<Boolean> supp){
+        return limit(key,LX.str(limit),"60",supp);
     }
-    public long limit(String key, int count, int time, Supplier<Boolean> supp){
-        Assert.hasText(key,"限流key不能为空");
-        Assert.isTrue(count>0,"申请的数量不能小于0");
-        Assert.isTrue(time>0,"限流时间不能小于0");
+    //删除匹配的key
+    public void dels(String key){
+        String lua = "local keys = unpack(redis.call(\"keys\",KEYS[1])); if (keys) then redis.call(\"del\",keys);end;";
+        evalsha(lua,key);
+    }
+    public long limit(String key , String limit,String time, Supplier<Boolean> supp){
+        String lua = "local key = KEYS[1];local limit = tonumber(KEYS[2]);local time = tonumber(KEYS[3]);local ttl = redis.call(\"ttl\",key);local incr = redis.call(\"incr\",key);if (ttl > 0) then if incr > limit then return ttl;end;else redis.call(\"expire\",key,KEYS[3]);end;return 0;";
         key = "system:limit:"+key;
-        final String finalKey = key;
-        return exec((jedis) -> {
-            Pipeline pipe = jedis.pipelined();
-            pipe.multi();
-            Response<Long> incr = pipe.incr(finalKey);
-            Response<Long> ttl = pipe.ttl(finalKey);
-            pipe.exec();
-            try {pipe.close();} catch (IOException e) {}
-            long expire = ttl.get();
-            if (expire==-1){//没有设置超时时间
-                jedis.expire(finalKey,time);
-            }else {
-                //个数超过了限制
-                if (LX.compareTo(incr.get(),count, MathUtil.Type.GT)){
-                    return expire;
-                }
-            }
-            //
-            if (supp.get()){
-                jedis.del(finalKey);
-            }
-            return 0L;
+        long t =  evalsha(lua,key,limit,time);
+        if (t==0 && supp.get()){
+            dels(key);//删除记录
+        }
+        return t;
+    }
+    public <T>T evalsha(String script,String...KEYS){
+        //获取脚本hash值
+        String hsah = get("system:evalsha:"+LX.md5(script),String.class,()->{
+            return exec(jedis -> {
+                return jedis.scriptLoad(script);
+            });
+        },0);
+        return exec(jedis -> {
+            return  (T)jedis.evalsha(hsah, KEYS.length ,KEYS);
         });
     }
-    //使用redis 进行限流操作 end
 }
