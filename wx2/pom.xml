@@ -55,26 +55,32 @@
             <scope>system</scope>
             <systemPath>${project.basedir}/lib/authority.jar</systemPath>
         </dependency>
-
         <dependency>
-            <groupId>io.github.biezhi</groupId>
-            <artifactId>wechat-api</artifactId>
-            <version>1.0.6</version>
-            <!--<exclusions>-->
-                <!--<exclusion>-->
-                    <!--<groupId>ch.qos.logback</groupId>-->
-                    <!--<artifactId>logback-classic</artifactId>-->
-                <!--</exclusion>-->
-                <!--<exclusion>-->
-                    <!--<groupId>com.google.zxing</groupId>-->
-                    <!--<artifactId>core</artifactId>-->
-                <!--</exclusion>-->
-                <!--<exclusion>-->
-                    <!--<groupId>com.google.zxing</groupId>-->
-                    <!--<artifactId>javase</artifactId>-->
-                <!--</exclusion>-->
-            <!--</exclusions>-->
+            <groupId>app-wx</groupId>
+            <artifactId>app-wx</artifactId>
+            <version>1.0</version>
+            <scope>system</scope>
+            <systemPath>${project.basedir}/lib/wechat-api.jar</systemPath>
         </dependency>
+        <!--<dependency>-->
+            <!--<groupId>io.github.biezhi</groupId>-->
+            <!--<artifactId>wechat-api</artifactId>-->
+            <!--<version>1.0.6</version>-->
+            <!--&lt;!&ndash;<exclusions>&ndash;&gt;-->
+                <!--&lt;!&ndash;<exclusion>&ndash;&gt;-->
+                    <!--&lt;!&ndash;<groupId>ch.qos.logback</groupId>&ndash;&gt;-->
+                    <!--&lt;!&ndash;<artifactId>logback-classic</artifactId>&ndash;&gt;-->
+                <!--&lt;!&ndash;</exclusion>&ndash;&gt;-->
+                <!--&lt;!&ndash;<exclusion>&ndash;&gt;-->
+                    <!--&lt;!&ndash;<groupId>com.google.zxing</groupId>&ndash;&gt;-->
+                    <!--&lt;!&ndash;<artifactId>core</artifactId>&ndash;&gt;-->
+                <!--&lt;!&ndash;</exclusion>&ndash;&gt;-->
+                <!--&lt;!&ndash;<exclusion>&ndash;&gt;-->
+                    <!--&lt;!&ndash;<groupId>com.google.zxing</groupId>&ndash;&gt;-->
+                    <!--&lt;!&ndash;<artifactId>javase</artifactId>&ndash;&gt;-->
+                <!--&lt;!&ndash;</exclusion>&ndash;&gt;-->
+            <!--&lt;!&ndash;</exclusions>&ndash;&gt;-->
+        <!--</dependency>-->
     </dependencies>
     <build>
         <plugins>

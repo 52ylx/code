@@ -5,7 +5,6 @@ import com.lx.authority.dao.RedisUtil;
 import com.lx.entity.Var;
 import com.lx.util.LX;
 import com.lx.wx.entity.GZH;
-import com.lx.wx.entity.Order;
 import com.lx.wx.entity.Show;
 import com.lx.wx.entity.TW;
 import com.lx.wx.service.TaoBaoService;
@@ -123,13 +122,6 @@ public class AppController {
             pw.close();
         }
     }
-    public void add(StringBuilder s,List<Order> ls){
-        if (LX.isNotEmpty(ls)){
-            for (Order o:ls){
-                s.append(o.getStatus()+": "+(o.getTitle().substring(0,10))+"...\n");
-            }
-        }
-    }
     //说明:回复图文消息
     /**{ ylx } 2019/7/3 23:07 */
     public String parseTW(String str, TW tg) throws Exception {
@@ -197,10 +189,14 @@ public class AppController {
         Var v = redisUtil.get("app:user:nick:"+name, Var.class);
         Show s = new Show();
         s.setAdd_time(LX.getTime());
-        s.setStatus(Order.Status.总提现);
+        s.setStatus(Show.Status.总提现);
         s.setTitle("尊敬的用户:"+v.getStr("nick")+",已累计提现");
         s.setFx(LX.getBigDecimal(v.get("fx")));
         shows.add(s);
         return new OS.Page(shows);
+    }
+    @RequestMapping("/toGZH")
+    public String toGZH(){
+        return "redirect:https://mp.weixin.qq.com/mp/profile_ext?action=home&__biz=Mzg3ODI4MDMyOQ==#wechat_redirect";
     }
 }

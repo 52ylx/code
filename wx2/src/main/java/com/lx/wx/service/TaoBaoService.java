@@ -64,20 +64,16 @@ public class TaoBaoService {
                                 for (TbkOrderDetailsGetResponse.PublisherOrderDto it : ls){
                                     try{
                                         if (12==it.getTkStatus()){//已付款
-                                            Order order = redisUtil.get("app:numiid_pid:" + it.getItemId() + "_" + it.getAdzoneId(), Order.class);
-                                            if (order != null){
-                                                order.setAdd_time(LX.getTime());
-//                                                order.setOrderNo(it.getTradeId());
-                                                order.setStatus(Order.Status.付款);
-//                                                order.setNumiid(it.getItemId()+"");//商品id
+                                            Show show = redisUtil.get("app:numiid_pid:" + it.getItemId() + "_" + it.getAdzoneId(), Show.class);
+                                            if (show != null){
                                                 BigDecimal b = LX.getBigDecimal(it.getPubSharePreFee()).multiply(new BigDecimal(0.8)).setScale(2, RoundingMode.CEILING);
-                                                if (b.compareTo(order.getFx())<0){//实际金额小于订单金额
-                                                    order.setFx(b);
+                                                if (b.compareTo(show.getFx())<0){//实际金额小于订单金额
+                                                    show.setFx(b);
                                                 }
-                                                redisUtil.put("app:tb:ls:order:"+it.getTradeId(),order.getName(),40*24*3600);//将订单加入
-                                                redisUtil.save("app:tb:ls:"+order.getName(),order.getOrderNo(),LX.toJSONString(new Show(order)));//将用户订单存入
+                                                redisUtil.put("app:tb:ls:order:"+it.getTradeId(),show.getName(),40*24*3600);//将订单加入
+                                                redisUtil.save("app:tb:ls:"+show.getName(),it.getTradeId(),show);//将用户订单存入
                                                 try {
-                                                    myWxBot.send(order.getName(),order.getTitle()+"\n付款成功!确认收货后可提现:"+order.getFx());
+                                                    myWxBot.send(show.getName(),show.getTitle()+"\n付款成功!确认收货后可提现:"+show.getFx());
                                                 }catch (Exception e){
                                                     log.error("推送消息失败!");
                                                 }
@@ -96,7 +92,7 @@ public class TaoBaoService {
                                             String name = redisUtil.get("app:tb:ls:order:" + it.getTradeId());
                                             if (name != null){
                                                 Show s = redisUtil.find("app:tb:ls:"+name,Show.class,it.getTradeId());
-                                                s.setStatus(Order.Status.结算);
+                                                s.setStatus(Show.Status.结算);
                                                 redisUtil.save("app:tb:ls:"+name,it.getTradeId(),LX.toJSONString(s));//加入到结算中
                                                 try {
                                                     myWxBot.send(name,s.getTitle()+"\n结算成功!可提现:"+s.getFx());
@@ -197,8 +193,9 @@ public class TaoBaoService {
                                 String s = nt.getCouponInfo().substring(nt.getCouponInfo().indexOf("减") + 1, nt.getCouponInfo().length() - 1);
                                 to = to.subtract(LX.getBigDecimal(s));
                             }
-                            Order o = new Order(name, in_title, to, LX.getBigDecimal(nt.getCommissionRate()).divide(LX.getBigDecimal(10)));
-                            String out = "总: " + nt.getZkFinalPrice() + " ,返: " + o.getFx();
+                            Show s = new Show(name,LX.getTime(),in_title,to, LX.getBigDecimal(nt.getCommissionRate()).divide(LX.getBigDecimal(10)));
+//                            Order o = new Order(name, in_title, to, LX.getBigDecimal(nt.getCommissionRate()).divide(LX.getBigDecimal(10)));
+                            String out = "总: " + nt.getZkFinalPrice() + " ,返: " + s.getFx();
                             if (LX.isNotEmpty(nt.getCouponInfo())) {
                                 out += "\n" + nt.getCouponInfo() + " 券后: " + to;
                             }
@@ -208,8 +205,8 @@ public class TaoBaoService {
                             redisUtil.put("app:gw:" + uuid, LX.toMap("{imgUrl='{0}',tkl='{1}'}"
                                     , imgUrl, toTKL(url, nt.getPictUrl(), nt.getTitle())), time);
                             TW tw = new TW(out, in_title, imgUrl, "http://www.52ylx.cn/h/" + uuid);
-                            redisUtil.put("app:numiid_name:" + numiid + "_" + name, LX.toJSONString(tw), time);//商品+用户
-                            redisUtil.put("app:numiid_pid:" + numiid + "_" + adzoneId, LX.toJSONString(o), time * 10);//商品+pid
+                            redisUtil.put("app:numiid_name:" + numiid + "_" + name, tw, time);//商品+用户
+                            redisUtil.put("app:numiid_pid:" + numiid + "_" + adzoneId, s, time * 10);//商品+pid
                             return tw;
                         }
                     }
@@ -297,9 +294,9 @@ public class TaoBaoService {
                 BigDecimal fx = new BigDecimal(0);
                 for (Map.Entry<String,String> e : shows.entrySet()){
                     Show o = LX.toObj(Show.class,e.getValue());
-                    if (o.getStatus() == Order.Status.结算){
+                    if (o.getStatus() == Show.Status.结算){
                         fx=fx.add(o.getFx());
-                        o.setStatus(Order.Status.提现);
+                        o.setStatus(Show.Status.提现);
                         redisUtil.save("app:tb:ls:"+name,e.getKey(),LX.toJSONString(o));
                         Var v = redisUtil.get("app:user:nick:"+name, Var.class);
                         v.put("fx",LX.getBigDecimal(v.get("fx")).add(fx));//fx
@@ -319,12 +316,5 @@ public class TaoBaoService {
             return tw;
         }
         return null;
-    }
-    public void add(StringBuilder s,List<Order> ls){
-        if (LX.isNotEmpty(ls)){
-            for (Order o:ls){
-                s.append(o.getStatus()+"("+o.getFx().setScale(2,RoundingMode.CEILING)+"):"+(o.getTitle().substring(0,8))+"...\n");
-            }
-        }
     }
 }

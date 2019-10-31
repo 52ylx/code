@@ -1,5 +1,7 @@
 package com.lx.wx.entity;
 
+import com.lx.util.LX;
+
 import java.math.BigDecimal;
 import java.math.RoundingMode;
 
@@ -7,17 +9,32 @@ import java.math.RoundingMode;
  * Created by 游林夕 on 2019/10/26.
  */
 public class Show {
-    private String add_time,title;
-    private Order.Status status;
-    private BigDecimal fx;
-
-    public Show(){}
-    public Show(Order order){
-        this.add_time = order.getAdd_time();
-        this.title = order.getTitle();
-        this.status = order.getStatus();
-        this.fx = order.getFx();
+    private String add_time,title,name;
+    private Status status;
+    private BigDecimal totalPay,fx,yj;
+    public enum Status{
+        付款,结算,提现,总提现
     }
+    public Show(){}
+    public Show(String name,String add_time, String title, BigDecimal t, BigDecimal y){
+        this.name = name;
+        this.title = title;
+        this.add_time = add_time;
+        this.status = status;
+        this.totalPay = t==null? LX.getBigDecimal(0):t;
+        this.yj = totalPay.multiply(y==null? LX.getBigDecimal(0):y).divide(LX.getBigDecimal(1000),2, BigDecimal.ROUND_HALF_DOWN);
+        this.fx = this.yj.multiply(LX.getBigDecimal(75)).divide(LX.getBigDecimal(100),2, BigDecimal.ROUND_HALF_DOWN);
+
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
     public String getAdd_time() {
         return add_time;
     }
@@ -36,11 +53,11 @@ public class Show {
         this.title = title;
     }
 
-    public Order.Status getStatus() {
+    public Status getStatus() {
         return status;
     }
 
-    public void setStatus(Order.Status status) {
+    public void setStatus(Status status) {
         this.status = status;
     }
 
@@ -52,13 +69,32 @@ public class Show {
         this.fx = fx.setScale(2, RoundingMode.CEILING);
     }
 
+    public BigDecimal getTotalPay() {
+        return totalPay;
+    }
+
+    public void setTotalPay(BigDecimal totalPay) {
+        this.totalPay = totalPay;
+    }
+
+    public BigDecimal getYj() {
+        return yj;
+    }
+
+    public void setYj(BigDecimal yj) {
+        this.yj = yj;
+    }
+
     @Override
     public String toString() {
         return "Show{" +
-                "time='" + add_time + '\'' +
+                "add_time='" + add_time + '\'' +
                 ", title='" + title + '\'' +
-                ", status='" + status + '\'' +
-                ", fx='" + fx + '\'' +
+                ", name='" + name + '\'' +
+                ", status=" + status +
+                ", totalPay=" + totalPay +
+                ", fx=" + fx +
+                ", yj=" + yj +
                 '}';
     }
 }

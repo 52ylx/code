@@ -114,15 +114,15 @@ public class MyWxBot extends WxBot {
                         sendText(rnameToName.get("lxzz000002"),s);
                     }else{//
                         if ("验证码".equals(msg.getText())){
-                            sendText(msg.getFromUserName(),"请复制验证码,点开下图,长按识别图中公众号:A00001佩琪;\n" +
-                                    "关注后将 验证码 发给公众号进行数据同步!谢谢合作!");
-                            sendImg(msg.getFromUserName(),System.getProperty("user.dir")+"\\wx\\"+"gzh.jpg");
+                            sendText(msg.getFromUserName(),"请复制验证码,发给公众号进行数据同步!谢谢合作!");
+//                            sendImg(msg.getFromUserName(),System.getProperty("user.dir")+"\\wx\\"+"gzh.jpg");
                         }else{
-                            Var v = redisUtil.get("app:user:nick:"+msg.getFromRemarkName(), Var.class);//查询公众号备注信息
-                            if (v == null || !"1".equals(v.get("gzh"))){//已绑定公众号不回复
-                                sendText(msg.getFromUserName(),"尊敬的用户:由于徽信接口不稳定,\n建议您使用我的公众号进行查询!\n" +
-                                        "公众号和微信可以互通!\n如需关注 请回复:验证码");
-                            }
+//                            Var v = redisUtil.get("app:user:nick:"+msg.getFromRemarkName(), Var.class);//查询公众号备注信息
+//                            if (v == null || !"1".equals(v.get("gzh"))){//已绑定公众号不回复
+//                                sendText(msg.getFromUserName(),"微信不回复请使用我的公众号:\n http://www.52ylx.cn/toGZH");
+//                            }
+                            //http://mp.weixin.qq.com/mp/profile_ext?action=home&__biz=Mzg3ODI4MDMyOQ==#wechat_redirect
+                            sendText(msg.getFromUserName(),"微信不回复请使用我的公众号:\n http://mp.weixin.qq.com/mp/profile_ext?action=home&__biz=Mzg3ODI4MDMyOQ==#wechat_redirect");
                         }
                     }
                 }
