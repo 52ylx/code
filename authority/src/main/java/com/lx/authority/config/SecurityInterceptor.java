@@ -28,7 +28,9 @@ public class SecurityInterceptor implements HandlerInterceptor {
     @Override
     public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) throws Exception {
         if (handler instanceof HandlerMethod) {
-            log.info(OS.getIpAddress(request)+"==>请求==>"+request.getRequestURL()+" 参数:"+LX.toJSONString(OS.getParameterMap(request)));
+            if ("1".equals(OS.sever_web_log) || request.getServletPath().matches(SYS)){
+                log.info(OS.getIpAddress(request)+"==>请求==>"+request.getRequestURL()+" 参数:"+LX.toJSONString(OS.getParameterMap(request)));
+            }
             HandlerMethod handlerMethod = (HandlerMethod) handler;
             Authority authority = Optional.ofNullable(handlerMethod.getMethod().getAnnotation(Authority.class))
                     .orElse(handlerMethod.getMethod().getDeclaringClass().getAnnotation(Authority.class));

@@ -134,35 +134,15 @@ public class LoginController {
         int b = random.nextInt(10);
         int c = random.nextInt(3);
         final String num[] = {"零", "一", "二", "三", "四", "五", "六", "七", "八", "九"};
-        String randomCode = ""+num[a % 10]+(c==0?"加":c==1?"减":"乘")+num[b % 10];
+        String randomCode = "0000";
+//        String randomCode = ""+num[a % 10]+(c==0?"加":c==1?"减":"乘")+num[b % 10];
         int i=0;
         for (char d : randomCode.toCharArray()){
             // 用随机产生的颜色将验证码绘制到图像中。
             gd.setColor(new Color(random.nextInt(80), random.nextInt(80), random.nextInt(80)));
-            gd.drawString(d+"", (++i) * 20, 27);
+            gd.drawString(d+"", (++i) * 18, 27);
         }
-        randomCode = ""+(c==0?a+b:c==1?a-b:a*b);
-        /*
-        // randomCode用于保存随机产生的验证码，以便用户登录后进行验证。
-        StringBuffer randomCode = new StringBuffer();
-        int red = 0, green = 0, blue = 0;
-
-        // 随机产生codeCount数字的验证码。
-        for (int i = 0; i < 4; i++) {
-            // 得到随机产生的验证码数字。
-            String code = String.valueOf(codeSequence[random.nextInt(codeSequence.length)]);
-            // 产生随机的颜色分量来构造颜色值，这样输出的每位数字的颜色值都将不同。
-            red = random.nextInt(255);
-            green = random.nextInt(255);
-            blue = random.nextInt(255);
-
-            // 用随机产生的颜色将验证码绘制到图像中。
-            gd.setColor(new Color(red, green, blue));
-            gd.drawString(code, (i + 1) * 15, 27);
-
-            // 将产生的四个随机数组合在一起。
-            randomCode.append(code);
-        }*/
+//        randomCode = ""+(c==0?a+b:c==1?a-b:a*b);
         // 将四位数字的验证码保存到Session中。
         HttpSession session = req.getSession();
         session.setAttribute("code", randomCode.toString());

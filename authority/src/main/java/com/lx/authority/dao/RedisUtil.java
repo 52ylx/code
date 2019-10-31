@@ -1,20 +1,28 @@
 package com.lx.authority.dao;//说明:
 
+import com.lx.authority.config.OS;
+import com.lx.entity.Var;
 import com.lx.util.LX;
 import com.lx.util.MathUtil;
+import com.lx.util.doc.ScanPackage;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 import org.springframework.util.Assert;
-import redis.clients.jedis.Jedis;
-import redis.clients.jedis.JedisPool;
-import redis.clients.jedis.Pipeline;
-import redis.clients.jedis.Response;
+import redis.clients.jedis.*;
 
 import javax.annotation.PostConstruct;
 import java.io.IOException;
+import java.lang.annotation.ElementType;
+import java.lang.annotation.Retention;
+import java.lang.annotation.RetentionPolicy;
+import java.lang.annotation.Target;
+import java.lang.reflect.InvocationTargetException;
+import java.lang.reflect.Method;
+import java.lang.reflect.Parameter;
 import java.util.*;
+import java.util.concurrent.Executor;
 import java.util.function.Consumer;
 import java.util.function.Function;
 import java.util.function.Supplier;
@@ -31,6 +39,8 @@ public class RedisUtil {
 
     @Autowired
     private JedisConfig jedisConfig;
+    @Autowired
+    private Executor executor;
     //说明:从连接池获取链接
     /**{ ylx } 2019/4/24 14:52 */
     protected Jedis getRedis() {
@@ -231,14 +241,9 @@ public class RedisUtil {
     //说明:获取所有对象
     /**{ ylx } 2019/5/6 8:52 */
     public <T> List<T> find(String key,Class<T> t){
-        Map<String,String> map = exec(jedis -> {
-            return jedis.hgetAll(key);
+        return exec(jedis -> {
+            return LX.toList(t,jedis.hvals(key));
         });
-        List<T> ls = new ArrayList<>();
-        for (String str : map.values()){
-            ls.add(LX.toObj(t,str));
-        }
-        return ls;
     }
     //获取对象
     public Map<String,String> findMap(String key){
@@ -268,7 +273,7 @@ public class RedisUtil {
 
     //获取分页
     public List listPage(String key,String limit,String page,String find){
-        String lua = "local fields = redis.call(\"HVALS\", KEYS[1]);local limit = tonumber(KEYS[2]);local page = tonumber(KEYS[3]);local result = {};local res={0};local j=0;local k=0; for i, v in ipairs(fields) do if string.len(KEYS[4])== 0 or string.find(v,KEYS[4]) then k=k+1; res[1]=k; if i>(page-1)*limit and i<=page*limit then j = j+1; result[j] = v; end; end;end;res[2]=result; return res;";
+        String lua = "local fields = redis.call(\"HVALS\", KEYS[1]);local limit = tonumber(KEYS[2]);local page = tonumber(KEYS[3]);local result = {};local res={0};local j=0;local k=0; for i, v in ipairs(fields) do if string.len(KEYS[4])== 0 or string.find(v,KEYS[4]) then k=k+1; res[1]=k; if k>(page-1)*limit and k<=page*limit then j = j+1; result[j] = v; end; end;end;res[2]=result; return res;";
         return evalsha(lua,key,limit,page,find);
     }
     /** 每分钟限制多少次 */
@@ -299,5 +304,96 @@ public class RedisUtil {
         return exec(jedis -> {
             return  (T)jedis.evalsha(hsah, KEYS.length ,KEYS);
         });
+    }
+    @PostConstruct
+    public void test() throws IOException {
+        long t = System.currentTimeMillis();
+        sub("com");
+        System.out.println(System.currentTimeMillis()-t);
+        LX.sleep(1000);
+        pub("my2","测试");
+        pub("my1","测试1");
+        pub("my1","测试2");
+        pub("my1","测试3");
+        pub("my1","测试4");
+    }
+    @Sub("my1")
+    public void bind(String a){
+        System.out.println(a);
+        LX.sleep(2000);
+    }
+    @Sub("my2")
+    public void bind1(String a){
+        System.out.println(a+"my2");
+        LX.sleep(2000);
+    }
+    @Retention(value = RetentionPolicy.RUNTIME)
+    @Target(ElementType.METHOD)
+    public @interface Sub {
+        public String value();
+    }
+    //发布消息
+    public void pub(String channel,String msg){
+        exec(jedis -> {
+            jedis.publish(channel,msg);
+        });
+    }
+    //取消订阅频道  unsubscribe String... channels  不传就是所有
+    //增加订阅频道  subscribe String... channels
+    public void sub(String...page) throws IOException {
+        //获取Spring 容器中所有的bean
+        String[] beanDefinitionNames = OS.getApplicationContext().getBeanDefinitionNames();
+        Var var = new Var();
+        for (String bean : beanDefinitionNames){
+            Class<?> cls = OS.getApplicationContext().getType(bean);
+            Method[] methods = cls.getDeclaredMethods();//获取所有方法
+            for (Method m : methods){
+                Parameter[] parameters = m.getParameters();
+                //方法上有@Sub 且参数只有String 的
+                if (m.isAnnotationPresent(Sub.class)&& parameters.length==1 && parameters[0].getType()==String.class){
+                    Sub s = m.getAnnotation(Sub.class);
+                    String channe = s.value();
+                    List ls = new ArrayList();
+                    if (var.containsKey(channe)){
+                        ls = var.getList(channe);
+                    }
+                    ls.add(new Var(new Object[][]{{"cls",cls},{"method",m}}));
+                    var.put(channe,ls);
+                }
+            }
+        }
+        if (var.size() == 0) return;
+        String [] channels = (String[]) var.keySet().toArray(new String[var.size()]);
+        JedisPubSub jedisPubSub = new JedisPubSub() {
+            public void onMessage(String channel, String message) {
+                try {
+                    List<Var> ls = var.getList(channel);
+                    for (Var v : ls){
+                        executor.execute(()->{
+                            try {
+                                Object o = OS.getBean((Class<?>) v.getObj("cls"));
+                                Method m = v.getObj("method");
+                                m.invoke(o,message);
+                            } catch (Exception e) {}
+                        });
+
+                    }
+                }catch (Exception e){}
+            }
+        };
+        new Thread(()->{
+            bind(jedisPubSub, channels);//监听指定channels
+        }).start();
+    }
+    private void bind(JedisPubSub jedisPubSub,String...channels){
+        try {
+            exec(jedis -> {
+                jedis.subscribe(jedisPubSub,channels);
+            });
+        } catch (Exception e) {
+            log.info("订阅连接出现异常!重试");
+            LX.sleep(3000);
+            bind(jedisPubSub, channels);
+        }
     }
 }

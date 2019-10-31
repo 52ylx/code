@@ -82,11 +82,17 @@ var lx = {
             });
             $(".layui-layer-content").append(`
             <input type="password" id="layui-layer-content_pass" class="layui-layer-input" placeholder="密码" value="" style="margin-top: 6px;">
-            <input type="text" id="layui-layer-content_code" class="layui-layer-input" placeholder="验证码" style="margin-top: 6px;background:url('${lx.wwwroot+"/login/code"}') no-repeat scroll right center transparent;">
+            <input type="text" id="layui-layer-content_code" class="layui-layer-input" placeholder="验证码" value="0000" style="margin-top: 6px;background:url('${lx.wwwroot+"/login/code"}') no-repeat scroll right center transparent;">
             <script>
                 function changeCode() {
                     document.getElementById("layui-layer-content_code").style.backgroundImage="url("+lx.wwwroot+"/login/code?t=" + new Date().getTime()+")";
                 }
+                document.onkeydown=function(e){
+              var a=e||window.event;//加这个火狐下不会报 event is  undefind
+                if (a.keyCode == 13){
+                   $(".layui-layer-btn0").click();
+                }
+             }
             </script>
             `);
         }

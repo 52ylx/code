@@ -41,6 +41,7 @@ public class OS implements ApplicationContextAware,EnvironmentAware {
     };
     private static RedisUtil redisUtil;
     private static Environment environment;
+    public static String sever_web_log;
 
     /** 获取缓存中的对象*/
     static HashMap getUserByToken(String token){
@@ -56,7 +57,7 @@ public class OS implements ApplicationContextAware,EnvironmentAware {
      */
     public static String login(HttpServletRequest request,String username,Object custom, Function<HashMap,Boolean> func){
         String token = LX.uuid();
-        long ipLimit = getIpLimit(request,()->{//
+        long ipLimit = getIpLimit(request,username,()->{//
             Var user = null;
             if ("admin".equals(username)){
                 user = LX.toMap("{{0}='admin',{1}='{2}',menus='{3}',btns='{4}'}",USERNAME,PASSWORD,"123456","#menus#","#btns#");
@@ -176,12 +177,20 @@ public class OS implements ApplicationContextAware,EnvironmentAware {
         return applicationContext.getBean(name);
     }
 
+    public static <T>T getBean(Class<T> t){
+        return applicationContext.getBean(t);
+    }
+
+    public static ApplicationContext getApplicationContext(){
+        return applicationContext;
+    }
     @Override
     public void setEnvironment(Environment environment) {
         this.environment = environment;
         this.token_timeout = Integer.parseInt(Optional.ofNullable(getProperty("server.token.timeout")).orElse(60*60+""));
         this.server_login_single = Optional.ofNullable(getProperty("server.login.single")).orElse("1");
         this.minuteLimit = Integer.parseInt(Optional.ofNullable(getProperty("server.login.minuteLimit")).orElse("5"));
+        this.sever_web_log = getProperty("sever.web.log");
     }
     public static String getProperty(String key){
         return environment.getProperty(key);
@@ -237,8 +246,8 @@ public class OS implements ApplicationContextAware,EnvironmentAware {
         }
         return returnMap;
     }
-    public static long getIpLimit(HttpServletRequest req, Supplier<Boolean> supp){
-        return redisUtil.minuteLimit(getIpAddress(req),minuteLimit,supp);
+    public static long getIpLimit(HttpServletRequest req,String username, Supplier<Boolean> supp){
+        return redisUtil.minuteLimit(getIpAddress(req)+":"+username,minuteLimit,supp);
     }
     /** 获取用户真实IP地址，不使用request.getRemoteAddr();的原因是有可能用户使用了代理软件方式避免真实IP地址, */
     public static String getIpAddress(HttpServletRequest request) {
