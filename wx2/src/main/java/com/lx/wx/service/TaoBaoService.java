@@ -70,6 +70,7 @@ public class TaoBaoService {
                                                 if (b.compareTo(show.getFx())<0){//实际金额小于订单金额
                                                     show.setFx(b);
                                                 }
+                                                show.setStatus(Show.Status.付款);
                                                 redisUtil.put("app:tb:ls:order:"+it.getTradeId(),show.getName(),40*24*3600);//将订单加入
                                                 redisUtil.save("app:tb:ls:"+show.getName(),it.getTradeId(),show);//将用户订单存入
                                                 try {
