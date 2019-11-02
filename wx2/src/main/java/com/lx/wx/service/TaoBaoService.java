@@ -3,6 +3,7 @@ package com.lx.wx.service;//说明:
 import com.lx.authority.dao.RedisUtil;
 import com.lx.entity.Var;
 import com.lx.util.LX;
+import com.lx.util.LogUtil;
 import com.lx.util.MathUtil;
 import com.lx.wx.controller.AppController;
 import com.lx.wx.entity.*;
@@ -40,6 +41,8 @@ public class TaoBaoService {
     @Autowired
     private MyWxBot myWxBot;
 
+    private LogUtil lx_log = new LogUtil("order");
+
     @PostConstruct
     public void getNewOrder() throws Exception {
         new Thread(new Runnable() {
@@ -66,6 +69,7 @@ public class TaoBaoService {
                                         if (12==it.getTkStatus()){//已付款
                                             Show show = redisUtil.get("app:numiid_pid:" + it.getItemId() + "_" + it.getAdzoneId(), Show.class);
                                             if (show != null){
+                                                lx_log.info("付款:"+show.getName()+","+it.getTradeId()+","+show.getTitle());
                                                 BigDecimal b = LX.getBigDecimal(it.getPubSharePreFee()).multiply(new BigDecimal(0.8)).setScale(2, RoundingMode.CEILING);
                                                 if (b.compareTo(show.getFx())<0){//实际金额小于订单金额
                                                     show.setFx(b);
@@ -73,11 +77,11 @@ public class TaoBaoService {
                                                 show.setStatus(Show.Status.付款);
                                                 redisUtil.put("app:tb:ls:order:"+it.getTradeId(),show.getName(),40*24*3600);//将订单加入
                                                 redisUtil.save("app:tb:ls:"+show.getName(),it.getTradeId(),show);//将用户订单存入
-                                                try {
-                                                    myWxBot.send(show.getName(),show.getTitle()+"\n付款成功!确认收货后可提现:"+show.getFx());
-                                                }catch (Exception e){
-                                                    log.error("推送消息失败!");
-                                                }
+//                                                try {
+//                                                    myWxBot.send(show.getName(),show.getTitle()+"\n付款成功!确认收货后可提现:"+show.getFx());
+//                                                }catch (Exception e){
+//                                                    log.error("推送消息失败!");
+//                                                }
                                             }
                                         }
                                     }catch (Exception e){
@@ -95,11 +99,11 @@ public class TaoBaoService {
                                                 Show s = redisUtil.find("app:tb:ls:"+name,Show.class,it.getTradeId());
                                                 s.setStatus(Show.Status.结算);
                                                 redisUtil.save("app:tb:ls:"+name,it.getTradeId(),LX.toJSONString(s));//加入到结算中
-                                                try {
-                                                    myWxBot.send(name,s.getTitle()+"\n结算成功!可提现:"+s.getFx());
-                                                }catch (Exception e){
-                                                    log.error("推送消息失败!");
-                                                }
+//                                                try {
+//                                                    myWxBot.send(name,s.getTitle()+"\n结算成功!可提现:"+s.getFx());
+//                                                }catch (Exception e){
+//                                                    log.error("推送消息失败!");
+//                                                }
                                             }
                                         }
                                     }catch (Exception e){
@@ -291,31 +295,41 @@ public class TaoBaoService {
             case "教学":
                 return GZH.newInstance(System.getProperty("user.dir")+"\\wx\\"+"jiaocheng.jpg");
             case "提现":
-                Map<String,String> shows = redisUtil.findMap("app:tb:ls:" + name);
-                BigDecimal fx = new BigDecimal(0);
-                for (Map.Entry<String,String> e : shows.entrySet()){
-                    Show o = LX.toObj(Show.class,e.getValue());
-                    if (o.getStatus() == Show.Status.结算){
-                        fx=fx.add(o.getFx());
-                        o.setStatus(Show.Status.提现);
-                        redisUtil.save("app:tb:ls:"+name,e.getKey(),LX.toJSONString(o));
-                        Var v = redisUtil.get("app:user:nick:"+name, Var.class);
-                        v.put("fx",LX.getBigDecimal(v.get("fx")).add(fx));//fx
-                        redisUtil.put("app:user:nick:"+name,LX.toJSONString(v));//将昵称存入
-                    }
-                }
-                if (fx.compareTo(new BigDecimal(0))==0){
-                    return GZH.newInstance("尊敬的用户:"+bName+".\n已确认收货:0元,不能提现的哦!如有疑问请输入:查询");
-                }
-                return GZH.newInstance("尊敬的用户:"+bName+".\n请稍后!由于转~账是人工服务,每天24点前完成!全部提现:"+fx.setScale(2,RoundingMode.CEILING)+"元");
+                return getTX(name,bName);
         }
-        if (in_title.matches(patten)) {//符合购物
-            TW tw = findFL(in_title, name);
-            if(tw == null){
-                return GZH.newInstance("暂未找到优惠信息");
-            }
-            return tw;
-        }
+//        if (in_title.matches(patten)) {//符合购物
+//            TW tw = findFL(in_title, name);
+//            if(tw == null){
+//                return GZH.newInstance("暂未找到优惠信息");
+//            }
+//            return tw;
+//        }
         return null;
+    }
+
+    public GZH getTX(String name,String bName){
+        BigDecimal fx = getTX(name);
+        if (fx.compareTo(new BigDecimal(0))==0){
+            return GZH.newInstance("尊敬的用户:"+bName+".\n已确认收货:0元,不能提现的哦!如有疑问请输入:查询");
+        }
+        return GZH.newInstance("尊敬的用户:"+bName+".\n请稍后!由于转~账是人工服务,每天24点前完成!全部提现:"+fx.setScale(2,RoundingMode.CEILING)+"元");
+    }
+    public BigDecimal getTX(String name){
+        Map<String,String> shows = redisUtil.findMap("app:tb:ls:" + name);
+        BigDecimal fx = new BigDecimal(0);
+        String tx_time = LX.getTime();
+        for (Map.Entry<String,String> e : shows.entrySet()){
+            Show o = LX.toObj(Show.class,e.getValue());
+            if (o.getStatus() == Show.Status.结算){
+                fx=fx.add(o.getFx());
+                o.setStatus(Show.Status.提现);
+                o.setTx_time(tx_time);
+                redisUtil.save("app:tb:ls:"+name,e.getKey(),LX.toJSONString(o));
+            }
+        }
+        Var v = redisUtil.get("app:user:nick:"+name, Var.class);
+        v.put("fx",LX.getBigDecimal(v.get("fx")).add(fx));//fx
+        redisUtil.put("app:user:nick:"+name,LX.toJSONString(v));//将昵称存入
+        return fx;
     }
 }

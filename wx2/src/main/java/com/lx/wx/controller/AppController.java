@@ -4,6 +4,7 @@ import com.lx.authority.config.OS;
 import com.lx.authority.dao.RedisUtil;
 import com.lx.entity.Var;
 import com.lx.util.LX;
+import com.lx.util.LogUtil;
 import com.lx.wx.entity.GZH;
 import com.lx.wx.entity.Show;
 import com.lx.wx.entity.TW;
@@ -24,7 +25,10 @@ import java.io.InputStreamReader;
 import java.io.PrintWriter;
 import java.io.UnsupportedEncodingException;
 import java.math.BigDecimal;
+import java.math.RoundingMode;
 import java.net.URLEncoder;
+import java.security.MessageDigest;
+import java.security.NoSuchAlgorithmException;
 import java.util.List;
 import java.util.Map;
 
@@ -37,14 +41,7 @@ public class AppController {
     private RedisUtil redisUtil;
     @Autowired
     private TaoBaoService taoBaoService;
-    //获取token
-    //https://api.weixin.qq.com/cgi-bin/token?grant_type=client_credential&appid=wx1640681a4d340625&secret=c87e28af1be4cbc7960f86c8e9dbb5a1
 
-    //获取永久素材列表
-    //https://api.weixin.qq.com/cgi-bin/material/batchget_material?access_token=26_5WZWO34wsX6GVnHJP0bfkeUo01yvgBvJIrBjgRFkgm0uqsYD2PbVFNzi_9C4QI4eEyp_lLCuY4ybSzYuuPL1TmF-jY_WNCw0bj8lvIjKzQAOpTxShLNcbeCCkZo0tzwXP_4-NfWWWhgeGBIXRBLaAIAGQA
-    //{"type":"image","offset":0,"count":20}
-    //{"item":[{"media_id":"RmBeagJC407TpN38-o3rwemuVDdTa4B2rHndmvQATFs","name":"pq.jpg","update_time":1572146980,"url":"http:\/\/mmbiz.qpic.cn\/mmbiz_jpg\/R6HibJCghziaDtOJEEJG2xchL54Bj2Jo5PQzEaMzXibw1BeIs8aoibr5X1bJDDlBTEiaIzqW9eKmOd35evPEFo8t3IA\/0?wx_fmt=jpeg"}
-    // ,{"media_id":"RmBeagJC407TpN38-o3rweS-eEzQMkF1NhieYqLJO0g","name":"jiaocheng.jpg","update_time":1562164740,"url":"http:\/\/mmbiz.qpic.cn\/mmbiz_jpg\/R6HibJCghziaDMCuO0PGSU1S6AJQnWDySicayfabDx00nMgEHUFtjXOJQRnb8qwlyFZlQaufFobzTC6N7O66JaalQ\/0?wx_fmt=jpeg"},{"media_id":"RmBeagJC407TpN38-o3rwSsebCAx2IiSw4FLW-IR-vE","name":"cxt.jpg","update_time":1562164717,"url":"http:\/\/mmbiz.qpic.cn\/mmbiz_jpg\/R6HibJCghziaDMCuO0PGSU1S6AJQnWDySic3KzADjXe2VT6umemiaflAJKOOcKfiaf61HDWXuq0XcvibbgiaSx7hC38lA\/0?wx_fmt=jpeg"}],"total_count":3,"item_count":3}
     Logger log = LoggerFactory.getLogger(AppController.class);
     @RequestMapping("/wx")
     public void wx(HttpServletRequest req, HttpServletResponse response) throws Exception {
@@ -59,45 +56,29 @@ public class AppController {
             String str = sb.toString();
             log.info(str);
             String name = getVal(str,"FromUserName").replace("<![CDATA[","").replace("]]>","");//用户唯一id
-            String rname = redisUtil.get("app:user:"+name);
             if ("<![CDATA[text]]>".equals(getVal(sb.toString(),"MsgType"))){//字符串消息
                 String text = getTrim(str,"Content").trim();//消息
-                if (LX.isEmpty(rname)){
-                    rname = "lxzz"+LX.getDate("yyMMddHHmmssSSS");//设置18备注名
-                    redisUtil.put("app:user:"+name,rname);
-                    redisUtil.put("app:user:nick:"+rname,LX.toJSONString(new Var("nick",rname)));//将昵称存入
-                }
-                if ("查询".equals(text)){
-                    msg = parse(str,"http://www.52ylx.cn/s/" +rname);
-                }else if ("提现".equals(text)){
-                    if (rname.length()==19){
-                        msg = toImg(str, "RmBeagJC407TpN38-o3rwdtScXzBUtWmYi1T6ctjZE0");//去绑定
-                    }else{
-                        msg = parse(str,"公众号无法转账,请去关联的微信发起提现哦");
+                if (text.startsWith("tx_")){
+                    String txm = text.substring(3);
+                    String s = redisUtil.get("app:tx:" + txm);
+                    if (LX.isNotEmpty(s)){
+                        msg = parse(str,s);
                     }
-                }else if (text.matches("\\d{6}") || text.matches("\\d{12}")){//绑定微信号
-                    String lastName = rname;//上次备注
-                    rname = "lxzz"+text;//备注名
-                    Var v = redisUtil.get("app:user:nick:"+rname, Var.class);
-                    if (LX.isNotEmpty(v)){//用户存在
-                        if (lastName.length() == 19){//公众号用户
-                            Map<String,String> shows = redisUtil.findMap("app:tb:ls:" + lastName);
-                            for (Map.Entry<String,String> e : shows.entrySet()){
-                                redisUtil.save("app:tb:ls:"+rname,e.getKey(),e.getValue());
-                            }
-                            redisUtil.put("app:user:"+name,rname);//绑定备注
-                            redisUtil.del("app:tb:ls:"+lastName);//删除之前备注
-                            v.put("gzh","1");//已绑定公众号
-                            redisUtil.put("app:user:nick:"+rname,LX.toJSONString(v));//将昵称存入
-                            msg = parse(str,"尊敬的用户:"+v.getStr("nick")+"\n绑定成功!");
-                        }else{
-                            msg = parse(str,"暂不支持重复绑定,请联系客服.");
-                        }
+                }else if ("查询".equals(text)){
+                    msg = parseTW(str,new TW("尊敬的用户:请点击查看您的订单!","付款:即已付款订单\n结算:即已收货,可提现的订单!\n提现:即已经提现的订单","http://cdn.duitang.com/uploads/blog/201402/28/20140228230748_VLMv5.thumb.700_0.jpeg","http://www.52ylx.cn/s/" +name));
+                }else if ("提现".equals(text)){
+                    BigDecimal fx = taoBaoService.getTX(name);
+                    if (fx.compareTo(new BigDecimal(0))==0){
+                        msg = parse(str,"尊敬的用户:\n已确认收货:0元,不能提现的哦!如有疑问请点击:查询");
                     }else{
-                        msg = parse(str,"请完整复制关联微信返回的消息!");
+                        String uuid = LX.uuid32(5);
+                        int time = 2 * 24 * 60 * 60;
+                        String txm = "提现"+fx.setScale(2, RoundingMode.CEILING)+"元提现码:"+uuid;
+                        redisUtil.put("app:tx:" + uuid,txm,time);
+                        msg = parseTW(str,new TW("尊敬的用户:由于公众号无法转账!请添加我的微信!","请长按二维码图片添加好友!","https://mmbiz.qpic.cn/mmbiz_jpg/8el48ibPNafehj6z6pXHfSYFYpZZekP8wlYHtmibLFSdlc5ZMVb65PvhsntOrTdtT2vEHRPIFxU7GxQq6dwgWhBQ/0?wx_fmt=jpeg","http://52ylx.cn/tx.html?txm="+txm));
                     }
                 }else{//查询商品
-                    TW t = taoBaoService.findFL(text,rname);
+                    TW t = taoBaoService.findFL(text,name);
                     if (t == null){
                         msg = parse(str,"暂未找到优惠信息!\n"
                                 +"一一一一一温馨提示一一一一\n" +
@@ -108,8 +89,19 @@ public class AppController {
                     }
                 }
             }else if ("event".equals(getTrim(sb.toString(),"MsgType"))){//关注事件
-                if ("subscribe".equals(getTrim(sb.toString(),"Event"))){
-                    msg = toImg(str, "RmBeagJC407TpN38-o3rweS-eEzQMkF1NhieYqLJO0g");
+                switch (getTrim(sb.toString(),"Event")){
+                    case "subscribe":
+                        if (!redisUtil.exists("app:user:nick:"+name)){//查询昵称
+                            redisUtil.put("app:user:nick:"+name,new Var("nick",LX.getDate("yyyyMMdd")));//将昵称存入
+                        }
+                        msg = parse(str,"终于等到您!敬请吩咐!");
+                        break;
+                    case "CLICK":
+                        switch (getTrim(sb.toString(),"EventKey")){
+                            case "query":
+                                msg = parseTW(str,new TW("尊敬的用户:请点击查看您的订单!","付款:即已付款订单\n结算:即已收货,可提现的订单!\n提现:即已经提现的订单","http://cdn.duitang.com/uploads/blog/201402/28/20140228230748_VLMv5.thumb.700_0.jpeg","http://www.52ylx.cn/s/" +name));
+                                break;
+                        }
                 }
             }
         }catch (Exception e){
@@ -190,13 +182,102 @@ public class AppController {
         Show s = new Show();
         s.setAdd_time(LX.getTime());
         s.setStatus(Show.Status.总提现);
-        s.setTitle("尊敬的用户:"+v.getStr("nick")+",已累计提现");
+        s.setTitle("尊敬的用户:已累计提现:");
         s.setFx(LX.getBigDecimal(v.get("fx")));
         shows.add(s);
         return new OS.Page(shows);
     }
-    @RequestMapping("/toGZH")
-    public String toGZH(){
-        return "redirect:https://mp.weixin.qq.com/mp/profile_ext?action=home&__biz=Mzg3ODI4MDMyOQ==#wechat_redirect";
-    }
+
+//    @RequestMapping("/token")
+//    @ResponseBody
+//    public String token(String signature,String timestamp,String nonce,String echostr){
+//        // 通过检验signature对请求进行校验，若校验成功则原样返回echostr，表示接入成功，否则接入失败
+//        if (signature != null && WeixinCheckoutUtil.checkSignature(signature, timestamp, nonce)) {
+//            return echostr;
+//        }
+//        return null;
+//    }
+//
+//
+//
+//    public static class WeixinCheckoutUtil {
+//
+//        // 与接口配置信息中的Token要一致
+//        private static String token = "youjp";
+//
+//        /**
+//         * 验证签名
+//         *
+//         * @param signature
+//         * @param timestamp
+//         * @param nonce
+//         * @return
+//         */
+//        public static boolean checkSignature(String signature, String timestamp, String nonce) {
+//            String[] arr = new String[] { token, timestamp, nonce };
+//            // 将token、timestamp、nonce三个参数进行字典序排序
+//            // Arrays.sort(arr);
+//            sort(arr);
+//            StringBuilder content = new StringBuilder();
+//            for (int i = 0; i < arr.length; i++) {
+//                content.append(arr[i]);
+//            }
+//            MessageDigest md = null;
+//            String tmpStr = null;
+//
+//            try {
+//                md = MessageDigest.getInstance("SHA-1");
+//                // 将三个参数字符串拼接成一个字符串进行sha1加密
+//                byte[] digest = md.digest(content.toString().getBytes());
+//                tmpStr = byteToStr(digest);
+//            } catch (NoSuchAlgorithmException e) {
+//                e.printStackTrace();
+//            }
+//            content = null;
+//            // 将sha1加密后的字符串可与signature对比，标识该请求来源于微信
+//
+//            return tmpStr != null ? tmpStr.equals(signature.toUpperCase()) : false;
+//        }
+//
+//        /**
+//         * 将字节数组转换为十六进制字符串
+//         *
+//         * @param byteArray
+//         * @return
+//         */
+//        private static String byteToStr(byte[] byteArray) {
+//            String strDigest = "";
+//            for (int i = 0; i < byteArray.length; i++) {
+//                strDigest += byteToHexStr(byteArray[i]);
+//            }
+//            return strDigest;
+//        }
+//
+//        /**
+//         * 将字节转换为十六进制字符串
+//         *
+//         * @param mByte
+//         * @return
+//         */
+//        private static String byteToHexStr(byte mByte) {
+//            char[] Digit = { '0', '1', '2', '3', '4', '5', '6', '7', '8', '9', 'A', 'B', 'C', 'D', 'E', 'F' };
+//            char[] tempArr = new char[2];
+//            tempArr[0] = Digit[(mByte >>> 4) & 0X0F];
+//            tempArr[1] = Digit[mByte & 0X0F];
+//            String s = new String(tempArr);
+//            return s;
+//        }
+//        public static void sort(String a[]) {
+//            for (int i = 0; i < a.length - 1; i++) {
+//                for (int j = i + 1; j < a.length; j++) {
+//                    if (a[j].compareTo(a[i]) < 0) {
+//                        String temp = a[i];
+//                        a[i] = a[j];
+//                        a[j] = temp;
+//                    }
+//                }
+//            }
+//        }
+//
+//    }
 }

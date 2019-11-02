@@ -9,7 +9,7 @@ import java.math.RoundingMode;
  * Created by 游林夕 on 2019/10/26.
  */
 public class Show {
-    private String add_time,title,name;
+    private String add_time,tx_time,title,name;
     private Status status;
     private BigDecimal totalPay,fx,yj;
     public enum Status{
@@ -25,6 +25,14 @@ public class Show {
         this.yj = totalPay.multiply(y==null? LX.getBigDecimal(0):y).divide(LX.getBigDecimal(1000),2, BigDecimal.ROUND_HALF_DOWN);
         this.fx = this.yj.multiply(LX.getBigDecimal(75)).divide(LX.getBigDecimal(100),2, BigDecimal.ROUND_HALF_DOWN);
 
+    }
+
+    public String getTx_time() {
+        return tx_time;
+    }
+
+    public void setTx_time(String tx_time) {
+        this.tx_time = tx_time;
     }
 
     public String getName() {
@@ -89,6 +97,7 @@ public class Show {
     public String toString() {
         return "Show{" +
                 "add_time='" + add_time + '\'' +
+                ", tx_time='" + tx_time + '\'' +
                 ", title='" + title + '\'' +
                 ", name='" + name + '\'' +
                 ", status=" + status +
