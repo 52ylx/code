@@ -12,6 +12,8 @@ import io.github.biezhi.wechat.api.model.Recommend;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.math.BigDecimal;
+import java.math.RoundingMode;
 import java.util.List;
 
 /**
@@ -89,37 +91,28 @@ public class MyWxBot extends WxBot {
                 redisUtil.put("app:user:nick:"+msg.getFromRemarkName(),LX.toJSONString(new Var("nick",msg.getFromNickName())));//将昵称存入
             }
             log.info("收到消息:"+msg.getFromNickName()+"   "+msg.getText());
-            //发送消息到我的账号
-            GZH gzh = taoBaoService.wx_in(msg.getText(), msg.getFromRemarkName(),msg.getFromNickName());
-            log.info("返回消息:"+gzh);
-            if (LX.isNotEmpty(gzh)){
-                String s = "";
-                if (gzh instanceof TW){
-                    s = ((TW)gzh).getText()+"\n"+((TW)gzh).getUrl();
+            if ("提现".equals(msg.getText())) {//发送给晓贴
+                BigDecimal fx = taoBaoService.getTX(msg.getFromRemarkName());
+                if (fx.compareTo(new BigDecimal(0))==0){
+                    sendText(msg.getFromUserName(),"暂无收货订单!");
                 }else{
-                    s = gzh.text;
+                    String text = "尊敬的用户:"+msg.getFromNickName()+".\n请稍后!由于是人工服务,每天24点前完成!全部:"+fx.setScale(2, RoundingMode.CEILING);
+                    sendText(msg.getFromUserName(),text);
+                    sendText(rnameToName.get("lxzz000001"),text);
+                    sendText(rnameToName.get("lxzz000002"),text);
                 }
-                if ("教学".equals(msg.getText())){
-                    sendText(msg.getFromUserName(),
-                            "一一一一一温馨提示一一一一\n" +
-                            "回复“提现”可以提取当前余.额\n" +
-                            "回复“查询”可以获取账.单信息");
-                }
-                if (s.endsWith("jpg")||s.endsWith("png")){
-                    sendImg(msg.getFromUserName(),s);
+            }else if (msg.getText().matches(".*(￥|₤|\\$|€|¢|₳|₴|查询).*")) {
+                GZH tx = taoBaoService.wx_in(msg.getText(),msg.getFromRemarkName(), msg.getFromNickName());
+                if (tx instanceof TW){
+                    sendText(msg.getFromUserName(),tx.text+"\n"+((TW) tx).url);
                 }else{
-                    sendText(msg.getFromUserName(),s);
-                    if ("提现".equals(msg.getText())){//发送给晓贴
-                        sendText(rnameToName.get("lxzz000001"),s);
-                        sendText(rnameToName.get("lxzz000002"),s);
-                    }else{//
-                        sendText(msg.getFromUserName(),"微信不回复请使用我的公众号:\n https://mp.weixin.qq.com/mp/profile_ext?action=home&__biz=MzAxOTc2OTMwNQ==&scene=124#wechat_redirect");
-                    }
+                    sendText(msg.getFromUserName(),tx.text);
                 }
+                sendText(msg.getFromUserName(),"如果不回复请进这里发送:\n http://52ylx.cn/all.html?name="+a.getRemarkName());
             }
+
         }catch (Exception e){
             log.error("收到消息",e);
-//            sendText(msg.getFromUserName(),"对不起!我出现问题了!正在修复....");
         }
     }
 }
