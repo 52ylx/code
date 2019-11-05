@@ -108,7 +108,7 @@ public class MyWxBot extends WxBot {
                 }else{
                     sendText(msg.getFromUserName(),tx.text);
                 }
-                sendText(msg.getFromUserName(),"如果不回复请进这里发送:\n http://52ylx.cn/all.html?name="+a.getRemarkName());
+                sendText(msg.getFromUserName(),"下次不回复请点击:\n http://52ylx.cn/a/"+(a.getRemarkName().substring(4)));
             }
 
         }catch (Exception e){

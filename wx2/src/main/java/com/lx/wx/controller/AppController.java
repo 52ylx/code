@@ -58,6 +58,10 @@ public class AppController {
         }
 
     }
+    @RequestMapping("/a/{main}")
+    public String toAll(@PathVariable("main") String main, HttpServletRequest req, HttpServletResponse res) throws UnsupportedEncodingException {
+        return "redirect:/all.html?name=lxzz"+ main;
+    }
     @RequestMapping("/h/{main}")
     public String toMain(@PathVariable("main") String main, HttpServletRequest req, HttpServletResponse res) throws UnsupportedEncodingException {
         String str = redisUtil.get("app:gw:"+main);
@@ -65,7 +69,7 @@ public class AppController {
     }
     @RequestMapping("/s/{main}")
     public String toShow(@PathVariable("main") String main, HttpServletRequest req, HttpServletResponse res) throws UnsupportedEncodingException {
-        return "redirect:/show.html?name="+ URLEncoder.encode(main,"utf-8");
+        return "redirect:/show.html?name=lxzz"+main;
     }
     @RequestMapping("/getShowLs")
     @ResponseBody

@@ -200,15 +200,15 @@ public class TaoBaoService {
                             }
                             Show s = new Show(name,LX.getTime(),in_title,to, LX.getBigDecimal(nt.getCommissionRate()).divide(LX.getBigDecimal(10)));
 //                            Order o = new Order(name, in_title, to, LX.getBigDecimal(nt.getCommissionRate()).divide(LX.getBigDecimal(10)));
-                            String out = "总: " + nt.getZkFinalPrice() + " ,返: " + s.getFx();
+                            String out = "总:" + nt.getZkFinalPrice() + ",返:" + s.getFx();
                             if (LX.isNotEmpty(nt.getCouponInfo())) {
-                                out += "\n" + nt.getCouponInfo() + " 券后: " + to;
+                                out += "\n" + nt.getCouponInfo();
                             }
                             String imgUrl = nt.getSmallImages() == null ? nt.getPictUrl() : nt.getSmallImages().get(0);
                             String uuid = LX.uuid32(5);
                             int time = 2 * 24 * 60 * 60;
-                            redisUtil.put("app:gw:" + uuid, LX.toMap("{imgUrl='{0}',tkl='{1}'}"
-                                    , imgUrl, toTKL(url, nt.getPictUrl(), nt.getTitle())), time);
+                            redisUtil.put("app:gw:" + uuid, LX.toMap("{t='{0}',tkl='{1}'}"
+                                    ,out.replace("\n","</br>"), toTKL(url, nt.getPictUrl(), nt.getTitle())), time);
                             TW tw = new TW(out, in_title, imgUrl, "http://www.52ylx.cn/h/" + uuid);
                             redisUtil.put("app:numiid_name:" + numiid + "_" + name, tw, time);//商品+用户
                             redisUtil.put("app:numiid_pid:" + numiid + "_" + adzoneId, s, time * 10);//商品+pid
@@ -289,7 +289,7 @@ public class TaoBaoService {
     public GZH wx_in(String in_title, String name,String bName) throws Exception {
         switch (in_title.trim()){
             case "查询":
-                return GZH.newInstance("http://www.52ylx.cn/s/" +name);
+                return GZH.newInstance("http://www.52ylx.cn/s/" +name.substring(4));
 //            case "验证码":
 //                return GZH.newInstance(name.substring(4));
 //            case "教学":
