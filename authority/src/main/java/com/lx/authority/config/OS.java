@@ -55,19 +55,18 @@ public class OS implements ApplicationContextAware,EnvironmentAware {
      * username , 用户对应的库里的信息
      * func 返回true则登录成功 false 登录失败
      */
-    public static String login(HttpServletRequest request,String username,Object custom, Function<HashMap,Boolean> func){
+    public static String login(HttpServletRequest request,String username,Object custom, Function<User,Boolean> func){
         String token = LX.uuid();
         long ipLimit = getIpLimit(request,username,()->{//
-            Var user = null;
+            User user = null;
             if ("admin".equals(username)){
-                user = LX.toMap("{{0}='admin',{1}='{2}',menus='{3}',btns='{4}'}",USERNAME,PASSWORD,"123456","#menus#","#btns#");
+                user = new User("admin","123456","#menus#","#btns#");
             }else{
-                user = redisUtil.find("system:user",Var.class,username);
-                LX.exObj(user,"没有找到用户信息!");
-                Var role = redisUtil.find("system:role",Var.class,user.getStr("role"));
+                Var u = redisUtil.find("system:user",Var.class,username);
+                LX.exObj(u,"没有找到用户信息!");
+                Var role = redisUtil.find("system:role",Var.class,u.getStr("role"));
                 LX.exObj(role,"没有绑定角色权限!");
-                user.put("menus",role.getStr("menus"));
-                user.put("btns",role.getStr("btns"));
+                user = new User(u.getStr("id"),u.getStr("password"),role.getStr("menus"),role.getStr("btns"));
             }
 
             if (func.apply(user)){
@@ -83,13 +82,13 @@ public class OS implements ApplicationContextAware,EnvironmentAware {
         if (ipLimit>0) LX.exMsg("请{0}秒后重试!",ipLimit);
         return token;
     }
-    private static void saveUser(HttpServletRequest request, String token, Var user){
-        user.put("token",token);
+    private static void saveUser(HttpServletRequest request, String token, User user){
+        user.setToken(token);
         //登陆成功,返回登陆TOKEN
         if ("1".equals(server_login_single)){
             //单点登录
-            redisUtil.del(redisUtil.get("system:login:user_token:"+user.get(USERNAME)));//删除之前的token
-            redisUtil.put("system:login:user_token:"+user.get(USERNAME),token,token_timeout);//将当前用户的token记住
+            redisUtil.del(redisUtil.get("system:login:user_token:"+user.getName()));//删除之前的token
+            redisUtil.put("system:login:user_token:"+user.getName(),token,token_timeout);//将当前用户的token记住
         }
         redisUtil.put(USER_TOKEN+token,user,token_timeout);//缓存
         request.getSession().setAttribute("token",token);
@@ -97,15 +96,17 @@ public class OS implements ApplicationContextAware,EnvironmentAware {
     }
     /** 移除用户*/
     private static void removeUser(HttpServletRequest request){
-        Var user = getUser();
-        if (LX.isEmpty(user)) return;
-        String token = user.getStr("token");
-        //登陆成功,返回登陆TOKEN
-        if ("1".equals(server_login_single)){//单点登录
-            redisUtil.del(redisUtil.get("system:login:user_token:"+user.get(USERNAME)));//删除之前的token
+        String token = (String) request.getSession().getAttribute("token");
+        //从参数中获取
+        if (LX.isEmpty(token)) token = request.getParameter("token");
+        if (LX.isNotEmpty(token)){
+            User user = redisUtil.get(USER_TOKEN+token,User.class);
+            //登陆成功,返回登陆TOKEN
+            redisUtil.del(redisUtil.get("system:login:user_token:"+user.getName()));//删除之前的token
+            redisUtil.del(USER_TOKEN+token);//缓存
+            request.getSession().removeAttribute("token");
         }
-        redisUtil.del(USER_TOKEN+token);//缓存
-        request.getSession().removeAttribute("token");
+
     }
     //设置用户
     static boolean setUser(HttpServletRequest request){
@@ -114,7 +115,7 @@ public class OS implements ApplicationContextAware,EnvironmentAware {
         //从参数中获取
         if (LX.isEmpty(token)) token = request.getParameter("token");
         if (LX.isNotEmpty(token)){
-            Var user = redisUtil.get(USER_TOKEN+token,Var.class);
+            User user = redisUtil.get(USER_TOKEN+token,User.class);
             if (LX.isNotEmpty(user)){
                 saveUser(request,token,user);//重新保存
                 put(USER_TOKEN,user);
@@ -133,8 +134,8 @@ public class OS implements ApplicationContextAware,EnvironmentAware {
             }
         }else{
             Var var = getParameterMap(request);
-            Var user = getUser();
-            String btns = user.getStr("btns");
+            User user = getUser();
+            String btns = user.getBtns();
             if (LX.isNotEmpty(btns) &&("#btns#".equals(btns) || new HashSet<>(Arrays.asList(btns.split(","))).contains(var.get("method")))){
                 return true;
             }
@@ -143,11 +144,11 @@ public class OS implements ApplicationContextAware,EnvironmentAware {
     }
 
     /**返回用户*/
-    public static Var getUser(){
+    public static User getUser(){
         return get(USER_TOKEN);
     }
     public static <T>T getCustom(Class<T> tClass){
-        return redisUtil.get(CUSTOM_USER+getUser().getStr(USERNAME),tClass);
+        return redisUtil.get(CUSTOM_USER+getUser().getName(),tClass);
     }
 
     public static  <T>T get(String key){
@@ -274,7 +275,63 @@ public class OS implements ApplicationContextAware,EnvironmentAware {
     }
 
 
+    public static class User {
+        private String name,password,menus,btns,token;
 
+        public User(String name, String password, String menus, String btns) {
+            this.name = name;
+            this.password = password;
+            this.menus = menus;
+            this.btns = btns;
+        }
+
+        @Override
+        public String toString() {
+            return "User{" +
+                    "name='" + name + '\'' +
+                    '}';
+        }
+
+        public String getPassword() {
+            return password;
+        }
+
+        public void setPassword(String password) {
+            this.password = password;
+        }
+
+        public String getToken() {
+            return token;
+        }
+
+        public void setToken(String token) {
+            this.token = token;
+        }
+
+        public String getName() {
+            return name;
+        }
+
+        public void setName(String name) {
+            this.name = name;
+        }
+
+        public String getMenus() {
+            return menus;
+        }
+
+        public void setMenus(String menus) {
+            this.menus = menus;
+        }
+
+        public String getBtns() {
+            return btns;
+        }
+
+        public void setBtns(String btns) {
+            this.btns = btns;
+        }
+    }
     public static class Page {
         private String msg;
         private int success = 1;

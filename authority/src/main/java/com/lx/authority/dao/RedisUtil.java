@@ -7,12 +7,17 @@ import com.lx.util.MathUtil;
 import com.lx.util.doc.ScanPackage;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.BeansException;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.ApplicationContext;
+import org.springframework.context.ApplicationContextAware;
 import org.springframework.stereotype.Repository;
 import org.springframework.util.Assert;
 import redis.clients.jedis.*;
 
 import javax.annotation.PostConstruct;
+import java.io.File;
+import java.io.FileOutputStream;
 import java.io.IOException;
 import java.lang.annotation.ElementType;
 import java.lang.annotation.Retention;
@@ -21,8 +26,12 @@ import java.lang.annotation.Target;
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 import java.lang.reflect.Parameter;
+import java.nio.file.Files;
 import java.util.*;
 import java.util.concurrent.Executor;
+import java.util.concurrent.Executors;
+import java.util.concurrent.ScheduledExecutorService;
+import java.util.concurrent.TimeUnit;
 import java.util.function.Consumer;
 import java.util.function.Function;
 import java.util.function.Supplier;
@@ -31,7 +40,7 @@ import java.util.function.Supplier;
  * 创建人:游林夕/2019/4/24 14 36
  */
 @Repository("redisUtil")
-public class RedisUtil {
+public class RedisUtil implements ApplicationContextAware {
     private static final Logger log = LoggerFactory.getLogger(RedisUtil.class);
 
     @Autowired
@@ -41,6 +50,9 @@ public class RedisUtil {
     private JedisConfig jedisConfig;
     @Autowired
     private Executor executor;
+
+
+
     //说明:从连接池获取链接
     /**{ ylx } 2019/4/24 14:52 */
     protected Jedis getRedis() {
@@ -268,7 +280,7 @@ public class RedisUtil {
     }
     /** 备份*/
      public void backup(){
-         exec(jedis->{jedis.bgsave();});
+         exec(jedis->{jedis.save();});
      }
 
     //获取分页
@@ -294,39 +306,32 @@ public class RedisUtil {
         }
         return t;
     }
+    private Var scripts = new Var();
     public <T>T evalsha(String script,String...KEYS){
         //获取脚本hash值
-        String hsah = get("system:evalsha:"+LX.md5(script),String.class,()->{
-            return exec(jedis -> {
+        String hash = "";
+        if (scripts.containsKey(LX.md5(script))){
+            hash = scripts.getStr(LX.md5(script));
+        }else{
+            hash = exec(jedis -> {
                 return jedis.scriptLoad(script);
             });
-        },0);
+            scripts.put(LX.md5(script),hash);
+        }
+        String finalHash = hash;
         return exec(jedis -> {
-            return  (T)jedis.evalsha(hsah, KEYS.length ,KEYS);
+            return  (T)jedis.evalsha(finalHash, KEYS.length ,KEYS);
         });
     }
-    @PostConstruct
-    public void test() throws IOException {
-        long t = System.currentTimeMillis();
-        sub("com");
-        System.out.println(System.currentTimeMillis()-t);
-        LX.sleep(1000);
-        pub("my2","测试");
-        pub("my1","测试1");
-        pub("my1","测试2");
-        pub("my1","测试3");
-        pub("my1","测试4");
+    @Override
+    public void setApplicationContext(ApplicationContext applicationContext) throws BeansException {
+        try {
+            sub(applicationContext);//开启监听
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
-    @Sub("my1")
-    public void bind(String a){
-        System.out.println(a);
-        LX.sleep(2000);
-    }
-    @Sub("my2")
-    public void bind1(String a){
-        System.out.println(a+"my2");
-        LX.sleep(2000);
-    }
+
     @Retention(value = RetentionPolicy.RUNTIME)
     @Target(ElementType.METHOD)
     public @interface Sub {
@@ -340,12 +345,12 @@ public class RedisUtil {
     }
     //取消订阅频道  unsubscribe String... channels  不传就是所有
     //增加订阅频道  subscribe String... channels
-    public void sub(String...page) throws IOException {
+    public void sub(ApplicationContext applicationContext) throws IOException {
         //获取Spring 容器中所有的bean
-        String[] beanDefinitionNames = OS.getApplicationContext().getBeanDefinitionNames();
+        String[] beanDefinitionNames = applicationContext.getBeanDefinitionNames();
         Var var = new Var();
         for (String bean : beanDefinitionNames){
-            Class<?> cls = OS.getApplicationContext().getType(bean);
+            Class<?> cls = applicationContext.getType(bean);
             Method[] methods = cls.getDeclaredMethods();//获取所有方法
             for (Method m : methods){
                 Parameter[] parameters = m.getParameters();
@@ -396,4 +401,5 @@ public class RedisUtil {
             bind(jedisPubSub, channels);
         }
     }
+
 }

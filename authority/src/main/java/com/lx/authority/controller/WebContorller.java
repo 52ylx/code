@@ -176,6 +176,7 @@ public class WebContorller {
     }
 
     @RequestMapping("/getPCInfo")
+    @Authority(false)
     public Object getPCInfo(){
         Map map = new HashMap();
         map.put("Java的执行环境版本号：" , System.getProperty("java.version"));

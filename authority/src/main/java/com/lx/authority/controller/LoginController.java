@@ -40,13 +40,14 @@ public class LoginController {
         //从缓存中查找用户信息
         //登录
         String token = OS.login(request,map.get("loginname").toString(),null,(user)->{
-            return user.get(OS.USERNAME).equals(map.get("loginname"))&&user.get(OS.PASSWORD).equals(map.get("password"));
+            return user.getName().equals(map.get("loginname"))&&user.getPassword().equals(map.get("password"));
         });
         return LX.toMap("{result='success',token='{0}'}",token);
     }
     //说明:退出登录
     /**{ ylx } 2019/9/11 11:32 */
     @RequestMapping("/logout")
+    @Authority(false)
     public String logout(@RequestParam(required = false) Map map,HttpServletRequest request){
         OS.logout(request);
         return LX.isEmpty(map.get("path"))?"redirect:/index.html":"redirect:/sys/index.html";
@@ -57,13 +58,13 @@ public class LoginController {
     public Object list_menu(HttpServletRequest request) throws Exception {
         List<HashMap> ls = null;
         //获取当前用户信息
-        Var user = OS.getUser();
+        OS.User user = OS.getUser();
         if(LX.isEmpty(user)) return OS.Page.toLogin();
-        LX.exObj(user.get("menus"),"没有任何访问权限!");
-        if ("admin".equals(user.get(OS.USERNAME)) || "#menus#".equals(user.get("menus"))){//如果是amin用户 或 所有权限
+        LX.exObj(user.getMenus(),"没有任何访问权限!");
+        if ("admin".equals(user.getName()) || "#menus#".equals(user.getMenus())){//如果是amin用户 或 所有权限
             ls =  redis.find("system:menu",HashMap.class);
         }else{
-            ls = redis.findAll("system:menu",HashMap.class,user.getStr("menus").split(","));
+            ls = redis.findAll("system:menu",HashMap.class,user.getMenus().split(","));
         }
         LX.exObj(ls,"没有任何访问权限!");
         ls.sort((o1,o2)->{return o1.get("id").hashCode()-o2.get("id").hashCode();});
@@ -75,9 +76,9 @@ public class LoginController {
     @RequestMapping("/admin_menu")
     @ResponseBody
     public Object admin_menu(HttpServletRequest request) throws Exception {
-        HashMap user = OS.getUser();
+        OS.User user = OS.getUser();
         if(LX.isEmpty(user)) return OS.Page.toLogin();
-        if ("admin".equals(user.get(OS.USERNAME))){
+        if ("admin".equals(user.getName())){
             return LX.toList(HashMap.class,"[" +
                     "{name='接口管理',url='/sys/sys/service/list.html',icon='layui-icon-form'}" +
                     ",{name='菜单管理',url='/sys/sys/menu/list.html',icon='layui-icon-layouts'}" +

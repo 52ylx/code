@@ -1,5 +1,6 @@
 package com.lx.authority.dao;//说明:
 
+import com.lx.util.LX;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.cache.annotation.CachingConfigurerSupport;
@@ -9,7 +10,11 @@ import org.springframework.core.env.Environment;
 import redis.clients.jedis.JedisPool;
 import redis.clients.jedis.JedisPoolConfig;
 
+import java.util.Date;
 import java.util.Optional;
+import java.util.concurrent.Executors;
+import java.util.concurrent.ScheduledExecutorService;
+import java.util.concurrent.TimeUnit;
 
 /**
  * 创建人:游林夕/2019/4/28 08 26
@@ -18,8 +23,10 @@ import java.util.Optional;
 public class JedisConfig extends CachingConfigurerSupport {
 
     private Logger logger = LoggerFactory.getLogger(JedisConfig.class);
-    int database;
-    String password;
+    int database;   //数据库
+    String password;//密码
+    String autoBackupName;//上传项目名
+    String filename;//redis文件名
     @Bean
     public JedisPool redisPoolFactory(Environment environment){
         JedisPoolConfig jedisPoolConfig = new JedisPoolConfig();
@@ -31,6 +38,8 @@ public class JedisConfig extends CachingConfigurerSupport {
         int port = Integer.parseInt(Optional.ofNullable(environment.getProperty("spring.redis.port")).orElse("6379"));
         this.database = Integer.parseInt(Optional.ofNullable(environment.getProperty("spring.redis.database")).orElse("0"));
         this.password = environment.getProperty("spring.redis.password");
+        this.autoBackupName = environment.getProperty("spring.redis.autoBackupName");
+        this.filename = environment.getProperty("spring.redis.filename");
 //        LX.exObj(password,"请配置redis密码:spring.redis.password");
         JedisPool jedisPool = new JedisPool(jedisPoolConfig ,host ,port
                 ,Integer.parseInt(Optional.ofNullable(environment.getProperty("spring.redis.timeout")).orElse("1000"))
@@ -38,5 +47,4 @@ public class JedisConfig extends CachingConfigurerSupport {
         logger.info("redis地址："+host + ":" + port + " -database:"+database);
         return  jedisPool;
     }
-
 }
