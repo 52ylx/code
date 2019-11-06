@@ -181,7 +181,7 @@ public class OS implements ApplicationContextAware,EnvironmentAware {
     @Override
     public void setEnvironment(Environment environment) {
         this.environment = environment;
-        this.token_timeout = Integer.parseInt(Optional.ofNullable(getProperty("server.token.timeout")).orElse(60*60+""));
+        this.token_timeout = Integer.parseInt(Optional.ofNullable(getProperty("server.token.timeout")).orElse(10*60+""));
         this.server_login_single = Optional.ofNullable(getProperty("server.login.single")).orElse("1");
         this.minuteLimit = Integer.parseInt(Optional.ofNullable(getProperty("server.login.minuteLimit")).orElse("3"));
         this.sever_web_log = getProperty("sever.web.log");
