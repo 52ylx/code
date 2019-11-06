@@ -23,8 +23,9 @@ import java.util.function.Supplier;
 
 @Component
 public class OS implements ApplicationContextAware,EnvironmentAware {
-    public static final String USERNAME = "id";
-    public static final String PASSWORD = "password";
+    //超级管理员 用户名和密码
+    public static String ROOTNAME = "";
+    static String ROOTPASS = "";
     //存入redis
     private static final String USER_TOKEN = "system:login:token:";
     private static final String CUSTOM_USER = "system:login:custom:";
@@ -59,8 +60,8 @@ public class OS implements ApplicationContextAware,EnvironmentAware {
         String token = LX.uuid();
         long ipLimit = getIpLimit(request,username,()->{//
             User user = null;
-            if ("admin".equals(username)){
-                user = new User("admin","123456","#menus#","#btns#");
+            if (ROOTNAME.equals(username)){
+                user = new User(ROOTNAME,ROOTPASS,"#menus#","#btns#");
             }else{
                 Var u = redisUtil.find("system:user",Var.class,username);
                 LX.exObj(u,"没有找到用户信息!");
@@ -87,22 +88,17 @@ public class OS implements ApplicationContextAware,EnvironmentAware {
         //登陆成功,返回登陆TOKEN
         if ("1".equals(server_login_single)){
             //单点登录
-            redisUtil.del(redisUtil.get("system:login:user_token:"+user.getName()));//删除之前的token
+            redisUtil.del(USER_TOKEN+redisUtil.get("system:login:user_token:"+user.getName()));//删除之前的token
             redisUtil.put("system:login:user_token:"+user.getName(),token,token_timeout);//将当前用户的token记住
         }
         redisUtil.put(USER_TOKEN+token,user,token_timeout);//缓存
-        request.getSession().setAttribute("token",token);
-        request.getSession().setMaxInactiveInterval(token_timeout);
+        request.getSession().setAttribute("token",token);//移除登录使用
+//        request.getSession().setMaxInactiveInterval(token_timeout);
     }
     /** 移除用户*/
     private static void removeUser(HttpServletRequest request){
-        String token = (String) request.getSession().getAttribute("token");
-        //从参数中获取
-        if (LX.isEmpty(token)) token = request.getParameter("token");
+        String token = (String)request.getSession().getAttribute("token");
         if (LX.isNotEmpty(token)){
-            User user = redisUtil.get(USER_TOKEN+token,User.class);
-            //登陆成功,返回登陆TOKEN
-            redisUtil.del(redisUtil.get("system:login:user_token:"+user.getName()));//删除之前的token
             redisUtil.del(USER_TOKEN+token);//缓存
             request.getSession().removeAttribute("token");
         }
@@ -110,10 +106,7 @@ public class OS implements ApplicationContextAware,EnvironmentAware {
     }
     //设置用户
     static boolean setUser(HttpServletRequest request){
-        //尝试从Session中获取token
-        String token = (String) request.getSession().getAttribute("token");
-        //从参数中获取
-        if (LX.isEmpty(token)) token = request.getParameter("token");
+        String token = request.getParameter("token");
         if (LX.isNotEmpty(token)){
             User user = redisUtil.get(USER_TOKEN+token,User.class);
             if (LX.isNotEmpty(user)){
@@ -190,8 +183,10 @@ public class OS implements ApplicationContextAware,EnvironmentAware {
         this.environment = environment;
         this.token_timeout = Integer.parseInt(Optional.ofNullable(getProperty("server.token.timeout")).orElse(60*60+""));
         this.server_login_single = Optional.ofNullable(getProperty("server.login.single")).orElse("1");
-        this.minuteLimit = Integer.parseInt(Optional.ofNullable(getProperty("server.login.minuteLimit")).orElse("5"));
+        this.minuteLimit = Integer.parseInt(Optional.ofNullable(getProperty("server.login.minuteLimit")).orElse("3"));
         this.sever_web_log = getProperty("sever.web.log");
+        this.ROOTNAME = Optional.ofNullable(getProperty("server.sys.rootname")).orElse("admin");
+        this.ROOTPASS = Optional.ofNullable(getProperty("server.sys.rootpass")).orElse("123456");
     }
     public static String getProperty(String key){
         return environment.getProperty(key);

@@ -61,7 +61,7 @@ public class LoginController {
         OS.User user = OS.getUser();
         if(LX.isEmpty(user)) return OS.Page.toLogin();
         LX.exObj(user.getMenus(),"没有任何访问权限!");
-        if ("admin".equals(user.getName()) || "#menus#".equals(user.getMenus())){//如果是amin用户 或 所有权限
+        if ("#menus#".equals(user.getMenus())){//如果是amin用户 或 所有权限
             ls =  redis.find("system:menu",HashMap.class);
         }else{
             ls = redis.findAll("system:menu",HashMap.class,user.getMenus().split(","));
@@ -78,7 +78,7 @@ public class LoginController {
     public Object admin_menu(HttpServletRequest request) throws Exception {
         OS.User user = OS.getUser();
         if(LX.isEmpty(user)) return OS.Page.toLogin();
-        if ("admin".equals(user.getName())){
+        if (OS.ROOTNAME.equals(user.getName())){
             return LX.toList(HashMap.class,"[" +
                     "{name='接口管理',url='/sys/sys/service/list.html',icon='layui-icon-form'}" +
                     ",{name='菜单管理',url='/sys/sys/menu/list.html',icon='layui-icon-layouts'}" +
