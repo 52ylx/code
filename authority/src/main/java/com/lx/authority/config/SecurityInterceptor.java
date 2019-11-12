@@ -27,38 +27,39 @@ public class SecurityInterceptor implements HandlerInterceptor {
 
     @Override
     public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) throws Exception {
-        if (handler instanceof HandlerMethod) {
-            if ("1".equals(OS.sever_web_log) || request.getServletPath().matches(SYS)){
-                log.info(OS.getIpAddress(request)+"==>"+"请求==>"+request.getRequestURL()+" 参数:"+LX.toJSONString(OS.getParameterMap(request)));
-            }
-            HandlerMethod handlerMethod = (HandlerMethod) handler;
-            Authority authority = Optional.ofNullable(handlerMethod.getMethod().getAnnotation(Authority.class))
-                    .orElse(handlerMethod.getMethod().getDeclaringClass().getAnnotation(Authority.class));
-            // 如果标记了注解，则判断权限
-            if (authority!=null && authority.value()) {
-                try{
-                    if (OS.setUser(request)){//没有设置成功
-                        //是否检查接口权限
-                        if (!authority.method()) return true;//不用直接返回true
-                        try {
-                            return OS.checkMethod(request,authority);
-                        }catch (Exception e){
-                            response.setContentType("application/json;charset=UTF-8");
-                            response.setCharacterEncoding("UTF-8");
-                            response.getWriter().write(LX.toJSONString(new OS.Page(e.getMessage())));
-                            return false;
-                        }
-                    }
-                }catch (Exception e){
-                }
-                response.setContentType("application/json;charset=UTF-8");
-                response.setCharacterEncoding("UTF-8");
-                response.getWriter().write(OS.Page.toLogin());
-                return false;
-
-            }
+        if (!(handler instanceof HandlerMethod)) {//不是方法
+            return true;
         }
-        return true;
+        if ("1".equals(OS.sever_web_log) || request.getServletPath().matches(SYS)){
+            log.info(OS.getIpAddress(request)+"==>"+"请求==>"+request.getRequestURL()+" 参数:"+LX.toJSONString(OS.getParameterMap(request)));
+        }
+        HandlerMethod handlerMethod = (HandlerMethod) handler;
+        //获取方法上或者类上的注解
+        Authority authority = Optional.ofNullable(handlerMethod.getMethod().getAnnotation(Authority.class))
+                .orElse(handlerMethod.getMethod().getDeclaringClass().getAnnotation(Authority.class));
+        if (authority == null || !authority.value()){//如果接口没有进行验证
+            return true;
+        }
+        try{
+            if (OS.setUser(request)){//没有设置成功
+                //是否检查接口权限
+                if (!authority.method()) return true;//不用直接返回true
+                try {
+                    return OS.checkMethod(request,authority);
+                }catch (Exception e){
+                    response.setContentType("application/json;charset=UTF-8");
+                    response.setCharacterEncoding("UTF-8");
+                    response.getWriter().write(LX.toJSONString(new OS.Page(e.getMessage())));
+                    return false;
+                }
+            }
+        }catch (Exception e){
+        }
+        response.setContentType("application/json;charset=UTF-8");
+        response.setCharacterEncoding("UTF-8");
+        response.getWriter().write(OS.Page.toLogin());
+        return false;
+
     }
 
     @Override

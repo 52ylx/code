@@ -7,6 +7,8 @@ package com.lx.authority.config;//说明:
 import com.lx.authority.dao.RedisUtil;
 import com.lx.entity.Var;
 import com.lx.util.LX;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.BeansException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.ApplicationContext;
@@ -23,6 +25,8 @@ import java.util.function.Supplier;
 
 @Component
 public class OS implements ApplicationContextAware,EnvironmentAware {
+
+    private static Logger log = LoggerFactory.getLogger(OS.class);
     //超级管理员 用户名和密码
     public static String ROOTNAME = "";
     static String ROOTPASS = "";
@@ -42,12 +46,8 @@ public class OS implements ApplicationContextAware,EnvironmentAware {
     };
     private static RedisUtil redisUtil;
     private static Environment environment;
-    public static String sever_web_log;
+    static String sever_web_log;
 
-    /** 获取缓存中的对象*/
-    static HashMap getUserByToken(String token){
-        return redisUtil.get("system:login:token:"+token,HashMap.class);
-    }
     /** 从缓存中移除登录信息*/
     public static void logout(HttpServletRequest request){
         removeUser(request);
@@ -110,11 +110,12 @@ public class OS implements ApplicationContextAware,EnvironmentAware {
         if (LX.isNotEmpty(token)){
             User user = redisUtil.get(USER_TOKEN+token,User.class);
             if (LX.isNotEmpty(user)){
-                saveUser(request,token,user);//重新保存
+                redisUtil.expire(USER_TOKEN+token,token_timeout);//重置超时时间
                 put(USER_TOKEN,user);
                 return true;
             }
         }
+        LX.exMsg(token);
         return false;
     }
 

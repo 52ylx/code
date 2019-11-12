@@ -282,7 +282,12 @@ public class RedisUtil implements ApplicationContextAware {
      public void backup(){
          exec(jedis->{jedis.save();});
      }
-
+    /** 设置超时时间*/
+    public void expire(String key,int time){
+        exec(jedis->{
+            jedis.expire(key,time);
+        });
+    }
     //获取分页
     public List listPage(String key,String limit,String page,String find){
         String lua = "local fields = redis.call(\"HVALS\", KEYS[1]);local limit = tonumber(KEYS[2]);local page = tonumber(KEYS[3]);local result = {};local res={0};local j=0;local k=0; for i, v in ipairs(fields) do if string.len(KEYS[4])== 0 or string.find(v,KEYS[4]) then k=k+1; res[1]=k; if k>(page-1)*limit and k<=page*limit then j = j+1; result[j] = v; end; end;end;res[2]=result; return res;";
