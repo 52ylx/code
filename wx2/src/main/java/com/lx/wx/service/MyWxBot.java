@@ -39,7 +39,7 @@ public class MyWxBot extends WxBot {
             a.setAccountType(AccountType.TYPE_FRIEND);
             accountHashMap.put(a.getUserName(),a);
             remarkName(a.getUserName());//修改备注
-            getText(new WxMessage("教学",a.getUserName(),a.getNickName(),a.getRemarkName(),""));//发送信息
+            getText(new WxMessage("查询",a.getUserName(),a.getNickName(),a.getRemarkName(),""));//发送信息
         }
     }
     //修改备注名
@@ -91,7 +91,17 @@ public class MyWxBot extends WxBot {
                 redisUtil.put("app:user:nick:"+msg.getFromRemarkName(),LX.toJSONString(new Var("nick",msg.getFromNickName())));//将昵称存入
             }
             log.info("收到消息:"+msg.getFromNickName()+"   "+msg.getText());
-            if ("提现".equals(msg.getText())) {//发送给晓贴
+
+            if(msg.getText().matches("\\d{6}")){
+                Var v = redisUtil.get("app:user:nick:"+msg.getFromRemarkName(),Var.class);
+                if (("lxzz"+msg.getText()).equals(msg.getFromRemarkName())||v.containsKey("bing")){//推荐码是自己 或者有推荐码
+                    sendText(msg.getFromUserName(),"不可重复绑定哦!");
+                    return;
+                }
+                v.put("bing","lxzz"+msg.getText());
+                redisUtil.put("app:user:nick:"+msg.getFromRemarkName(),v);//将昵称存入
+                sendText(msg.getFromUserName(),"绑定成功!");
+            }else if ("提现".equals(msg.getText())) {//发送给晓贴
                 BigDecimal fx = taoBaoService.getTX(msg.getFromRemarkName());
                 if (fx.compareTo(new BigDecimal(0))==0){
                     sendText(msg.getFromUserName(),"暂无收货订单!");
