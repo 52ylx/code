@@ -92,7 +92,7 @@ public class MyWxBot extends WxBot {
             }
             log.info("收到消息:"+msg.getFromNickName()+"   "+msg.getText());
 
-            if(msg.getText().matches("\\d{6}")){
+            if(msg.getText().matches("\\d{6}")||msg.getText().matches("\\d{12}")){
                 Var v = redisUtil.get("app:user:nick:"+msg.getFromRemarkName(),Var.class);
                 if (("lxzz"+msg.getText()).equals(msg.getFromRemarkName())||v.containsKey("bing")){//推荐码是自己 或者有推荐码
                     sendText(msg.getFromUserName(),"不可重复绑定哦!");
