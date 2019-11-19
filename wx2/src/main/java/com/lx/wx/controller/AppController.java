@@ -8,6 +8,7 @@ import com.lx.util.LogUtil;
 import com.lx.wx.entity.GZH;
 import com.lx.wx.entity.Show;
 import com.lx.wx.entity.TW;
+import com.lx.wx.service.MyWxBot;
 import com.lx.wx.service.TaoBaoService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -85,5 +86,61 @@ public class AppController {
         shows.add(s);
         return new OS.Page(shows);
     }
+    @Autowired
+    private MyWxBot myWxBot;
+    @RequestMapping("/addOrder")
+    @ResponseBody
+    public void addOrder(String item,String id,String tad){
+        Show show = redisUtil.get("app:numiid_pid:" + item + "_" + id, Show.class);
+        if (show != null){
+            show.setStatus(Show.Status.付款);
+            redisUtil.put("app:tb:ls:order:"+tad,show.getName(),40*24*3600);//将订单加入
+            redisUtil.save("app:tb:ls:"+show.getName(),tad,show);//将用户订单存入
+            try {
+                myWxBot.send(show.getName(),show.getTitle()+"付㝟成功!"+show.getFx());
+                Var v = redisUtil.get("app:user:nick:"+show.getName(),Var.class);
+                if (v.containsKey("bing")){//推荐码是自己 或者有推荐码
+                    myWxBot.send(v.getStr("bing"),v.getStr("nick")+";付㝟成功!"
+                            +(show.getFx().multiply(new BigDecimal(0.1)).setScale(2,BigDecimal.ROUND_FLOOR)));
+                }
+            }catch (Exception e){
+                log.error("推送消息失败!");
+            }
+        }
+    }
+    @RequestMapping("/uOrder")
+    @ResponseBody
+    public void uOrder(String item,String id,String tad){
+        String name = redisUtil.get("app:tb:ls:order:" + tad);
+        if (name != null){
+            Show s = redisUtil.find("app:tb:ls:"+name,Show.class,tad);
+            s.setStatus(Show.Status.结算);
+            redisUtil.save("app:tb:ls:"+name,tad,LX.toJSONString(s));//加入到结算中
+            try {
+                myWxBot.send(name,s.getTitle()+"\n结算成功:"+s.getFx());
+                Var v = redisUtil.get("app:user:nick:"+name,Var.class);
+                if (v.containsKey("bing")){//推荐码是自己 或者有推荐码
+                    Show s1 = new Show();
+                    s1.setAdd_time(LX.getTime());
+                    s1.setTitle("推荐:"+v.getStr("nick"));
+                    s1.setFx(s.getFx().multiply(new BigDecimal(0.1)).setScale(2,BigDecimal.ROUND_FLOOR));
+                    s1.setStatus(Show.Status.结算);
+                    redisUtil.save("app:tb:ls:"+v.getStr("bing"),tad,s1);//加入到结算中
+                    myWxBot.send(v.getStr("bing"),v.getStr("nick")+";结算成功!可提现:"
+                            +(s1.getFx()));
+                }
+            }catch (Exception e){
+                log.error("推送消息失败!");
+            }
+        }
+    }
 
+    public static void main(String[] args) {
+        //13914880109_108979600467
+        //520538406051_108824400102
+        String t = LX.getDate("yyyyMMddHHmmss");
+        LX.doGet("http://52ylx.cn/addOrder?item=520538406051&id=108824400102&tad="+t);
+        System.out.print(t);
+        LX.doGet("http://52ylx.cn/uOrder?item=13914880109&id=108979600467&tad="+t);
+    }
 }
