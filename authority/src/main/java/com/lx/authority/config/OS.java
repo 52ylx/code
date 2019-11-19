@@ -90,6 +90,7 @@ public class OS implements ApplicationContextAware,EnvironmentAware {
             //单点登录
             redisUtil.del(USER_TOKEN+redisUtil.get("system:login:user_token:"+user.getName()));//删除之前的token
             redisUtil.put("system:login:user_token:"+user.getName(),token,token_timeout);//将当前用户的token记住
+            request.getSession().removeAttribute("token");//移除登录使用
         }
         redisUtil.put(USER_TOKEN+token,user,token_timeout);//缓存
         request.getSession().setAttribute("token",token);//移除登录使用
@@ -106,7 +107,10 @@ public class OS implements ApplicationContextAware,EnvironmentAware {
     }
     //设置用户
     static boolean setUser(HttpServletRequest request){
-        String token = request.getParameter("token");
+        String token = (String)request.getSession().getAttribute("token");
+        if (LX.isEmpty(token)){
+            token = request.getParameter("token");
+        }
         if (LX.isNotEmpty(token)){
             User user = redisUtil.get(USER_TOKEN+token,User.class);
             if (LX.isNotEmpty(user)){
@@ -115,7 +119,6 @@ public class OS implements ApplicationContextAware,EnvironmentAware {
                 return true;
             }
         }
-        LX.exMsg(token);
         return false;
     }
 

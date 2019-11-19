@@ -30,9 +30,6 @@ public class SecurityInterceptor implements HandlerInterceptor {
         if (!(handler instanceof HandlerMethod)) {//不是方法
             return true;
         }
-        if ("1".equals(OS.sever_web_log) || request.getServletPath().matches(SYS)){
-            log.info(OS.getIpAddress(request)+"==>"+"请求==>"+request.getRequestURL()+" 参数:"+LX.toJSONString(OS.getParameterMap(request)));
-        }
         HandlerMethod handlerMethod = (HandlerMethod) handler;
         //获取方法上或者类上的注解
         Authority authority = Optional.ofNullable(handlerMethod.getMethod().getAnnotation(Authority.class))
@@ -42,6 +39,9 @@ public class SecurityInterceptor implements HandlerInterceptor {
         }
         try{
             if (OS.setUser(request)){//没有设置成功
+                if ("1".equals(OS.sever_web_log) || request.getServletPath().matches(SYS)){
+                    log.info(OS.getIpAddress(request)+"==>"+OS.getUser().getName()+"==>请求==>"+request.getRequestURL()+" 参数:"+LX.toJSONString(OS.getParameterMap(request)));
+                }
                 //是否检查接口权限
                 if (!authority.method()) return true;//不用直接返回true
                 try {
