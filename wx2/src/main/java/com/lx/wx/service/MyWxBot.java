@@ -101,7 +101,7 @@ public class MyWxBot extends WxBot {
                 v.put("bing","lxzz"+msg.getText());
                 redisUtil.put("app:user:nick:"+msg.getFromRemarkName(),v);//将昵称存入
                 sendText(msg.getFromUserName(),"绑定成功!");
-                send("lxzz"+msg.getText(),"好友:"+v.getStr("nick")+".绑定成功!");
+                send("lxzz"+msg.getText(),v.getStr("nick")+".绑定成功!");
             }else if ("提现".equals(msg.getText())) {//发送给晓贴
                 BigDecimal fx = taoBaoService.getTX(msg.getFromRemarkName());
                 if (fx.compareTo(new BigDecimal(0))==0){
