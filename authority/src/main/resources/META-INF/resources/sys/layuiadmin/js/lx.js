@@ -291,13 +291,8 @@ if($("#table_temp_id").size()>0){
         }
         //联表操作 data
         ,link_func:function (d) {
-            for(var i in this.data){
-                var v = this.data[i];
-                if (d[this.field] == v.k){
-                    return  v.v;
-                }
-            }
-            return '未知';
+            var k = this.data[d[this.field]];
+            return k?k:'未知';
         }
         ,sex_func:function (d) {
             return d[this.field]==1?`<button class="layui-btn layui-btn-xs">${this.t1}</button>`: `<button class="layui-btn layui-btn-primary layui-btn-xs" lay-event="add_p">${this.t2}</button>`;
