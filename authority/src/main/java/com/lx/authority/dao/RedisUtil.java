@@ -139,7 +139,7 @@ public class RedisUtil implements ApplicationContextAware {
     public <T> T get(String key, Class<T> t, Supplier<? extends T> other,int time) {
         return Optional.ofNullable(LX.toObj(t,getRedis().get(key))).orElseGet(()->{//缓存不存在该key
             T obj = null;
-            synchronized (key){//加锁防止缓存雪崩
+            synchronized (RedisUtil.class){//加锁防止缓存雪崩
                 obj = get(key,t);//重新重缓存获取
                 if (LX.isEmpty(obj)){//如果还是不存在就去数据库查询
                     obj = other.get();
