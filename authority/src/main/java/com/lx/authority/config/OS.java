@@ -332,24 +332,26 @@ public class OS implements ApplicationContextAware,EnvironmentAware {
         }
     }
     public static class Page {
-        private String msg;
+        private String msg = "";
         private int success = 1;
         private long count = 0;
-        private List rows;
-        private Map entity;
+        private List rows = new ArrayList();
+        private Map entity = new HashMap();
 
         public Page(){}
         public Page(Map map){
+            if (map == null) return;
             this.entity = map;
         }
-        public Page(List data){
-            if (data == null) return;
-            this.rows = data;
-            this.count = data.size();
+        public Page(List rows){
+            if (rows == null) return;
+            this.rows = rows;
+            this.count = rows.size();
         }
         public Page(List rows, long count){
-            this.rows = rows;
             this.count = count;
+            if (rows == null) return;
+            this.rows = rows;
         }
         public Page(String msg){
             this.msg = msg;
@@ -380,35 +382,27 @@ public class OS implements ApplicationContextAware,EnvironmentAware {
         public void setMsg(String msg) {
             this.msg = msg;
         }
-
         public int getSuccess() {
             return success;
         }
-
         public void setSuccess(int success) {
             this.success = success;
         }
-
         public long getCount() {
             return count;
         }
-
         public void setCount(long count) {
             this.count = count;
         }
-
         public List getRows() {
             return rows;
         }
-
         public void setRows(List rows) {
             this.rows = rows;
         }
-
         public Map getEntity() {
             return entity;
         }
-
         public void setEntity(Map entity) {
             this.entity = entity;
         }

@@ -43,12 +43,19 @@ var lx = {
             newurl += "?token=" + $.cookie('token');
         }
         $.ajax(newurl, {
-                async: false,
+                async: true,
                 cache: false,
                 dataType: "json",
                 data: data,
                 type: 'POST',
                 processData: true,
+                layerIndex: -1,
+                beforeSend: function () {
+                    this.layerIndex = layer.load(0, {shade: [0.5, '#666c7f']});
+                },
+                complete: function () {
+                    layer.close(this.layerIndex);
+                },
                 success: function(data) {
                     if(that.login(data)){
                         funcallback(data);

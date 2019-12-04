@@ -147,14 +147,13 @@
               });
               var ls = arrayToMenu(data,'0');
               $("#LAY-system-side-menu").append(ls);
-
               $("#LAY_app_body").append(
                       `<div class="layadmin-tabsbody-item layui-show">
                       <iframe src="sys/home/console.html" frameborder="0" class="layadmin-iframe"></iframe>
                     </div>`);
-
+              element.init();
           });
-          element.init();
+
       });
 
       function arrayToMenu(treeArr, pid) {

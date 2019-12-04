@@ -260,10 +260,9 @@
               $("#tbody").append(`<tr><td>${key}</td><td>${data[key]}</td></tr>`);
           });
           option.series[0].data[0].value = data.内存剩余率;
+          var myChart = echarts.init(document.getElementById('myChart1'));
+          myChart.setOption(option, true);
       })
-      var myChart = echarts.init(document.getElementById('myChart1'));
-      myChart.setOption(option, true);
-
   </script>
 </body>
 </html>

@@ -84,8 +84,8 @@ public class LoginController {
                     ",{name='菜单管理',url='/sys/sys/menu/list.html',icon='layui-icon-layouts'}" +
                     ",{name='权限管理',url='/sys/sys/role/list.html',icon='layui-icon-vercode'}" +
                     ",{name='用户管理',url='/sys/sys/user/list.html',icon='layui-icon-group'}" +
-                    ",{name='字典管理',url='/sys/sys/dict/list.html',icon='layui-icon-template-1'}" +
-                    ",{name='配置管理',url='/sys/sys/config/list.html',icon='layui-icon-set-fill'}" +
+//                    ",{name='字典管理',url='/sys/sys/dict/list.html',icon='layui-icon-template-1'}" +
+//                    ",{name='配置管理',url='/sys/sys/config/list.html',icon='layui-icon-set-fill'}" +
                     "]");
         }
         return LX.toList(HashMap.class,"[]");
