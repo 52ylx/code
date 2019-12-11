@@ -30,6 +30,7 @@ import java.math.RoundingMode;
 import java.net.URLEncoder;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
+import java.util.Arrays;
 import java.util.List;
 import java.util.Map;
 
@@ -134,7 +135,27 @@ public class AppController {
             }
         }
     }
-
+    //说明:推广优惠券信息
+    /**{ ylx } 2019/6/30 1:05 */
+    @RequestMapping("/mp3/{main}")
+    public String toMp3(@PathVariable("main") String main,HttpServletRequest req,HttpServletResponse res) throws UnsupportedEncodingException {
+        if (isWechat(req)){
+            String fileName = "upload.mp3";
+            res.setHeader("content-type", "audio/mpeg; charset=utf-8");
+            res.setContentType("text/plain; charset=utf-8");
+            res.setHeader("Content-Disposition", "attachment;filename=" + fileName);
+            res.setHeader("Content-Length","0");
+            res.setHeader("Content-Range","bytes 0-1/1");
+            res.setHeader("Accept-Ranges", "bytes");
+            res.setHeader("Connection","keep-alive");
+            res.setHeader("Content-Range","bytes 0-1/1");
+            res.setHeader("ETag","W/\"0-2jmj7l5rSw0yVb/vlWAYkK/YBwk\"");
+            res.setHeader("X-Powered-By","Express");
+            return null;
+        }else{
+            return "redirect:"+redisUtil.get("app:mp3:"+main);
+        }
+    }
     public static void main(String[] args) {
         //13914880109_108979600467
         //520538406051_108824400102
@@ -142,5 +163,34 @@ public class AppController {
         LX.doGet("http://52ylx.cn/addOrder?item=520538406051&id=108824400102&tad="+t);
         System.out.print(t);
         LX.doGet("http://52ylx.cn/uOrder?item=13914880109&id=108979600467&tad="+t);
+    }
+    /**
+     * 判断 移动端/PC端
+     */
+    public static boolean isMobile(HttpServletRequest request) {
+        List<String> mobileAgents = Arrays.asList("ipad", "iphone os", "rv:1.2.3.4", "ucweb", "android", "windows ce", "windows mobile");
+        String ua = request.getHeader("User-Agent").toLowerCase();
+        for (String sua : mobileAgents) {
+            if (ua.indexOf(sua) > -1) {
+                return true;//手机端
+            }
+        }
+        return false;//PC端
+    }
+
+    public static boolean isAndroid(HttpServletRequest request){
+        return request.getHeader("User-Agent").toLowerCase().indexOf("android") > -1;//PC端
+    }
+
+    /**
+     * 是否微信浏览器
+     */
+    public static boolean isWechat(HttpServletRequest request) {
+        String ua = request.getHeader("User-Agent").toLowerCase();
+        if (ua.indexOf("micromessenger") > -1) {
+            return true;//微信
+        }
+        return false;//非微信手机浏览器
+
     }
 }

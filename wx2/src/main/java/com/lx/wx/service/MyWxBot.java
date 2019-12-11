@@ -25,6 +25,8 @@ public class MyWxBot extends WxBot {
     private RedisUtil redisUtil;
     @Autowired
     private TaoBaoService taoBaoService;
+    @Autowired
+    private KGService kgService;
 
     public static void main(String [] args){
         MyWxBot b = new MyWxBot();
@@ -91,8 +93,9 @@ public class MyWxBot extends WxBot {
                 redisUtil.put("app:user:nick:"+msg.getFromRemarkName(),LX.toJSONString(new Var("nick",msg.getFromNickName())));//将昵称存入
             }
             log.info("收到消息:"+msg.getFromNickName()+"   "+msg.getText());
-
-            if(msg.getText().matches("\\d{6}")||msg.getText().matches("\\d{12}")){
+            if(msg.getText().startsWith("歌曲")){
+                sendText(msg.getFromUserName(),kgService.getLS(msg.getText().substring(2)));
+            }else if(msg.getText().matches("\\d{6}")||msg.getText().matches("\\d{12}")){
                 Var v = redisUtil.get("app:user:nick:"+msg.getFromRemarkName(),Var.class);
                 if (("lxzz"+msg.getText()).equals(msg.getFromRemarkName())||v.containsKey("bing")){//推荐码是自己 或者有推荐码
                     sendText(msg.getFromUserName(),"不可重复绑定哦!");
