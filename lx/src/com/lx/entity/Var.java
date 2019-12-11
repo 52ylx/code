@@ -21,8 +21,9 @@ public class Var extends HashMap {
     public Var(String str ,Object...v){this.putAll(LX.toMap(str,v));}
     /** 获取字符串类型*/
     public String getStr(Object key){return LX.isEmpty(get(key))?"":get(key).toString();}
-    public List getList(Object key){return getObj(List.class,key);}
+    public List getList(Object key){return getObj(key);}
     public Var getVar(Object key){return getObj(Var.class,key);}
+    public int getInt(Object key){return Integer.parseInt(getStr(key));}
     /** 获取值(可能强转不了)*/
     public <T> T getObj(Object key){return (T) get(key);}
     /** 获取指定类型值*/
