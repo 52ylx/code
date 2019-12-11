@@ -5,6 +5,7 @@ import com.lx.authority.config.OS;
 import com.lx.authority.dao.RedisUtil;
 import com.lx.entity.Var;
 import com.lx.util.LX;
+import com.lx.util.MathUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -55,19 +56,42 @@ public class LoginController {
     //用户菜单
     @RequestMapping("/menu")
     @ResponseBody
-    public Object list_menu(HttpServletRequest request) throws Exception {
-        List<HashMap> ls = null;
+    public List<Var> list_menu(HttpServletRequest request) throws Exception {
+        List<Var> ls = null;
         //获取当前用户信息
         OS.User user = OS.getUser();
-        if(LX.isEmpty(user)) return OS.Page.toLogin();
-        LX.exObj(user.getMenus(),"没有任何访问权限!");
+        if(LX.isEmpty(user)) return null;
         if ("#menus#".equals(user.getMenus())){//如果是amin用户 或 所有权限
-            ls =  redis.find("system:menu",HashMap.class);
+            ls =  redis.find("system:menu",Var.class);
         }else{
-            ls = redis.findAll("system:menu",HashMap.class,user.getMenus().split(","));
+            ls = redis.findAll("system:menu",Var.class,user.getMenus().split(","));
         }
-        LX.exObj(ls,"没有任何访问权限!");
-        ls.sort((o1,o2)->{return o1.get("id").hashCode()-o2.get("id").hashCode();});
+        if (LX.isNotEmpty(ls)){
+            ls.sort((o1,o2)->{return o1.get("id").hashCode()-o2.get("id").hashCode();});
+        }
+        return ls;
+    }
+    //获取指定用户指定 pid下的所有菜单 并将子菜单放入 父菜单的 list 中
+    @RequestMapping("/format_menu")
+    @ResponseBody
+    public Object format_menu(HttpServletRequest request,int id) throws Exception {
+        List<Var> ls = list_menu(request);
+        Map<String,Var> map = new HashMap<>();
+        Iterator<Var> it = ls.iterator();
+        while (it.hasNext()){
+            Var v = it.next();
+            v.put("list",new ArrayList<>());
+            if (LX.compareTo(v.get("pid"),id, MathUtil.Type.EQ)){//当前父id是指定id
+                map.put(v.getStr("id"),v);
+            }else if (map.containsKey(v.getStr("pid"))){//当前父id在map中
+                map.put(v.getStr("id"),v);
+                map.get(v.getStr("pid")).getList("list").add(v);
+                it.remove();
+            }else{
+                it.remove();
+            }
+
+        }
         return ls;
     }
 
