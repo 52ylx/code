@@ -79,11 +79,11 @@ public class TaoBaoService {
                                                 redisUtil.save("app:tb:ls:"+show.getName(),it.getTradeId(),show);//将用户订单存入
                                                 try {
                                                     myWxBot.send(show.getName(),show.getTitle()+"\n付㝟成功!"+show.getFx());
-                                                    Var v = redisUtil.get("app:user:nick:"+show.getName(),Var.class);
-                                                    if (v.containsKey("bing")){//推荐码是自己 或者有推荐码
-                                                        myWxBot.send(v.getStr("bing"),v.getStr("nick")+";付㝟成功!"
-                                                                +(show.getFx().multiply(new BigDecimal(0.1)).setScale(2,BigDecimal.ROUND_FLOOR)));
-                                                    }
+//                                                    Var v = redisUtil.get("app:user:nick:"+show.getName(),Var.class);
+//                                                    if (v.containsKey("bing")){//推荐码是自己 或者有推荐码
+//                                                        myWxBot.send(v.getStr("bing"),v.getStr("nick")+";付㝟成功!"
+//                                                                +(show.getFx().multiply(new BigDecimal(0.1)).setScale(2,BigDecimal.ROUND_FLOOR)));
+//                                                    }
                                                 }catch (Exception e){
                                                     log.error("推送消息失败!");
                                                 }
@@ -106,17 +106,17 @@ public class TaoBaoService {
                                                 redisUtil.save("app:tb:ls:"+name,it.getTradeId(),LX.toJSONString(s));//加入到结算中
                                                 try {
                                                     myWxBot.send(name,s.getTitle()+"\n结算成功:"+s.getFx());
-                                                    Var v = redisUtil.get("app:user:nick:"+name,Var.class);
-                                                    if (v.containsKey("bing")){//推荐码是自己 或者有推荐码
-                                                        Show s1 = new Show();
-                                                        s1.setAdd_time(LX.getTime());
-                                                        s1.setTitle("推荐:"+v.getStr("nick"));
-                                                        s1.setFx(s.getFx().multiply(new BigDecimal(0.1)).setScale(2,BigDecimal.ROUND_FLOOR));
-                                                        s1.setStatus(Show.Status.结算);
-                                                        redisUtil.save("app:tb:ls:"+v.getStr("bing"),it.getTradeId(),s1);//加入到结算中
-                                                        myWxBot.send(v.getStr("bing"),v.getStr("nick")+";结算成功!可提现:"
-                                                                +(s1.getFx()));
-                                                    }
+//                                                    Var v = redisUtil.get("app:user:nick:"+name,Var.class);
+//                                                    if (v.containsKey("bing")){//推荐码是自己 或者有推荐码
+//                                                        Show s1 = new Show();
+//                                                        s1.setAdd_time(LX.getTime());
+//                                                        s1.setTitle("推荐:"+v.getStr("nick"));
+//                                                        s1.setFx(s.getFx().multiply(new BigDecimal(0.1)).setScale(2,BigDecimal.ROUND_FLOOR));
+//                                                        s1.setStatus(Show.Status.结算);
+//                                                        redisUtil.save("app:tb:ls:"+v.getStr("bing"),it.getTradeId(),s1);//加入到结算中
+//                                                        myWxBot.send(v.getStr("bing"),v.getStr("nick")+";结算成功!可提现:"
+//                                                                +(s1.getFx()));
+//                                                    }
                                                 }catch (Exception e){
                                                     log.error("推送消息失败!");
                                                 }
