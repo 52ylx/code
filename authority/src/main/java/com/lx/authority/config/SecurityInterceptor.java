@@ -44,22 +44,19 @@ public class SecurityInterceptor implements HandlerInterceptor {
                 }
                 //是否检查接口权限
                 if (!authority.method()) return true;//不用直接返回true
-                try {
-                    return OS.checkMethod(request,authority);
-                }catch (Exception e){
-                    response.setContentType("application/json;charset=UTF-8");
-                    response.setCharacterEncoding("UTF-8");
-                    response.getWriter().write(LX.toJSONString(new OS.Page(e.getMessage())));
-                    return false;
-                }
+                return OS.checkMethod(request,authority);
+            }else{
+                response.setContentType("application/json;charset=UTF-8");
+                response.setCharacterEncoding("UTF-8");
+                response.getWriter().write(OS.Page.toLogin());
+                return false;
             }
         }catch (Exception e){
+            response.setContentType("application/json;charset=UTF-8");
+            response.setCharacterEncoding("UTF-8");
+            response.getWriter().write(LX.toJSONString(new OS.Page(e.getMessage())));
+            return false;
         }
-        response.setContentType("application/json;charset=UTF-8");
-        response.setCharacterEncoding("UTF-8");
-        response.getWriter().write(OS.Page.toLogin());
-        return false;
-
     }
 
     @Override
