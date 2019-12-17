@@ -23,7 +23,7 @@ public class Show {
         this.status = status;
         this.totalPay = t==null? LX.getBigDecimal(0):t;
         this.yj = totalPay.multiply(y==null? LX.getBigDecimal(0):y).divide(LX.getBigDecimal(1000),2, BigDecimal.ROUND_HALF_DOWN);
-        this.fx = this.yj.multiply(LX.getBigDecimal(75)).divide(LX.getBigDecimal(100),2, BigDecimal.ROUND_HALF_DOWN);
+        this.fx = this.yj.multiply(LX.getBigDecimal(50)).divide(LX.getBigDecimal(100),2, BigDecimal.ROUND_HALF_DOWN);
 
     }
 
