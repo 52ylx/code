@@ -35,6 +35,8 @@ var lx = {
         }
     },
     ajax: function(url, funcallback,data) {
+        this.ajaxasync(true,url,funcallback,data);
+    },ajaxasync: function(async,url, funcallback,data) {
         var that = this;
         var newurl = this.wwwroot + url;
         if(newurl.indexOf("?") >= 0) {
@@ -43,25 +45,25 @@ var lx = {
             newurl += "?token=" + $.cookie('token');
         }
         $.ajax(newurl, {
-                async: true,
-                cache: false,
-                dataType: "json",
-                data: data,
-                type: 'POST',
-                processData: true,
-                layerIndex: -1,
-                beforeSend: function () {
-                    this.layerIndex = layer.load(0, {shade: [0.5, '#666c7f']});
-                },
-                complete: function () {
-                    layer.close(this.layerIndex);
-                },
-                success: function(data) {
-                    if(that.login(data)){
-                        funcallback(data);
-                    }
+            async: async,
+            cache: false,
+            dataType: "json",
+            data: data,
+            type: 'POST',
+            processData: true,
+            layerIndex: -1,
+            beforeSend: function () {
+                this.layerIndex = layer.load(0, {shade: [0.5, '#666c7f']});
+            },
+            complete: function () {
+                layer.close(this.layerIndex);
+            },
+            success: function(data) {
+                if(that.login(data)){
+                    funcallback(data);
                 }
-            });
+            }
+        });
     }
     ,login_open:false
     ,login:function(data){
