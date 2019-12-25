@@ -120,6 +120,9 @@ public class OS implements ApplicationContextAware,EnvironmentAware {
         if (LX.isNotEmpty(token)){
             user = redisUtil.get(USER_TOKEN+token,User.class);
             if (LX.isNotEmpty(user)){
+                request.getSession().setAttribute("token",token);//移除登录使用
+                request.getSession().setAttribute("user",user);//移除登录使用
+                request.getSession().setMaxInactiveInterval(token_timeout);//超时
                 redisUtil.expire(USER_TOKEN+token,token_timeout);//重置超时时间
                 put(USER_TOKEN,user);
                 return true;
