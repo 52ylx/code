@@ -40,7 +40,7 @@ public class LoginController {
         if (!map.get("code").toString().toLowerCase().equals(LX.str(request.getSession().getAttribute("code")).toLowerCase())) return LX.toMap("{result='codeerror'}");;
         //从缓存中查找用户信息
         //登录
-        String token = OS.login(request,map.get("loginname").toString(),null,(user)->{
+        String token = OS.login(request,map.get("loginname").toString(),(user)->{
             return user.getName().equals(map.get("loginname"))&&user.getPassword().equals(map.get("password"));
         });
         return LX.toMap("{result='success',token='{0}'}",token);

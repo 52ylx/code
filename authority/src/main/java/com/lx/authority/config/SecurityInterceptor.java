@@ -1,6 +1,5 @@
 package com.lx.authority.config;
 
-import com.lx.authority.dao.RedisUtil;
 import com.lx.util.LX;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -22,8 +21,6 @@ public class SecurityInterceptor implements HandlerInterceptor {
     Logger log = LoggerFactory.getLogger(SecurityInterceptor.class);
     public static final String HTMl = ".*/.html.*";
     public static final String SYS = ".*/sys/.*";
-    @Resource(name="redisUtil")
-    private RedisUtil redis;
 
     @Override
     public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) throws Exception {

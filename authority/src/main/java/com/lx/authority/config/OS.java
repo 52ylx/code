@@ -32,7 +32,6 @@ public class OS implements ApplicationContextAware,EnvironmentAware {
     static String ROOTPASS = "";
     //存入redis
     private static final String USER_TOKEN = "system:login:token:";
-    private static final String CUSTOM_USER = "system:login:custom:";
     //token超时时间
     private static int token_timeout;
     //尝试登录错误次数
@@ -56,7 +55,7 @@ public class OS implements ApplicationContextAware,EnvironmentAware {
      * username , 用户对应的库里的信息
      * func 返回true则登录成功 false 登录失败
      */
-    public static String login(HttpServletRequest request,String username,Object custom, Function<User,Boolean> func){
+    public static String login(HttpServletRequest request,String username, Function<User,Boolean> func){
         String token = LX.uuid();
         long ipLimit = getIpLimit(request,username,()->{//
             User user = null;
@@ -72,9 +71,6 @@ public class OS implements ApplicationContextAware,EnvironmentAware {
 
             if (func.apply(user)){
                 saveUser(request,token,user);
-                if (LX.isNotEmpty(custom)){
-                    redisUtil.put(CUSTOM_USER+username,LX.toJSONString(custom));//缓存
-                }
             }else{
                 LX.exMsg("登陆验证失败!");
             }
@@ -86,15 +82,17 @@ public class OS implements ApplicationContextAware,EnvironmentAware {
     private static void saveUser(HttpServletRequest request, String token, User user){
         user.setToken(token);
         //登陆成功,返回登陆TOKEN
-        if ("1".equals(server_login_single)){
-            //单点登录
-            redisUtil.del(USER_TOKEN+redisUtil.get("system:login:user_token:"+user.getName()));//删除之前的token
-            redisUtil.put("system:login:user_token:"+user.getName(),token,token_timeout);//将当前用户的token记住
-            request.getSession().removeAttribute("token");//移除登录使用
-        }
+//        if ("1".equals(server_login_single)){
+//            //单点登录
+//            redisUtil.del(USER_TOKEN+redisUtil.get("system:login:user_token:"+user.getName()));//删除之前的token
+//            redisUtil.put("system:login:user_token:"+user.getName(),token);//将当前用户的token记住
+//            request.getSession().removeAttribute("token");//移除登录使用
+//            request.getSession().removeAttribute("user");//移除登录使用
+//        }
         redisUtil.put(USER_TOKEN+token,user,token_timeout);//缓存
         request.getSession().setAttribute("token",token);//移除登录使用
-//        request.getSession().setMaxInactiveInterval(token_timeout);
+        request.getSession().setAttribute("user",user);//移除登录使用
+        request.getSession().setMaxInactiveInterval(token_timeout);//超时
     }
     /** 移除用户*/
     private static void removeUser(HttpServletRequest request){
@@ -102,17 +100,25 @@ public class OS implements ApplicationContextAware,EnvironmentAware {
         if (LX.isNotEmpty(token)){
             redisUtil.del(USER_TOKEN+token);//缓存
             request.getSession().removeAttribute("token");
+            request.getSession().removeAttribute("user");
         }
 
     }
     //设置用户
     static boolean setUser(HttpServletRequest request){
+        User user = (User) request.getSession().getAttribute("user");
+        if(user != null){
+            put(USER_TOKEN,user);//存入threadLocal
+            request.getSession().setAttribute("user",user);//移除登录使用
+            request.getSession().setMaxInactiveInterval(token_timeout);//超时
+            return true;
+        }
         String token = (String)request.getSession().getAttribute("token");
         if (LX.isEmpty(token)){
             token = request.getParameter("token");
         }
         if (LX.isNotEmpty(token)){
-            User user = redisUtil.get(USER_TOKEN+token,User.class);
+            user = redisUtil.get(USER_TOKEN+token,User.class);
             if (LX.isNotEmpty(user)){
                 redisUtil.expire(USER_TOKEN+token,token_timeout);//重置超时时间
                 put(USER_TOKEN,user);
@@ -143,9 +149,6 @@ public class OS implements ApplicationContextAware,EnvironmentAware {
     /**返回用户*/
     public static User getUser(){
         return get(USER_TOKEN);
-    }
-    public static <T>T getCustom(Class<T> tClass){
-        return redisUtil.get(CUSTOM_USER+getUser().getName(),tClass);
     }
 
     public static  <T>T get(String key){
