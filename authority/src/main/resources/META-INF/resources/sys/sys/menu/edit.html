@@ -134,7 +134,6 @@
         var v = data.entity;
         layui.form.val("formTest",{p_name:v.name,pid:v.id,type:v.type=='2'?'3':'2'});
         $("#address").removeAttr('disabled');
-        $("#address").val("");
         if(v.type == "1"){
             $("#types-2").removeAttr('disabled');
         }else if(v.type == '2'){
