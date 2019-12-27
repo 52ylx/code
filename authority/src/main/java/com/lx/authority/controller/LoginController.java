@@ -76,6 +76,7 @@ public class LoginController {
     @ResponseBody
     public Object format_menu(HttpServletRequest request,int id) throws Exception {
         List<Var> ls = list_menu(request);
+        if (LX.isEmpty(ls)) return new OS.Page(ls);
         Map<String,Var> map = new HashMap<>();
         Iterator<Var> it = ls.iterator();
         while (it.hasNext()){
@@ -92,7 +93,7 @@ public class LoginController {
             }
 
         }
-        return ls;
+        return new OS.Page(ls);
     }
 
     //说明:admin管理员菜单

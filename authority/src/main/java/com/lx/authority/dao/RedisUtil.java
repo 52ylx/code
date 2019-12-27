@@ -268,7 +268,11 @@ public class RedisUtil implements ApplicationContextAware {
     public <T> List<T> findAll(String key,Class<T> t,String... ids){
         LX.exObj(ids,"ids不能为空!");
         return exec(jedis -> {
-            return LX.toList(t,jedis.hmget(key,ids));
+            List<String> ls = jedis.hmget(key, ids);
+            if(ls.size()==1 && ls.get(0)==null) {
+                return null;
+            }
+            return LX.toList(t,ls);
         });
     }
     //说明:获取一个对象
