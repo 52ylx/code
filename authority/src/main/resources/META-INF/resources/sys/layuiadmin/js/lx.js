@@ -334,7 +334,7 @@ if($("#table_temp_id").size()>0){
             ,toolbar:true
             ,cols:[[]]
             ,page:!0
-            ,limit:10
+            ,limit:20
             ,limits:[5,10,15,20,25,30,50,100,200,500,1000,10000]
             ,text:"对不起，加载出现异常！"
         }

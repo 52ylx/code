@@ -51,11 +51,15 @@ public class OS implements ApplicationContextAware,EnvironmentAware {
     public static void logout(HttpServletRequest request){
         removeUser(request);
     }
+
     /**
      * username , 用户对应的库里的信息
      * func 返回true则登录成功 false 登录失败
      */
     public static String login(HttpServletRequest request,String username, Function<User,Boolean> func){
+        return login(request,username,null,func);
+    }
+    public static String login(HttpServletRequest request,String username,Object custom, Function<User,Boolean> func){
         String token = LX.uuid();
         long ipLimit = getIpLimit(request,username,()->{//
             User user = null;
@@ -70,6 +74,7 @@ public class OS implements ApplicationContextAware,EnvironmentAware {
             }
 
             if (func.apply(user)){
+                user.setCustom(custom);
                 saveUser(request,token,user);
             }else{
                 LX.exMsg("登陆验证失败!");
@@ -282,6 +287,7 @@ public class OS implements ApplicationContextAware,EnvironmentAware {
 
     public static class User {
         private String name,password,menus,btns,token;
+        private Object custom;
 
         public User(String name, String password, String menus, String btns) {
             this.name = name;
@@ -335,6 +341,14 @@ public class OS implements ApplicationContextAware,EnvironmentAware {
 
         public void setBtns(String btns) {
             this.btns = btns;
+        }
+
+        public Object getCustom() {
+            return custom;
+        }
+
+        public void setCustom(Object custom) {
+            this.custom = custom;
         }
     }
     public static class Page {

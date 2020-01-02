@@ -119,6 +119,7 @@
             var edit = "ins";
             if(id){edit = "edit";}
             lx.ajax("sys/"+edit+"/role",function () {
+                lx.ajax("sys/up_user");
                 parent.layui.table.reload('table_temp_id'); //重载表格
                 parent.layer.close(index); //再执行关闭
             },field);

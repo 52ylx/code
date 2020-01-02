@@ -73,6 +73,7 @@ public class WebContorller {
         LX.exObj(old,"没有找到准备修改的对象!请刷新界面后重试!");
         old.putAll(map);
         old.put("u_time", LX.getTime());
+        old.remove("token");
         redis.save("system:"+main,old.get("id").toString(),old);
         return new OS.Page();
     }
@@ -88,6 +89,7 @@ public class WebContorller {
         }
         //全部修改
         map.put("u_time", LX.getTime());
+        map.remove("token");
         redis.save("system:"+main,map.get("id").toString(),map);
         return new OS.Page();
     }
@@ -121,13 +123,19 @@ public class WebContorller {
    final String updateFile = "service,menu,dict,config";
     @RequestMapping("/up_version")
     public void saveFile() throws Exception {
-        File file = new File("up_version.txt");
+        saveFile("up_version.txt",updateFile);
+    }
+    @RequestMapping("/up_user")
+    public void saveUser() throws Exception {
+        saveFile("up_version_user.txt","user,role");
+    }
+    private void saveFile(String fileName,String name) throws Exception{
+        File file = new File(fileName);
         PrintWriter pw = new PrintWriter(new OutputStreamWriter(new FileOutputStream(file),"utf-8"));
         try {
             String v = System.currentTimeMillis()+"";
-            redis.put("system:version",v);
             pw.println(v);
-            for (String uf : updateFile.split(",")){
+            for (String uf : name.split(",")){
                 if (redis.get("system:"+uf+"_incr") != null){
                     pw.println("system:"+uf+"_incr@~@`@"+redis.get("system:"+uf+"_incr"));
                 }
@@ -142,7 +150,6 @@ public class WebContorller {
         }finally {
             if(pw!=null) pw.close();
         }
-
     }
     @PostConstruct
     public void updateFile() throws Exception {
