@@ -54,7 +54,9 @@ public class WXPayService  implements OnlinePay {
         p.put("time_expire",getTimeout());
         PageData ps =LX.toMap(PageData.class,wx.microPay(p));
         if(ps == null  ) throw new Exception("调用当面付失败!");
-        orderQuery(pd);//查询订单
+        if("FAIL".equals(ps.getStr("return_code"))){
+            LX.exMsg(ps.getStr("return_msg"));
+        }
         return new PageData("isSuccess","1");
     }
 
