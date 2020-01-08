@@ -56,6 +56,8 @@ public class WXPayService  implements OnlinePay {
         if(ps == null  ) throw new Exception("调用当面付失败!");
         if("FAIL".equals(ps.getStr("return_code"))){
             LX.exMsg(ps.getStr("return_msg"));
+        }else if("FAIL".equals(ps.getStr("result_code"))){
+            LX.exMsg(ps.getStr("err_code_des"));
         }
         return new PageData("isSuccess","1");
     }
