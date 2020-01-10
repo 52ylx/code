@@ -2,8 +2,662 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" readonly="true" id="cc1066f9-7cd2-4ef7-a74d-8b53ca7e9716" name="Default" comment="">
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../lx/.idea/uiDesigner.xml" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../lx/a.html" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../myWeb/src/main/java/com/lx/web/core/HttpServer.java" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../myWeb/src/main/java/com/lx/web/core/MyService.java" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../myWeb/src/main/java/com/lx/web/core/MyServlet.java" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../myWeb/src/main/java/com/lx/web/core/Test.java" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../myWeb/src/main/resource/a.html" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/../auth/.gitignore" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/../auth/.mvn/wrapper/MavenWrapperDownloader.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/../auth/.mvn/wrapper/maven-wrapper.jar" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/../auth/.mvn/wrapper/maven-wrapper.properties" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/../auth/mvnw" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/../auth/mvnw.cmd" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/../auth/pom.xml" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/../auth/src/main/java/com/lx/auth/config/Authority.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/../auth/src/main/java/com/lx/auth/config/OS.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/../auth/src/main/java/com/lx/auth/config/SecurityInterceptor.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/../auth/src/main/java/com/lx/auth/config/WebConfigurer.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/../auth/src/main/java/com/lx/auth/controller/LoginController.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/../auth/src/main/java/com/lx/auth/controller/MainsiteErrorController.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/../auth/src/main/java/com/lx/auth/controller/WebContorller.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/../auth/src/main/java/com/lx/auth/controller/WebExceptionResolver.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/../auth/src/main/java/com/lx/auth/dao/JedisConfig.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/../auth/src/main/java/com/lx/auth/dao/RedisUtil.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/../auth/src/main/java/com/lx/auth/test/Test.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/../auth/src/main/java/com/lx/auth/test/WindowsInfoUtil.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/../auth/src/main/resources/META-INF/resources/error/404.html" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/../auth/src/main/resources/META-INF/resources/error/500.html" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/../auth/src/main/resources/META-INF/resources/sys/index.html" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/../auth/src/main/resources/META-INF/resources/sys/layuiadmin/config.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/../auth/src/main/resources/META-INF/resources/sys/layuiadmin/css/ztree/img/line_conn.gif" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/../auth/src/main/resources/META-INF/resources/sys/layuiadmin/css/ztree/img/line_conn.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/../auth/src/main/resources/META-INF/resources/sys/layuiadmin/css/ztree/img/loading.gif" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/../auth/src/main/resources/META-INF/resources/sys/layuiadmin/css/ztree/img/metro.gif" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/../auth/src/main/resources/META-INF/resources/sys/layuiadmin/css/ztree/img/metro.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/../auth/src/main/resources/META-INF/resources/sys/layuiadmin/css/ztree/zTreeStyle.css" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/../auth/src/main/resources/META-INF/resources/sys/layuiadmin/ico/favicon.ico" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/../auth/src/main/resources/META-INF/resources/sys/layuiadmin/js/echarts.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/../auth/src/main/resources/META-INF/resources/sys/layuiadmin/js/jquery.min.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/../auth/src/main/resources/META-INF/resources/sys/layuiadmin/js/jquery.ztree.all-3.5.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/../auth/src/main/resources/META-INF/resources/sys/layuiadmin/js/lx.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/../auth/src/main/resources/META-INF/resources/sys/layuiadmin/json/console/prograss.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/../auth/src/main/resources/META-INF/resources/sys/layuiadmin/json/console/top-card.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/../auth/src/main/resources/META-INF/resources/sys/layuiadmin/json/console/top-search.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/../auth/src/main/resources/META-INF/resources/sys/layuiadmin/json/content/comment.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/../auth/src/main/resources/META-INF/resources/sys/layuiadmin/json/content/list.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/../auth/src/main/resources/META-INF/resources/sys/layuiadmin/json/content/tags.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/../auth/src/main/resources/META-INF/resources/sys/layuiadmin/json/forum/list.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/../auth/src/main/resources/META-INF/resources/sys/layuiadmin/json/forum/replys.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/../auth/src/main/resources/META-INF/resources/sys/layuiadmin/json/layer/photos.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/../auth/src/main/resources/META-INF/resources/sys/layuiadmin/json/layim/getList.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/../auth/src/main/resources/META-INF/resources/sys/layuiadmin/json/layim/getMembers.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/../auth/src/main/resources/META-INF/resources/sys/layuiadmin/json/mall/order.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/../auth/src/main/resources/META-INF/resources/sys/layuiadmin/json/menu.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/../auth/src/main/resources/META-INF/resources/sys/layuiadmin/json/menu1.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/../auth/src/main/resources/META-INF/resources/sys/layuiadmin/json/message/all.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/../auth/src/main/resources/META-INF/resources/sys/layuiadmin/json/message/detail.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/../auth/src/main/resources/META-INF/resources/sys/layuiadmin/json/message/direct.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/../auth/src/main/resources/META-INF/resources/sys/layuiadmin/json/message/new.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/../auth/src/main/resources/META-INF/resources/sys/layuiadmin/json/message/notice.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/../auth/src/main/resources/META-INF/resources/sys/layuiadmin/json/table/demo.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/../auth/src/main/resources/META-INF/resources/sys/layuiadmin/json/table/demo2.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/../auth/src/main/resources/META-INF/resources/sys/layuiadmin/json/table/user.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/../auth/src/main/resources/META-INF/resources/sys/layuiadmin/json/table/user30.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/../auth/src/main/resources/META-INF/resources/sys/layuiadmin/json/upload/demo.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/../auth/src/main/resources/META-INF/resources/sys/layuiadmin/json/user/forget.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/../auth/src/main/resources/META-INF/resources/sys/layuiadmin/json/user/login.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/../auth/src/main/resources/META-INF/resources/sys/layuiadmin/json/user/logout.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/../auth/src/main/resources/META-INF/resources/sys/layuiadmin/json/user/reg.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/../auth/src/main/resources/META-INF/resources/sys/layuiadmin/json/user/resetpass.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/../auth/src/main/resources/META-INF/resources/sys/layuiadmin/json/user/session.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/../auth/src/main/resources/META-INF/resources/sys/layuiadmin/json/user/sms.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/../auth/src/main/resources/META-INF/resources/sys/layuiadmin/json/useradmin/mangadmin.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/../auth/src/main/resources/META-INF/resources/sys/layuiadmin/json/useradmin/role.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/../auth/src/main/resources/META-INF/resources/sys/layuiadmin/json/useradmin/webuser.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/../auth/src/main/resources/META-INF/resources/sys/layuiadmin/json/workorder/demo.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/../auth/src/main/resources/META-INF/resources/sys/layuiadmin/json/说明.txt" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/../auth/src/main/resources/META-INF/resources/sys/layuiadmin/layui/css/layui.css" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/../auth/src/main/resources/META-INF/resources/sys/layuiadmin/layui/css/layui.mobile.css" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/../auth/src/main/resources/META-INF/resources/sys/layuiadmin/layui/css/modules/code.css" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/../auth/src/main/resources/META-INF/resources/sys/layuiadmin/layui/css/modules/laydate/default/laydate.css" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/../auth/src/main/resources/META-INF/resources/sys/layuiadmin/layui/css/modules/layer/default/icon-ext.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/../auth/src/main/resources/META-INF/resources/sys/layuiadmin/layui/css/modules/layer/default/icon.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/../auth/src/main/resources/META-INF/resources/sys/layuiadmin/layui/css/modules/layer/default/layer.css" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/../auth/src/main/resources/META-INF/resources/sys/layuiadmin/layui/css/modules/layer/default/loading-0.gif" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/../auth/src/main/resources/META-INF/resources/sys/layuiadmin/layui/css/modules/layer/default/loading-1.gif" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/../auth/src/main/resources/META-INF/resources/sys/layuiadmin/layui/css/modules/layer/default/loading-2.gif" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/../auth/src/main/resources/META-INF/resources/sys/layuiadmin/layui/css/modules/layim/html/chatlog.html" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/../auth/src/main/resources/META-INF/resources/sys/layuiadmin/layui/css/modules/layim/html/find.html" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/../auth/src/main/resources/META-INF/resources/sys/layuiadmin/layui/css/modules/layim/html/getmsg.json" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/../auth/src/main/resources/META-INF/resources/sys/layuiadmin/layui/css/modules/layim/html/msgbox.html" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/../auth/src/main/resources/META-INF/resources/sys/layuiadmin/layui/css/modules/layim/layim.css" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/../auth/src/main/resources/META-INF/resources/sys/layuiadmin/layui/css/modules/layim/mobile/layim.css" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/../auth/src/main/resources/META-INF/resources/sys/layuiadmin/layui/css/modules/layim/skin/1.jpg" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/../auth/src/main/resources/META-INF/resources/sys/layuiadmin/layui/css/modules/layim/skin/2.jpg" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/../auth/src/main/resources/META-INF/resources/sys/layuiadmin/layui/css/modules/layim/skin/3.jpg" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/../auth/src/main/resources/META-INF/resources/sys/layuiadmin/layui/css/modules/layim/skin/4.jpg" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/../auth/src/main/resources/META-INF/resources/sys/layuiadmin/layui/css/modules/layim/skin/5.jpg" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/../auth/src/main/resources/META-INF/resources/sys/layuiadmin/layui/css/modules/layim/skin/logo.jpg" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/../auth/src/main/resources/META-INF/resources/sys/layuiadmin/layui/css/modules/layim/voice/default.mp3" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/../auth/src/main/resources/META-INF/resources/sys/layuiadmin/layui/font/iconfont.eot" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/../auth/src/main/resources/META-INF/resources/sys/layuiadmin/layui/font/iconfont.svg" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/../auth/src/main/resources/META-INF/resources/sys/layuiadmin/layui/font/iconfont.ttf" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/../auth/src/main/resources/META-INF/resources/sys/layuiadmin/layui/font/iconfont.woff" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/../auth/src/main/resources/META-INF/resources/sys/layuiadmin/layui/font/iconfont.woff2" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/../auth/src/main/resources/META-INF/resources/sys/layuiadmin/layui/images/face/0.gif" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/../auth/src/main/resources/META-INF/resources/sys/layuiadmin/layui/images/face/1.gif" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/../auth/src/main/resources/META-INF/resources/sys/layuiadmin/layui/images/face/10.gif" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/../auth/src/main/resources/META-INF/resources/sys/layuiadmin/layui/images/face/11.gif" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/../auth/src/main/resources/META-INF/resources/sys/layuiadmin/layui/images/face/12.gif" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/../auth/src/main/resources/META-INF/resources/sys/layuiadmin/layui/images/face/13.gif" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/../auth/src/main/resources/META-INF/resources/sys/layuiadmin/layui/images/face/14.gif" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/../auth/src/main/resources/META-INF/resources/sys/layuiadmin/layui/images/face/15.gif" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/../auth/src/main/resources/META-INF/resources/sys/layuiadmin/layui/images/face/16.gif" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/../auth/src/main/resources/META-INF/resources/sys/layuiadmin/layui/images/face/17.gif" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/../auth/src/main/resources/META-INF/resources/sys/layuiadmin/layui/images/face/18.gif" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/../auth/src/main/resources/META-INF/resources/sys/layuiadmin/layui/images/face/19.gif" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/../auth/src/main/resources/META-INF/resources/sys/layuiadmin/layui/images/face/2.gif" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/../auth/src/main/resources/META-INF/resources/sys/layuiadmin/layui/images/face/20.gif" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/../auth/src/main/resources/META-INF/resources/sys/layuiadmin/layui/images/face/21.gif" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/../auth/src/main/resources/META-INF/resources/sys/layuiadmin/layui/images/face/22.gif" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/../auth/src/main/resources/META-INF/resources/sys/layuiadmin/layui/images/face/23.gif" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/../auth/src/main/resources/META-INF/resources/sys/layuiadmin/layui/images/face/24.gif" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/../auth/src/main/resources/META-INF/resources/sys/layuiadmin/layui/images/face/25.gif" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/../auth/src/main/resources/META-INF/resources/sys/layuiadmin/layui/images/face/26.gif" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/../auth/src/main/resources/META-INF/resources/sys/layuiadmin/layui/images/face/27.gif" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/../auth/src/main/resources/META-INF/resources/sys/layuiadmin/layui/images/face/28.gif" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/../auth/src/main/resources/META-INF/resources/sys/layuiadmin/layui/images/face/29.gif" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/../auth/src/main/resources/META-INF/resources/sys/layuiadmin/layui/images/face/3.gif" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/../auth/src/main/resources/META-INF/resources/sys/layuiadmin/layui/images/face/30.gif" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/../auth/src/main/resources/META-INF/resources/sys/layuiadmin/layui/images/face/31.gif" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/../auth/src/main/resources/META-INF/resources/sys/layuiadmin/layui/images/face/32.gif" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/../auth/src/main/resources/META-INF/resources/sys/layuiadmin/layui/images/face/33.gif" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/../auth/src/main/resources/META-INF/resources/sys/layuiadmin/layui/images/face/34.gif" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/../auth/src/main/resources/META-INF/resources/sys/layuiadmin/layui/images/face/35.gif" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/../auth/src/main/resources/META-INF/resources/sys/layuiadmin/layui/images/face/36.gif" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/../auth/src/main/resources/META-INF/resources/sys/layuiadmin/layui/images/face/37.gif" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/../auth/src/main/resources/META-INF/resources/sys/layuiadmin/layui/images/face/38.gif" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/../auth/src/main/resources/META-INF/resources/sys/layuiadmin/layui/images/face/39.gif" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/../auth/src/main/resources/META-INF/resources/sys/layuiadmin/layui/images/face/4.gif" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/../auth/src/main/resources/META-INF/resources/sys/layuiadmin/layui/images/face/40.gif" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/../auth/src/main/resources/META-INF/resources/sys/layuiadmin/layui/images/face/41.gif" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/../auth/src/main/resources/META-INF/resources/sys/layuiadmin/layui/images/face/42.gif" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/../auth/src/main/resources/META-INF/resources/sys/layuiadmin/layui/images/face/43.gif" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/../auth/src/main/resources/META-INF/resources/sys/layuiadmin/layui/images/face/44.gif" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/../auth/src/main/resources/META-INF/resources/sys/layuiadmin/layui/images/face/45.gif" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/../auth/src/main/resources/META-INF/resources/sys/layuiadmin/layui/images/face/46.gif" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/../auth/src/main/resources/META-INF/resources/sys/layuiadmin/layui/images/face/47.gif" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/../auth/src/main/resources/META-INF/resources/sys/layuiadmin/layui/images/face/48.gif" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/../auth/src/main/resources/META-INF/resources/sys/layuiadmin/layui/images/face/49.gif" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/../auth/src/main/resources/META-INF/resources/sys/layuiadmin/layui/images/face/5.gif" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/../auth/src/main/resources/META-INF/resources/sys/layuiadmin/layui/images/face/50.gif" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/../auth/src/main/resources/META-INF/resources/sys/layuiadmin/layui/images/face/51.gif" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/../auth/src/main/resources/META-INF/resources/sys/layuiadmin/layui/images/face/52.gif" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/../auth/src/main/resources/META-INF/resources/sys/layuiadmin/layui/images/face/53.gif" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/../auth/src/main/resources/META-INF/resources/sys/layuiadmin/layui/images/face/54.gif" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/../auth/src/main/resources/META-INF/resources/sys/layuiadmin/layui/images/face/55.gif" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/../auth/src/main/resources/META-INF/resources/sys/layuiadmin/layui/images/face/56.gif" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/../auth/src/main/resources/META-INF/resources/sys/layuiadmin/layui/images/face/57.gif" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/../auth/src/main/resources/META-INF/resources/sys/layuiadmin/layui/images/face/58.gif" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/../auth/src/main/resources/META-INF/resources/sys/layuiadmin/layui/images/face/59.gif" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/../auth/src/main/resources/META-INF/resources/sys/layuiadmin/layui/images/face/6.gif" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/../auth/src/main/resources/META-INF/resources/sys/layuiadmin/layui/images/face/60.gif" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/../auth/src/main/resources/META-INF/resources/sys/layuiadmin/layui/images/face/61.gif" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/../auth/src/main/resources/META-INF/resources/sys/layuiadmin/layui/images/face/62.gif" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/../auth/src/main/resources/META-INF/resources/sys/layuiadmin/layui/images/face/63.gif" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/../auth/src/main/resources/META-INF/resources/sys/layuiadmin/layui/images/face/64.gif" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/../auth/src/main/resources/META-INF/resources/sys/layuiadmin/layui/images/face/65.gif" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/../auth/src/main/resources/META-INF/resources/sys/layuiadmin/layui/images/face/66.gif" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/../auth/src/main/resources/META-INF/resources/sys/layuiadmin/layui/images/face/67.gif" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/../auth/src/main/resources/META-INF/resources/sys/layuiadmin/layui/images/face/68.gif" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/../auth/src/main/resources/META-INF/resources/sys/layuiadmin/layui/images/face/69.gif" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/../auth/src/main/resources/META-INF/resources/sys/layuiadmin/layui/images/face/7.gif" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/../auth/src/main/resources/META-INF/resources/sys/layuiadmin/layui/images/face/70.gif" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/../auth/src/main/resources/META-INF/resources/sys/layuiadmin/layui/images/face/71.gif" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/../auth/src/main/resources/META-INF/resources/sys/layuiadmin/layui/images/face/8.gif" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/../auth/src/main/resources/META-INF/resources/sys/layuiadmin/layui/images/face/9.gif" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/../auth/src/main/resources/META-INF/resources/sys/layuiadmin/layui/lay/modules/carousel.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/../auth/src/main/resources/META-INF/resources/sys/layuiadmin/layui/lay/modules/code.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/../auth/src/main/resources/META-INF/resources/sys/layuiadmin/layui/lay/modules/colorpicker.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/../auth/src/main/resources/META-INF/resources/sys/layuiadmin/layui/lay/modules/element.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/../auth/src/main/resources/META-INF/resources/sys/layuiadmin/layui/lay/modules/flow.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/../auth/src/main/resources/META-INF/resources/sys/layuiadmin/layui/lay/modules/form.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/../auth/src/main/resources/META-INF/resources/sys/layuiadmin/layui/lay/modules/jquery.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/../auth/src/main/resources/META-INF/resources/sys/layuiadmin/layui/lay/modules/laydate.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/../auth/src/main/resources/META-INF/resources/sys/layuiadmin/layui/lay/modules/layedit.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/../auth/src/main/resources/META-INF/resources/sys/layuiadmin/layui/lay/modules/layer.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/../auth/src/main/resources/META-INF/resources/sys/layuiadmin/layui/lay/modules/layim.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/../auth/src/main/resources/META-INF/resources/sys/layuiadmin/layui/lay/modules/laypage.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/../auth/src/main/resources/META-INF/resources/sys/layuiadmin/layui/lay/modules/laytpl.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/../auth/src/main/resources/META-INF/resources/sys/layuiadmin/layui/lay/modules/mobile.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/../auth/src/main/resources/META-INF/resources/sys/layuiadmin/layui/lay/modules/rate.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/../auth/src/main/resources/META-INF/resources/sys/layuiadmin/layui/lay/modules/slider.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/../auth/src/main/resources/META-INF/resources/sys/layuiadmin/layui/lay/modules/table.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/../auth/src/main/resources/META-INF/resources/sys/layuiadmin/layui/lay/modules/transfer.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/../auth/src/main/resources/META-INF/resources/sys/layuiadmin/layui/lay/modules/tree.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/../auth/src/main/resources/META-INF/resources/sys/layuiadmin/layui/lay/modules/upload.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/../auth/src/main/resources/META-INF/resources/sys/layuiadmin/layui/lay/modules/util.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/../auth/src/main/resources/META-INF/resources/sys/layuiadmin/layui/layui.all.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/../auth/src/main/resources/META-INF/resources/sys/layuiadmin/layui/layui.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/../auth/src/main/resources/META-INF/resources/sys/layuiadmin/lib/admin.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/../auth/src/main/resources/META-INF/resources/sys/layuiadmin/lib/extend/echarts.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/../auth/src/main/resources/META-INF/resources/sys/layuiadmin/lib/extend/echartsTheme.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/../auth/src/main/resources/META-INF/resources/sys/layuiadmin/lib/index.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/../auth/src/main/resources/META-INF/resources/sys/layuiadmin/lib/view.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/../auth/src/main/resources/META-INF/resources/sys/layuiadmin/modules/common.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/../auth/src/main/resources/META-INF/resources/sys/layuiadmin/modules/console.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/../auth/src/main/resources/META-INF/resources/sys/layuiadmin/modules/contlist.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/../auth/src/main/resources/META-INF/resources/sys/layuiadmin/modules/forum.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/../auth/src/main/resources/META-INF/resources/sys/layuiadmin/modules/im.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/../auth/src/main/resources/META-INF/resources/sys/layuiadmin/modules/message.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/../auth/src/main/resources/META-INF/resources/sys/layuiadmin/modules/sample.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/../auth/src/main/resources/META-INF/resources/sys/layuiadmin/modules/senior.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/../auth/src/main/resources/META-INF/resources/sys/layuiadmin/modules/set.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/../auth/src/main/resources/META-INF/resources/sys/layuiadmin/modules/user.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/../auth/src/main/resources/META-INF/resources/sys/layuiadmin/modules/useradmin.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/../auth/src/main/resources/META-INF/resources/sys/layuiadmin/modules/workorder.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/../auth/src/main/resources/META-INF/resources/sys/layuiadmin/style/admin.css" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/../auth/src/main/resources/META-INF/resources/sys/layuiadmin/style/login.css" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/../auth/src/main/resources/META-INF/resources/sys/layuiadmin/style/res/bg-none.jpg" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/../auth/src/main/resources/META-INF/resources/sys/layuiadmin/style/res/layui-logo.jpg" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/../auth/src/main/resources/META-INF/resources/sys/layuiadmin/style/res/logo-black.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/../auth/src/main/resources/META-INF/resources/sys/layuiadmin/style/res/logo.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/../auth/src/main/resources/META-INF/resources/sys/layuiadmin/style/res/template/character.jpg" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/../auth/src/main/resources/META-INF/resources/sys/layuiadmin/style/res/template/huge.jpg" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/../auth/src/main/resources/META-INF/resources/sys/layuiadmin/style/res/template/portrait.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/../auth/src/main/resources/META-INF/resources/sys/layuiadmin/style/template.css" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/../auth/src/main/resources/META-INF/resources/sys/layuiadmin/tpl/layim/demo.html" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/../auth/src/main/resources/META-INF/resources/sys/layuiadmin/tpl/system/about.html" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/../auth/src/main/resources/META-INF/resources/sys/layuiadmin/tpl/system/get.html" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/../auth/src/main/resources/META-INF/resources/sys/layuiadmin/tpl/system/more.html" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/../auth/src/main/resources/META-INF/resources/sys/layuiadmin/tpl/system/theme.html" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/../auth/src/main/resources/META-INF/resources/sys/layuiadmin/tpl/system/说明.txt" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/../auth/src/main/resources/META-INF/resources/sys/layuiadmin/tpl/说明.txt" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/../auth/src/main/resources/META-INF/resources/sys/sys/config/edit.html" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/../auth/src/main/resources/META-INF/resources/sys/sys/config/list.html" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/../auth/src/main/resources/META-INF/resources/sys/sys/dict/edit.html" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/../auth/src/main/resources/META-INF/resources/sys/sys/dict/list.html" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/../auth/src/main/resources/META-INF/resources/sys/sys/home/console.html" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/../auth/src/main/resources/META-INF/resources/sys/sys/menu/edit.html" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/../auth/src/main/resources/META-INF/resources/sys/sys/menu/list.html" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/../auth/src/main/resources/META-INF/resources/sys/sys/role/edit.html" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/../auth/src/main/resources/META-INF/resources/sys/sys/role/list.html" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/../auth/src/main/resources/META-INF/resources/sys/sys/service/edit.html" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/../auth/src/main/resources/META-INF/resources/sys/sys/service/list.html" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/../auth/src/main/resources/META-INF/resources/sys/sys/user/edit.html" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/../auth/src/main/resources/META-INF/resources/sys/sys/user/list.html" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/../auth/src/main/resources/META-INF/resources/sys/temp/table/dataTable.html" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/../auth/src/main/resources/META-INF/resources/sys/temp/table/form.html" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/../auth/src/main/resources/META-INF/resources/sys/temp/table/temp.html" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/../auth/src/main/resources/META-INF/resources/sys/temp/table/tree.html" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/../auth/src/main/resources/META-INF/resources/sys/views/app/content/comment.html" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/../auth/src/main/resources/META-INF/resources/sys/views/app/content/contform.html" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/../auth/src/main/resources/META-INF/resources/sys/views/app/content/list.html" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/../auth/src/main/resources/META-INF/resources/sys/views/app/content/listform.html" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/../auth/src/main/resources/META-INF/resources/sys/views/app/content/tags.html" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/../auth/src/main/resources/META-INF/resources/sys/views/app/content/tagsform.html" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/../auth/src/main/resources/META-INF/resources/sys/views/app/forum/list.html" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/../auth/src/main/resources/META-INF/resources/sys/views/app/forum/listform.html" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/../auth/src/main/resources/META-INF/resources/sys/views/app/forum/replys.html" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/../auth/src/main/resources/META-INF/resources/sys/views/app/forum/replysform.html" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/../auth/src/main/resources/META-INF/resources/sys/views/app/mall/category.html" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/../auth/src/main/resources/META-INF/resources/sys/views/app/mall/list.html" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/../auth/src/main/resources/META-INF/resources/sys/views/app/mall/specs.html" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/../auth/src/main/resources/META-INF/resources/sys/views/app/message/detail.html" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/../auth/src/main/resources/META-INF/resources/sys/views/app/message/index.html" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/../auth/src/main/resources/META-INF/resources/sys/views/app/workorder/list.html" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/../auth/src/main/resources/META-INF/resources/sys/views/app/workorder/listform.html" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/../auth/src/main/resources/META-INF/resources/sys/views/app/说明.txt" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/../auth/src/main/resources/META-INF/resources/sys/views/component/anim/index.html" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/../auth/src/main/resources/META-INF/resources/sys/views/component/auxiliar/index.html" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/../auth/src/main/resources/META-INF/resources/sys/views/component/badge/index.html" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/../auth/src/main/resources/META-INF/resources/sys/views/component/button/index.html" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/../auth/src/main/resources/META-INF/resources/sys/views/component/carousel/index.html" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/../auth/src/main/resources/META-INF/resources/sys/views/component/code/index.html" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/../auth/src/main/resources/META-INF/resources/sys/views/component/flow/index.html" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/../auth/src/main/resources/META-INF/resources/sys/views/component/form/element.html" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/../auth/src/main/resources/META-INF/resources/sys/views/component/form/group.html" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/../auth/src/main/resources/META-INF/resources/sys/views/component/grid/all.html" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/../auth/src/main/resources/META-INF/resources/sys/views/component/grid/list.html" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/../auth/src/main/resources/META-INF/resources/sys/views/component/grid/mobile-pc.html" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/../auth/src/main/resources/META-INF/resources/sys/views/component/grid/mobile.html" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/../auth/src/main/resources/META-INF/resources/sys/views/component/grid/speed-dial.html" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/../auth/src/main/resources/META-INF/resources/sys/views/component/grid/stack.html" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/../auth/src/main/resources/META-INF/resources/sys/views/component/laydate/demo1.html" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/../auth/src/main/resources/META-INF/resources/sys/views/component/laydate/demo2.html" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/../auth/src/main/resources/META-INF/resources/sys/views/component/laydate/index.html" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/../auth/src/main/resources/META-INF/resources/sys/views/component/laydate/special-demo.html" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/../auth/src/main/resources/META-INF/resources/sys/views/component/laydate/theme.html" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/../auth/src/main/resources/META-INF/resources/sys/views/component/layer/list.html" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/../auth/src/main/resources/META-INF/resources/sys/views/component/layer/special-demo.html" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/../auth/src/main/resources/META-INF/resources/sys/views/component/layer/theme.html" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/../auth/src/main/resources/META-INF/resources/sys/views/component/laypage/demo1.html" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/../auth/src/main/resources/META-INF/resources/sys/views/component/laypage/demo2.html" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/../auth/src/main/resources/META-INF/resources/sys/views/component/laypage/index.html" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/../auth/src/main/resources/META-INF/resources/sys/views/component/laytpl/index.html" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/../auth/src/main/resources/META-INF/resources/sys/views/component/nav/index.html" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/../auth/src/main/resources/META-INF/resources/sys/views/component/panel/index.html" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/../auth/src/main/resources/META-INF/resources/sys/views/component/progress/index.html" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/../auth/src/main/resources/META-INF/resources/sys/views/component/rate/index.html" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/../auth/src/main/resources/META-INF/resources/sys/views/component/table/auto.html" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/../auth/src/main/resources/META-INF/resources/sys/views/component/table/cellEdit.html" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/../auth/src/main/resources/META-INF/resources/sys/views/component/table/cellEvent.html" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/../auth/src/main/resources/META-INF/resources/sys/views/component/table/checkbox.html" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/../auth/src/main/resources/META-INF/resources/sys/views/component/table/data.html" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/../auth/src/main/resources/META-INF/resources/sys/views/component/table/fixed.html" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/../auth/src/main/resources/META-INF/resources/sys/views/component/table/form.html" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/../auth/src/main/resources/META-INF/resources/sys/views/component/table/height.html" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/../auth/src/main/resources/META-INF/resources/sys/views/component/table/index.html" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/../auth/src/main/resources/META-INF/resources/sys/views/component/table/initSort.html" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/../auth/src/main/resources/META-INF/resources/sys/views/component/table/operate.html" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/../auth/src/main/resources/META-INF/resources/sys/views/component/table/page.html" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/../auth/src/main/resources/META-INF/resources/sys/views/component/table/reload.html" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/../auth/src/main/resources/META-INF/resources/sys/views/component/table/resetPage.html" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/../auth/src/main/resources/META-INF/resources/sys/views/component/table/simple.html" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/../auth/src/main/resources/META-INF/resources/sys/views/component/table/static.html" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/../auth/src/main/resources/META-INF/resources/sys/views/component/table/style.html" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/../auth/src/main/resources/META-INF/resources/sys/views/component/table/thead.html" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/../auth/src/main/resources/META-INF/resources/sys/views/component/table/tostatic.html" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/../auth/src/main/resources/META-INF/resources/sys/views/component/tabs/index.html" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/../auth/src/main/resources/META-INF/resources/sys/views/component/temp.html" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/../auth/src/main/resources/META-INF/resources/sys/views/component/timeline/index.html" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/../auth/src/main/resources/META-INF/resources/sys/views/component/upload/demo1.html" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/../auth/src/main/resources/META-INF/resources/sys/views/component/upload/demo2.html" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/../auth/src/main/resources/META-INF/resources/sys/views/component/upload/index.html" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/../auth/src/main/resources/META-INF/resources/sys/views/component/util/index.html" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/../auth/src/main/resources/META-INF/resources/sys/views/component/说明.txt" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/../auth/src/main/resources/META-INF/resources/sys/views/home/console.html" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/../auth/src/main/resources/META-INF/resources/sys/views/home/homepage1.html" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/../auth/src/main/resources/META-INF/resources/sys/views/home/homepage2.html" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/../auth/src/main/resources/META-INF/resources/sys/views/iframe/layer/iframe.html" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/../auth/src/main/resources/META-INF/resources/sys/views/index.html" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/../auth/src/main/resources/META-INF/resources/sys/views/senior/echarts/bar.html" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/../auth/src/main/resources/META-INF/resources/sys/views/senior/echarts/line.html" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/../auth/src/main/resources/META-INF/resources/sys/views/senior/echarts/map.html" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/../auth/src/main/resources/META-INF/resources/sys/views/senior/im/index.html" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/../auth/src/main/resources/META-INF/resources/sys/views/senior/说明.txt" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/../auth/src/main/resources/META-INF/resources/sys/views/set/system/email.html" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/../auth/src/main/resources/META-INF/resources/sys/views/set/system/website.html" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/../auth/src/main/resources/META-INF/resources/sys/views/set/user/info.html" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/../auth/src/main/resources/META-INF/resources/sys/views/set/user/password.html" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/../auth/src/main/resources/META-INF/resources/sys/views/set/说明.txt" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/../auth/src/main/resources/META-INF/resources/sys/views/system/about.html" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/../auth/src/main/resources/META-INF/resources/sys/views/system/get.html" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/../auth/src/main/resources/META-INF/resources/sys/views/system/more.html" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/../auth/src/main/resources/META-INF/resources/sys/views/system/theme.html" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/../auth/src/main/resources/META-INF/resources/sys/views/system/说明.txt" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/../auth/src/main/resources/META-INF/resources/sys/views/template/addresslist.html" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/../auth/src/main/resources/META-INF/resources/sys/views/template/goodslist.html" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/../auth/src/main/resources/META-INF/resources/sys/views/template/msgboard.html" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/../auth/src/main/resources/META-INF/resources/sys/views/template/personalpage.html" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/../auth/src/main/resources/META-INF/resources/sys/views/template/search.html" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/../auth/src/main/resources/META-INF/resources/sys/views/template/temp.html" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/../auth/src/main/resources/META-INF/resources/sys/views/template/tips/404.html" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/../auth/src/main/resources/META-INF/resources/sys/views/template/tips/error.html" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/../auth/src/main/resources/META-INF/resources/sys/views/template/说明.txt" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/../auth/src/main/resources/META-INF/resources/sys/views/user/administrators/adminform.html" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/../auth/src/main/resources/META-INF/resources/sys/views/user/administrators/list.html" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/../auth/src/main/resources/META-INF/resources/sys/views/user/administrators/role.html" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/../auth/src/main/resources/META-INF/resources/sys/views/user/administrators/roleform.html" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/../auth/src/main/resources/META-INF/resources/sys/views/user/forget.html" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/../auth/src/main/resources/META-INF/resources/sys/views/user/login.html" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/../auth/src/main/resources/META-INF/resources/sys/views/user/reg.html" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/../auth/src/main/resources/META-INF/resources/sys/views/user/user/list.html" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/../auth/src/main/resources/META-INF/resources/sys/views/user/user/userform.html" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/../auth/src/main/resources/META-INF/resources/sys/views/user/说明.txt" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/../auth/src/main/resources/META-INF/resources/sys1/html/app1.html" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/../auth/src/main/resources/META-INF/resources/sys1/html/app2.html" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/../auth/src/main/resources/META-INF/resources/sys1/html/index.html" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/../auth/src/main/resources/META-INF/resources/sys1/html/menu.html" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/../auth/src/main/resources/META-INF/resources/sys1/html/table/form.html" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/../auth/src/main/resources/META-INF/resources/sys1/html/table/temp.html" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/../auth/src/main/resources/META-INF/resources/sys1/html/table/tree.html" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/../auth/src/main/resources/META-INF/resources/sys1/html/user.html" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/../auth/src/main/resources/META-INF/resources/sys1/index.html" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/../auth/src/main/resources/META-INF/resources/sys1/js/jquery.min.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/../auth/src/main/resources/META-INF/resources/sys1/js/lx.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/../auth/src/main/resources/META-INF/resources/sys1/json/add.json" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/../auth/src/main/resources/META-INF/resources/sys1/json/demo3.json" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/../auth/src/main/resources/META-INF/resources/sys1/layui/css/layui.css" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/../auth/src/main/resources/META-INF/resources/sys1/layui/css/layui.mobile.css" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/../auth/src/main/resources/META-INF/resources/sys1/layui/css/modules/code.css" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/../auth/src/main/resources/META-INF/resources/sys1/layui/css/modules/laydate/default/laydate.css" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/../auth/src/main/resources/META-INF/resources/sys1/layui/css/modules/layer/default/icon-ext.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/../auth/src/main/resources/META-INF/resources/sys1/layui/css/modules/layer/default/icon.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/../auth/src/main/resources/META-INF/resources/sys1/layui/css/modules/layer/default/layer.css" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/../auth/src/main/resources/META-INF/resources/sys1/layui/css/modules/layer/default/loading-0.gif" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/../auth/src/main/resources/META-INF/resources/sys1/layui/css/modules/layer/default/loading-1.gif" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/../auth/src/main/resources/META-INF/resources/sys1/layui/css/modules/layer/default/loading-2.gif" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/../auth/src/main/resources/META-INF/resources/sys1/layui/font/iconfont.eot" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/../auth/src/main/resources/META-INF/resources/sys1/layui/font/iconfont.svg" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/../auth/src/main/resources/META-INF/resources/sys1/layui/font/iconfont.ttf" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/../auth/src/main/resources/META-INF/resources/sys1/layui/font/iconfont.woff" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/../auth/src/main/resources/META-INF/resources/sys1/layui/font/iconfont.woff2" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/../auth/src/main/resources/META-INF/resources/sys1/layui/images/face/0.gif" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/../auth/src/main/resources/META-INF/resources/sys1/layui/images/face/1.gif" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/../auth/src/main/resources/META-INF/resources/sys1/layui/images/face/10.gif" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/../auth/src/main/resources/META-INF/resources/sys1/layui/images/face/11.gif" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/../auth/src/main/resources/META-INF/resources/sys1/layui/images/face/12.gif" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/../auth/src/main/resources/META-INF/resources/sys1/layui/images/face/13.gif" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/../auth/src/main/resources/META-INF/resources/sys1/layui/images/face/14.gif" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/../auth/src/main/resources/META-INF/resources/sys1/layui/images/face/15.gif" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/../auth/src/main/resources/META-INF/resources/sys1/layui/images/face/16.gif" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/../auth/src/main/resources/META-INF/resources/sys1/layui/images/face/17.gif" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/../auth/src/main/resources/META-INF/resources/sys1/layui/images/face/18.gif" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/../auth/src/main/resources/META-INF/resources/sys1/layui/images/face/19.gif" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/../auth/src/main/resources/META-INF/resources/sys1/layui/images/face/2.gif" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/../auth/src/main/resources/META-INF/resources/sys1/layui/images/face/20.gif" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/../auth/src/main/resources/META-INF/resources/sys1/layui/images/face/21.gif" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/../auth/src/main/resources/META-INF/resources/sys1/layui/images/face/22.gif" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/../auth/src/main/resources/META-INF/resources/sys1/layui/images/face/23.gif" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/../auth/src/main/resources/META-INF/resources/sys1/layui/images/face/24.gif" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/../auth/src/main/resources/META-INF/resources/sys1/layui/images/face/25.gif" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/../auth/src/main/resources/META-INF/resources/sys1/layui/images/face/26.gif" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/../auth/src/main/resources/META-INF/resources/sys1/layui/images/face/27.gif" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/../auth/src/main/resources/META-INF/resources/sys1/layui/images/face/28.gif" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/../auth/src/main/resources/META-INF/resources/sys1/layui/images/face/29.gif" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/../auth/src/main/resources/META-INF/resources/sys1/layui/images/face/3.gif" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/../auth/src/main/resources/META-INF/resources/sys1/layui/images/face/30.gif" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/../auth/src/main/resources/META-INF/resources/sys1/layui/images/face/31.gif" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/../auth/src/main/resources/META-INF/resources/sys1/layui/images/face/32.gif" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/../auth/src/main/resources/META-INF/resources/sys1/layui/images/face/33.gif" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/../auth/src/main/resources/META-INF/resources/sys1/layui/images/face/34.gif" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/../auth/src/main/resources/META-INF/resources/sys1/layui/images/face/35.gif" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/../auth/src/main/resources/META-INF/resources/sys1/layui/images/face/36.gif" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/../auth/src/main/resources/META-INF/resources/sys1/layui/images/face/37.gif" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/../auth/src/main/resources/META-INF/resources/sys1/layui/images/face/38.gif" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/../auth/src/main/resources/META-INF/resources/sys1/layui/images/face/39.gif" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/../auth/src/main/resources/META-INF/resources/sys1/layui/images/face/4.gif" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/../auth/src/main/resources/META-INF/resources/sys1/layui/images/face/40.gif" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/../auth/src/main/resources/META-INF/resources/sys1/layui/images/face/41.gif" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/../auth/src/main/resources/META-INF/resources/sys1/layui/images/face/42.gif" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/../auth/src/main/resources/META-INF/resources/sys1/layui/images/face/43.gif" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/../auth/src/main/resources/META-INF/resources/sys1/layui/images/face/44.gif" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/../auth/src/main/resources/META-INF/resources/sys1/layui/images/face/45.gif" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/../auth/src/main/resources/META-INF/resources/sys1/layui/images/face/46.gif" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/../auth/src/main/resources/META-INF/resources/sys1/layui/images/face/47.gif" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/../auth/src/main/resources/META-INF/resources/sys1/layui/images/face/48.gif" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/../auth/src/main/resources/META-INF/resources/sys1/layui/images/face/49.gif" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/../auth/src/main/resources/META-INF/resources/sys1/layui/images/face/5.gif" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/../auth/src/main/resources/META-INF/resources/sys1/layui/images/face/50.gif" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/../auth/src/main/resources/META-INF/resources/sys1/layui/images/face/51.gif" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/../auth/src/main/resources/META-INF/resources/sys1/layui/images/face/52.gif" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/../auth/src/main/resources/META-INF/resources/sys1/layui/images/face/53.gif" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/../auth/src/main/resources/META-INF/resources/sys1/layui/images/face/54.gif" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/../auth/src/main/resources/META-INF/resources/sys1/layui/images/face/55.gif" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/../auth/src/main/resources/META-INF/resources/sys1/layui/images/face/56.gif" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/../auth/src/main/resources/META-INF/resources/sys1/layui/images/face/57.gif" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/../auth/src/main/resources/META-INF/resources/sys1/layui/images/face/58.gif" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/../auth/src/main/resources/META-INF/resources/sys1/layui/images/face/59.gif" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/../auth/src/main/resources/META-INF/resources/sys1/layui/images/face/6.gif" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/../auth/src/main/resources/META-INF/resources/sys1/layui/images/face/60.gif" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/../auth/src/main/resources/META-INF/resources/sys1/layui/images/face/61.gif" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/../auth/src/main/resources/META-INF/resources/sys1/layui/images/face/62.gif" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/../auth/src/main/resources/META-INF/resources/sys1/layui/images/face/63.gif" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/../auth/src/main/resources/META-INF/resources/sys1/layui/images/face/64.gif" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/../auth/src/main/resources/META-INF/resources/sys1/layui/images/face/65.gif" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/../auth/src/main/resources/META-INF/resources/sys1/layui/images/face/66.gif" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/../auth/src/main/resources/META-INF/resources/sys1/layui/images/face/67.gif" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/../auth/src/main/resources/META-INF/resources/sys1/layui/images/face/68.gif" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/../auth/src/main/resources/META-INF/resources/sys1/layui/images/face/69.gif" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/../auth/src/main/resources/META-INF/resources/sys1/layui/images/face/7.gif" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/../auth/src/main/resources/META-INF/resources/sys1/layui/images/face/70.gif" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/../auth/src/main/resources/META-INF/resources/sys1/layui/images/face/71.gif" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/../auth/src/main/resources/META-INF/resources/sys1/layui/images/face/8.gif" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/../auth/src/main/resources/META-INF/resources/sys1/layui/images/face/9.gif" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/../auth/src/main/resources/META-INF/resources/sys1/layui/lay/modules/carousel.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/../auth/src/main/resources/META-INF/resources/sys1/layui/lay/modules/code.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/../auth/src/main/resources/META-INF/resources/sys1/layui/lay/modules/colorpicker.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/../auth/src/main/resources/META-INF/resources/sys1/layui/lay/modules/element.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/../auth/src/main/resources/META-INF/resources/sys1/layui/lay/modules/flow.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/../auth/src/main/resources/META-INF/resources/sys1/layui/lay/modules/form.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/../auth/src/main/resources/META-INF/resources/sys1/layui/lay/modules/jquery.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/../auth/src/main/resources/META-INF/resources/sys1/layui/lay/modules/laydate.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/../auth/src/main/resources/META-INF/resources/sys1/layui/lay/modules/layedit.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/../auth/src/main/resources/META-INF/resources/sys1/layui/lay/modules/layer.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/../auth/src/main/resources/META-INF/resources/sys1/layui/lay/modules/laypage.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/../auth/src/main/resources/META-INF/resources/sys1/layui/lay/modules/laytpl.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/../auth/src/main/resources/META-INF/resources/sys1/layui/lay/modules/mobile.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/../auth/src/main/resources/META-INF/resources/sys1/layui/lay/modules/rate.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/../auth/src/main/resources/META-INF/resources/sys1/layui/lay/modules/slider.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/../auth/src/main/resources/META-INF/resources/sys1/layui/lay/modules/table.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/../auth/src/main/resources/META-INF/resources/sys1/layui/lay/modules/transfer.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/../auth/src/main/resources/META-INF/resources/sys1/layui/lay/modules/tree.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/../auth/src/main/resources/META-INF/resources/sys1/layui/lay/modules/upload.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/../auth/src/main/resources/META-INF/resources/sys1/layui/lay/modules/util.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/../auth/src/main/resources/META-INF/resources/sys1/layui/layui.all.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/../auth/src/main/resources/META-INF/resources/sys1/layui/layui.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/../auth/src/main/resources/META-INF/resources/sys3/css/H-ui.admin.css" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/../auth/src/main/resources/META-INF/resources/sys3/css/H-ui.css" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/../auth/src/main/resources/META-INF/resources/sys3/css/H-ui.login.css" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/../auth/src/main/resources/META-INF/resources/sys3/css/bootstrap.custom.css" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/../auth/src/main/resources/META-INF/resources/sys3/css/iconfont.css" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/../auth/src/main/resources/META-INF/resources/sys3/css/iconfont.ttf" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/../auth/src/main/resources/META-INF/resources/sys3/css/iconfont.woff" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/../auth/src/main/resources/META-INF/resources/sys3/css/skin/blue/acrossTab-bg.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/../auth/src/main/resources/META-INF/resources/sys3/css/skin/blue/acrossTab.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/../auth/src/main/resources/META-INF/resources/sys3/css/skin/blue/icon_arrow.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/../auth/src/main/resources/META-INF/resources/sys3/css/skin/blue/skin.css" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/../auth/src/main/resources/META-INF/resources/sys3/css/skin/default/acrossTab-bg.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/../auth/src/main/resources/META-INF/resources/sys3/css/skin/default/acrossTab.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/../auth/src/main/resources/META-INF/resources/sys3/css/skin/default/icon_arrow.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/../auth/src/main/resources/META-INF/resources/sys3/css/skin/default/skin.css" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/../auth/src/main/resources/META-INF/resources/sys3/css/skin/green/acrossTab-bg.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/../auth/src/main/resources/META-INF/resources/sys3/css/skin/green/acrossTab.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/../auth/src/main/resources/META-INF/resources/sys3/css/skin/green/icon_arrow.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/../auth/src/main/resources/META-INF/resources/sys3/css/skin/green/skin.css" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/../auth/src/main/resources/META-INF/resources/sys3/css/skin/orange/acrossTab-bg.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/../auth/src/main/resources/META-INF/resources/sys3/css/skin/orange/acrossTab.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/../auth/src/main/resources/META-INF/resources/sys3/css/skin/orange/icon_arrow.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/../auth/src/main/resources/META-INF/resources/sys3/css/skin/orange/skin.css" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/../auth/src/main/resources/META-INF/resources/sys3/css/skin/red/acrossTab-bg.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/../auth/src/main/resources/META-INF/resources/sys3/css/skin/red/acrossTab.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/../auth/src/main/resources/META-INF/resources/sys3/css/skin/red/icon_arrow.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/../auth/src/main/resources/META-INF/resources/sys3/css/skin/red/skin.css" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/../auth/src/main/resources/META-INF/resources/sys3/css/skin/yellow/acrossTab-bg.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/../auth/src/main/resources/META-INF/resources/sys3/css/skin/yellow/acrossTab.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/../auth/src/main/resources/META-INF/resources/sys3/css/skin/yellow/icon_arrow.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/../auth/src/main/resources/META-INF/resources/sys3/css/skin/yellow/skin.css" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/../auth/src/main/resources/META-INF/resources/sys3/css/ztree/img/line_conn.gif" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/../auth/src/main/resources/META-INF/resources/sys3/css/ztree/img/line_conn.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/../auth/src/main/resources/META-INF/resources/sys3/css/ztree/img/loading.gif" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/../auth/src/main/resources/META-INF/resources/sys3/css/ztree/img/metro.gif" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/../auth/src/main/resources/META-INF/resources/sys3/css/ztree/img/metro.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/../auth/src/main/resources/META-INF/resources/sys3/css/ztree/zTreeStyle.css" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/../auth/src/main/resources/META-INF/resources/sys3/html/app1.html" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/../auth/src/main/resources/META-INF/resources/sys3/html/app2.html" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/../auth/src/main/resources/META-INF/resources/sys3/html/index.html" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/../auth/src/main/resources/META-INF/resources/sys3/images/acrossTab/acrossTab-2.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/../auth/src/main/resources/META-INF/resources/sys3/images/acrossTab/acrossTab-bg.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/../auth/src/main/resources/META-INF/resources/sys3/images/acrossTab/acrossTab-close.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/../auth/src/main/resources/META-INF/resources/sys3/images/acrossTab/acrossTab.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/../auth/src/main/resources/META-INF/resources/sys3/images/admin-login-bg.jpg" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/../auth/src/main/resources/META-INF/resources/sys3/images/admin-loginform-bg.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/../auth/src/main/resources/META-INF/resources/sys3/images/cn.gif" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/../auth/src/main/resources/META-INF/resources/sys3/images/dataTable/sort_asc.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/../auth/src/main/resources/META-INF/resources/sys3/images/dataTable/sort_both.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/../auth/src/main/resources/META-INF/resources/sys3/images/dataTable/sort_desc.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/../auth/src/main/resources/META-INF/resources/sys3/images/loading.gif" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/../auth/src/main/resources/META-INF/resources/sys3/images/logo.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/../auth/src/main/resources/META-INF/resources/sys3/images/um.gif" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/../auth/src/main/resources/META-INF/resources/sys3/index.html" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/../auth/src/main/resources/META-INF/resources/sys3/js/H-ui.admin.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/../auth/src/main/resources/META-INF/resources/sys3/js/H-ui.min.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/../auth/src/main/resources/META-INF/resources/sys3/js/Tools.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/../auth/src/main/resources/META-INF/resources/sys3/js/bootstrap.min.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/../auth/src/main/resources/META-INF/resources/sys3/js/echarts.min.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/../auth/src/main/resources/META-INF/resources/sys3/js/jquery.contextmenu.r2.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/../auth/src/main/resources/META-INF/resources/sys3/js/jquery.dataTables.min.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/../auth/src/main/resources/META-INF/resources/sys3/js/jquery.min.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/../auth/src/main/resources/META-INF/resources/sys3/js/jquery.tips.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/../auth/src/main/resources/META-INF/resources/sys3/js/jquery.validate.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/../auth/src/main/resources/META-INF/resources/sys3/js/jquery.ztree.all-3.5.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/../auth/src/main/resources/META-INF/resources/sys3/js/layer.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/../auth/src/main/resources/META-INF/resources/sys3/js/laypage.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/../auth/src/main/resources/META-INF/resources/sys3/js/lx.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/../auth/src/main/resources/META-INF/resources/sys3/js/messages_zh.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/../auth/src/main/resources/META-INF/resources/sys3/js/skin/default/icon-ext.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/../auth/src/main/resources/META-INF/resources/sys3/js/skin/default/icon.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/../auth/src/main/resources/META-INF/resources/sys3/js/skin/default/loading-0.gif" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/../auth/src/main/resources/META-INF/resources/sys3/js/skin/default/loading-1.gif" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/../auth/src/main/resources/META-INF/resources/sys3/js/skin/default/loading-2.gif" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/../auth/src/main/resources/META-INF/resources/sys3/js/skin/layer.css" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/../auth/src/main/resources/META-INF/resources/sys3/js/validate-methods.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/../auth/src/main/resources/META-INF/resources/sys3/login.html" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/../auth/src/main/resources/META-INF/resources/sys3/menu/service/edit.html" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/../auth/src/main/resources/META-INF/resources/sys3/menu/service/list.html" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/../auth/src/main/resources/META-INF/resources/sys3/menu/service/temp.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/../auth/src/main/resources/META-INF/resources/sys3/menu/system/edit.html" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/../auth/src/main/resources/META-INF/resources/sys3/menu/system/list.html" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/../auth/src/main/resources/META-INF/resources/sys3/menu/system/temp.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/../auth/src/main/resources/META-INF/resources/sys3/menu/system/temp/echarts.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/../auth/src/main/resources/META-INF/resources/sys3/menu/system/temp/menu.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/../auth/src/main/resources/META-INF/resources/sys3/menu/system/temp/role.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/../auth/src/main/resources/META-INF/resources/sys3/menu/system/temp/service.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/../auth/src/main/resources/META-INF/resources/sys3/menu/system/temp/user.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/../auth/src/main/resources/META-INF/resources/sys3/menu/temp/css/bootstrap.custom.css" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/../auth/src/main/resources/META-INF/resources/sys3/menu/temp/index.html" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/../auth/src/main/resources/META-INF/resources/sys3/menu/temp/js/bootstrap.min.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/../auth/src/main/resources/META-INF/resources/sys3/menu/temp/js/jquery-3.2.1.min.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/../auth/src/main/resources/META-INF/resources/sys3/menu/temp/js/layer.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/../auth/src/main/resources/META-INF/resources/sys3/menu/temp/js/skin/default/icon-ext.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/../auth/src/main/resources/META-INF/resources/sys3/menu/temp/js/skin/default/icon.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/../auth/src/main/resources/META-INF/resources/sys3/menu/temp/js/skin/default/loading-0.gif" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/../auth/src/main/resources/META-INF/resources/sys3/menu/temp/js/skin/default/loading-1.gif" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/../auth/src/main/resources/META-INF/resources/sys3/menu/temp/js/skin/default/loading-2.gif" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/../auth/src/main/resources/META-INF/resources/sys3/menu/temp/js/skin/layer.css" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/../auth/src/main/resources/META-INF/resources/sys3/vue.html" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/../auth/src/main/resources/application.properties" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/../auth/src/test/java/com/lx/auth/AuthorityApplicationTests.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/../auth/src/test/java/com/lx/auth/aa.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/../lx/.idea/artifacts/authority_jar2.xml" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/../myWeb/src/com/lx/web/http/HttpServer.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/../myWeb/src/com/lx/web/http/Servlet.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/../myWeb/src/com/lx/web/http/mime.type" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/../myWeb/src/test/MyServlet.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/../myWeb/src/test/Test.java" afterPath="" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../authority/authority.iml" afterPath="$PROJECT_DIR$/../authority/authority.iml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../lx/.idea/artifacts/authority_jar.xml" afterPath="$PROJECT_DIR$/../lx/.idea/artifacts/authority_jar.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../lx/.idea/compiler.xml" afterPath="$PROJECT_DIR$/../lx/.idea/compiler.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../lx/.idea/encodings.xml" afterPath="$PROJECT_DIR$/../lx/.idea/encodings.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../lx/.idea/inspectionProfiles/Project_Default.xml" afterPath="$PROJECT_DIR$/../lx/.idea/inspectionProfiles/Project_Default.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../lx/.idea/libraries/Maven__ch_qos_logback_logback_classic_1_2_3.xml" afterPath="$PROJECT_DIR$/../lx/.idea/libraries/Maven__ch_qos_logback_logback_classic_1_2_3.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../lx/.idea/libraries/Maven__ch_qos_logback_logback_core_1_2_3.xml" afterPath="$PROJECT_DIR$/../lx/.idea/libraries/Maven__ch_qos_logback_logback_core_1_2_3.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../lx/.idea/libraries/Maven__com_fasterxml_classmate_1_4_0.xml" afterPath="$PROJECT_DIR$/../lx/.idea/libraries/Maven__com_fasterxml_classmate_1_4_0.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../lx/.idea/libraries/Maven__com_fasterxml_jackson_core_jackson_annotations_2_9_0.xml" afterPath="$PROJECT_DIR$/../lx/.idea/libraries/Maven__com_fasterxml_jackson_core_jackson_annotations_2_9_0.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../lx/.idea/libraries/Maven__com_fasterxml_jackson_core_jackson_core_2_9_9.xml" afterPath="$PROJECT_DIR$/../lx/.idea/libraries/Maven__com_fasterxml_jackson_core_jackson_core_2_9_9.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../lx/.idea/libraries/Maven__com_fasterxml_jackson_core_jackson_databind_2_9_9.xml" afterPath="$PROJECT_DIR$/../lx/.idea/libraries/Maven__com_fasterxml_jackson_core_jackson_databind_2_9_9.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../lx/.idea/libraries/Maven__com_fasterxml_jackson_datatype_jackson_datatype_jdk8_2_9_9.xml" afterPath="$PROJECT_DIR$/../lx/.idea/libraries/Maven__com_fasterxml_jackson_datatype_jackson_datatype_jdk8_2_9_9.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../lx/.idea/libraries/Maven__com_fasterxml_jackson_datatype_jackson_datatype_jsr310_2_9_9.xml" afterPath="$PROJECT_DIR$/../lx/.idea/libraries/Maven__com_fasterxml_jackson_datatype_jackson_datatype_jsr310_2_9_9.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../lx/.idea/libraries/Maven__com_fasterxml_jackson_module_jackson_module_parameter_names_2_9_9.xml" afterPath="$PROJECT_DIR$/../lx/.idea/libraries/Maven__com_fasterxml_jackson_module_jackson_module_parameter_names_2_9_9.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../lx/.idea/libraries/Maven__javax_annotation_javax_annotation_api_1_3_2.xml" afterPath="$PROJECT_DIR$/../lx/.idea/libraries/Maven__javax_annotation_javax_annotation_api_1_3_2.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../lx/.idea/libraries/Maven__javax_validation_validation_api_2_0_1_Final.xml" afterPath="$PROJECT_DIR$/../lx/.idea/libraries/Maven__javax_validation_validation_api_2_0_1_Final.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../lx/.idea/libraries/Maven__org_apache_commons_commons_pool2_2_6_2.xml" afterPath="$PROJECT_DIR$/../lx/.idea/libraries/Maven__org_apache_commons_commons_pool2_2_6_2.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../lx/.idea/libraries/Maven__org_apache_logging_log4j_log4j_api_2_11_2.xml" afterPath="$PROJECT_DIR$/../lx/.idea/libraries/Maven__org_apache_logging_log4j_log4j_api_2_11_2.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../lx/.idea/libraries/Maven__org_apache_logging_log4j_log4j_to_slf4j_2_11_2.xml" afterPath="$PROJECT_DIR$/../lx/.idea/libraries/Maven__org_apache_logging_log4j_log4j_to_slf4j_2_11_2.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../lx/.idea/libraries/Maven__org_apache_tomcat_embed_tomcat_embed_core_9_0_22.xml" afterPath="$PROJECT_DIR$/../lx/.idea/libraries/Maven__org_apache_tomcat_embed_tomcat_embed_core_9_0_22.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../lx/.idea/libraries/Maven__org_apache_tomcat_embed_tomcat_embed_el_9_0_22.xml" afterPath="$PROJECT_DIR$/../lx/.idea/libraries/Maven__org_apache_tomcat_embed_tomcat_embed_el_9_0_22.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../lx/.idea/libraries/Maven__org_apache_tomcat_embed_tomcat_embed_websocket_9_0_22.xml" afterPath="$PROJECT_DIR$/../lx/.idea/libraries/Maven__org_apache_tomcat_embed_tomcat_embed_websocket_9_0_22.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../lx/.idea/libraries/Maven__org_hibernate_validator_hibernate_validator_6_0_17_Final.xml" afterPath="$PROJECT_DIR$/../lx/.idea/libraries/Maven__org_hibernate_validator_hibernate_validator_6_0_17_Final.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../lx/.idea/libraries/Maven__org_jboss_logging_jboss_logging_3_3_2_Final.xml" afterPath="$PROJECT_DIR$/../lx/.idea/libraries/Maven__org_jboss_logging_jboss_logging_3_3_2_Final.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../lx/.idea/libraries/Maven__org_slf4j_jul_to_slf4j_1_7_26.xml" afterPath="$PROJECT_DIR$/../lx/.idea/libraries/Maven__org_slf4j_jul_to_slf4j_1_7_26.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../lx/.idea/libraries/Maven__org_slf4j_slf4j_api_1_7_26.xml" afterPath="$PROJECT_DIR$/../lx/.idea/libraries/Maven__org_slf4j_slf4j_api_1_7_26.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../lx/.idea/libraries/Maven__org_springframework_boot_spring_boot_2_1_7_RELEASE.xml" afterPath="$PROJECT_DIR$/../lx/.idea/libraries/Maven__org_springframework_boot_spring_boot_2_1_7_RELEASE.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../lx/.idea/libraries/Maven__org_springframework_boot_spring_boot_autoconfigure_2_1_7_RELEASE.xml" afterPath="$PROJECT_DIR$/../lx/.idea/libraries/Maven__org_springframework_boot_spring_boot_autoconfigure_2_1_7_RELEASE.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../lx/.idea/libraries/Maven__org_springframework_boot_spring_boot_starter_2_1_7_RELEASE.xml" afterPath="$PROJECT_DIR$/../lx/.idea/libraries/Maven__org_springframework_boot_spring_boot_starter_2_1_7_RELEASE.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../lx/.idea/libraries/Maven__org_springframework_boot_spring_boot_starter_json_2_1_7_RELEASE.xml" afterPath="$PROJECT_DIR$/../lx/.idea/libraries/Maven__org_springframework_boot_spring_boot_starter_json_2_1_7_RELEASE.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../lx/.idea/libraries/Maven__org_springframework_boot_spring_boot_starter_logging_2_1_7_RELEASE.xml" afterPath="$PROJECT_DIR$/../lx/.idea/libraries/Maven__org_springframework_boot_spring_boot_starter_logging_2_1_7_RELEASE.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../lx/.idea/libraries/Maven__org_springframework_boot_spring_boot_starter_tomcat_2_1_7_RELEASE.xml" afterPath="$PROJECT_DIR$/../lx/.idea/libraries/Maven__org_springframework_boot_spring_boot_starter_tomcat_2_1_7_RELEASE.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../lx/.idea/libraries/Maven__org_springframework_boot_spring_boot_starter_web_2_1_7_RELEASE.xml" afterPath="$PROJECT_DIR$/../lx/.idea/libraries/Maven__org_springframework_boot_spring_boot_starter_web_2_1_7_RELEASE.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../lx/.idea/libraries/Maven__org_springframework_spring_aop_5_1_9_RELEASE.xml" afterPath="$PROJECT_DIR$/../lx/.idea/libraries/Maven__org_springframework_spring_aop_5_1_9_RELEASE.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../lx/.idea/libraries/Maven__org_springframework_spring_beans_5_1_9_RELEASE.xml" afterPath="$PROJECT_DIR$/../lx/.idea/libraries/Maven__org_springframework_spring_beans_5_1_9_RELEASE.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../lx/.idea/libraries/Maven__org_springframework_spring_context_5_1_9_RELEASE.xml" afterPath="$PROJECT_DIR$/../lx/.idea/libraries/Maven__org_springframework_spring_context_5_1_9_RELEASE.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../lx/.idea/libraries/Maven__org_springframework_spring_core_5_1_9_RELEASE.xml" afterPath="$PROJECT_DIR$/../lx/.idea/libraries/Maven__org_springframework_spring_core_5_1_9_RELEASE.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../lx/.idea/libraries/Maven__org_springframework_spring_expression_5_1_9_RELEASE.xml" afterPath="$PROJECT_DIR$/../lx/.idea/libraries/Maven__org_springframework_spring_expression_5_1_9_RELEASE.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../lx/.idea/libraries/Maven__org_springframework_spring_jcl_5_1_9_RELEASE.xml" afterPath="$PROJECT_DIR$/../lx/.idea/libraries/Maven__org_springframework_spring_jcl_5_1_9_RELEASE.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../lx/.idea/libraries/Maven__org_springframework_spring_web_5_1_9_RELEASE.xml" afterPath="$PROJECT_DIR$/../lx/.idea/libraries/Maven__org_springframework_spring_web_5_1_9_RELEASE.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../lx/.idea/libraries/Maven__org_springframework_spring_webmvc_5_1_9_RELEASE.xml" afterPath="$PROJECT_DIR$/../lx/.idea/libraries/Maven__org_springframework_spring_webmvc_5_1_9_RELEASE.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../lx/.idea/libraries/Maven__org_yaml_snakeyaml_1_23.xml" afterPath="$PROJECT_DIR$/../lx/.idea/libraries/Maven__org_yaml_snakeyaml_1_23.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../lx/.idea/libraries/Maven__redis_clients_jedis_2_8_0.xml" afterPath="$PROJECT_DIR$/../lx/.idea/libraries/Maven__redis_clients_jedis_2_8_0.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../lx/.idea/misc.xml" afterPath="$PROJECT_DIR$/../lx/.idea/misc.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../lx/.idea/modules.xml" afterPath="$PROJECT_DIR$/../lx/.idea/modules.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../lx/.idea/workspace.xml" afterPath="$PROJECT_DIR$/../lx/.idea/workspace.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../lx/lx.iml" afterPath="$PROJECT_DIR$/../lx/lx.iml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../myWeb/myWeb.iml" afterPath="$PROJECT_DIR$/../myWeb/myWeb.iml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../orderPlatform/.idea/workspace.xml" afterPath="$PROJECT_DIR$/../orderPlatform/.idea/workspace.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../wx1.0/.idea/misc.xml" afterPath="$PROJECT_DIR$/../wx1.0/.idea/misc.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../wx1.0/.idea/vcs.xml" afterPath="$PROJECT_DIR$/../wx1.0/.idea/vcs.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../wx1.0/.idea/workspace.xml" afterPath="$PROJECT_DIR$/../wx1.0/.idea/workspace.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../wx1.0/src/main/java/com/lx/role/controller/AppController.java" afterPath="$PROJECT_DIR$/../wx1.0/src/main/java/com/lx/role/controller/AppController.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/compiler.xml" afterPath="$PROJECT_DIR$/.idea/compiler.xml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/inspectionProfiles/Project_Default.xml" afterPath="$PROJECT_DIR$/.idea/inspectionProfiles/Project_Default.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/com/lx/pdf/Pdf.java" afterPath="$PROJECT_DIR$/src/main/java/com/lx/pdf/Pdf.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/vcs.xml" afterPath="$PROJECT_DIR$/.idea/vcs.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/xx.iml" afterPath="$PROJECT_DIR$/xx.iml" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/../myWeb/src/com/lx/web/core/AC.java" afterPath="$PROJECT_DIR$/../myWeb/src/main/java/com/lx/web/core/AC.java" />
     </list>
     <ignored path="xx.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -29,7 +683,7 @@
       <file leaf-file-name="pom.xml" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/pom.xml">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="30">
+            <state vertical-scroll-proportion="0.0">
               <caret line="6" column="17" selection-start-line="6" selection-start-column="17" selection-end-line="6" selection-end-column="17" />
               <folding />
             </state>
@@ -39,7 +693,7 @@
       <file leaf-file-name="icon.txt" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/icon.txt">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="180">
+            <state vertical-scroll-proportion="0.0">
               <caret line="6" column="11" selection-start-line="6" selection-start-column="11" selection-end-line="6" selection-end-column="11" />
               <folding />
             </state>
@@ -49,7 +703,7 @@
       <file leaf-file-name="Pdf.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/main/java/com/lx/pdf/Pdf.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="210">
+            <state vertical-scroll-proportion="0.0">
               <caret line="7" column="0" selection-start-line="7" selection-start-column="0" selection-end-line="7" selection-end-column="0" />
               <folding />
             </state>
@@ -59,14 +713,19 @@
       <file leaf-file-name="MyExecutor.java" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/main/java/com/lx/thread/MyExecutor.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="191">
-              <caret line="15" column="43" selection-start-line="15" selection-start-column="43" selection-end-line="15" selection-end-column="43" />
-              <folding />
+            <state vertical-scroll-proportion="0.62283736">
+              <caret line="32" column="8" selection-start-line="32" selection-start-column="8" selection-end-line="32" selection-end-column="8" />
+              <folding>
+                <element signature="imports" expanded="false" />
+              </folding>
             </state>
           </provider>
         </entry>
       </file>
     </leaf>
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$/.." />
   </component>
   <component name="GradleLocalSettings">
     <option name="externalProjectsViewState">
@@ -82,11 +741,10 @@
       </list>
     </option>
   </component>
-  <component name="JsBuildToolGruntFileManager" detection-done="true" sorting="DEFINITION_ORDER" />
-  <component name="JsBuildToolPackageJson" detection-done="true" sorting="DEFINITION_ORDER" />
+  <component name="JsBuildToolGruntFileManager" detection-done="true" />
+  <component name="JsBuildToolPackageJson" detection-done="true" />
   <component name="JsGulpfileManager">
     <detection-done>true</detection-done>
-    <sorting>DEFINITION_ORDER</sorting>
   </component>
   <component name="MavenImportPreferences">
     <option name="generalSettings">
@@ -118,7 +776,7 @@
       </profile-state>
     </entry>
   </component>
-  <component name="ProjectLevelVcsManager" settingsEditedManually="false">
+  <component name="ProjectLevelVcsManager" settingsEditedManually="true">
     <OptionsSetting value="true" id="Add" />
     <OptionsSetting value="true" id="Remove" />
     <OptionsSetting value="true" id="Checkout" />
@@ -145,7 +803,6 @@
     <panes>
       <pane id="Scope" />
       <pane id="Scratches" />
-      <pane id="PackagesPane" />
       <pane id="ProjectPane">
         <subPane>
           <PATH>
@@ -242,18 +899,110 @@
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="xx" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="xx" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="src" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="main" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="java" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="lx" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="core" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="xx" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="xx" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="src" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="main" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="java" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="lx" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="Async" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="xx" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="xx" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="src" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="main" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="java" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="lx" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="aop" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
         </subPane>
       </pane>
+      <pane id="PackagesPane" />
     </panes>
   </component>
   <component name="PropertiesComponent">
-    <property name="settings.editor.selected.configurable" value="MavenSettings" />
+    <property name="settings.editor.selected.configurable" value="reference.projectsettings.compiler.javacompiler" />
     <property name="settings.editor.splitter.proportion" value="0.2" />
     <property name="aspect.path.notification.shown" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="project.structure.last.edited" value="Modules" />
     <property name="project.structure.proportion" value="0.15" />
     <property name="project.structure.side.proportion" value="0.2" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
   </component>
   <component name="RunManager" selected="Application.Pdf">
     <configuration default="false" name="Pdf" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
@@ -284,21 +1033,31 @@
     </configuration>
     <configuration default="true" type="AndroidRunConfigurationType" factoryName="Android Application">
       <module name="" />
+      <option name="ACTIVITY_CLASS" value="" />
+      <option name="MODE" value="default_activity" />
       <option name="DEPLOY" value="true" />
       <option name="ARTIFACT_NAME" value="" />
-      <option name="PM_INSTALL_OPTIONS" value="" />
-      <option name="ACTIVITY_EXTRA_FLAGS" value="" />
-      <option name="MODE" value="default_activity" />
       <option name="TARGET_SELECTION_MODE" value="SHOW_DIALOG" />
-      <option name="PREFERRED_AVD" value="" />
-      <option name="CLEAR_LOGCAT" value="false" />
-      <option name="SHOW_LOGCAT_AUTOMATICALLY" value="true" />
-      <option name="SKIP_NOOP_APK_INSTALLATIONS" value="true" />
-      <option name="FORCE_STOP_RUNNING_APP" value="true" />
       <option name="USE_LAST_SELECTED_DEVICE" value="false" />
       <option name="PREFERRED_AVD" value="" />
-      <option name="DEEP_LINK" value="" />
-      <option name="ACTIVITY_CLASS" value="" />
+      <option name="USE_COMMAND_LINE" value="true" />
+      <option name="COMMAND_LINE" value="" />
+      <option name="WIPE_USER_DATA" value="false" />
+      <option name="DISABLE_BOOT_ANIMATION" value="false" />
+      <option name="NETWORK_SPEED" value="full" />
+      <option name="NETWORK_LATENCY" value="none" />
+      <option name="CLEAR_LOGCAT" value="false" />
+      <option name="SHOW_LOGCAT_AUTOMATICALLY" value="true" />
+      <option name="FILTER_LOGCAT_AUTOMATICALLY" value="true" />
+      <option name="SELECTED_CLOUD_MATRIX_CONFIGURATION_ID" value="0" />
+      <option name="SELECTED_CLOUD_MATRIX_PROJECT_ID" value="" />
+      <option name="SELECTED_CLOUD_DEVICE_CONFIGURATION_ID" value="0" />
+      <option name="SELECTED_CLOUD_DEVICE_PROJECT_ID" value="" />
+      <option name="IS_VALID_CLOUD_MATRIX_SELECTION" value="false" />
+      <option name="INVALID_CLOUD_MATRIX_SELECTION_ERROR" value="" />
+      <option name="IS_VALID_CLOUD_DEVICE_SELECTION" value="false" />
+      <option name="INVALID_CLOUD_DEVICE_SELECTION_ERROR" value="" />
+      <option name="CLOUD_DEVICE_SERIAL_NUMBER" value="" />
       <method />
     </configuration>
     <configuration default="true" type="AndroidTestRunConfigurationType" factoryName="Android Tests">
@@ -308,15 +1067,27 @@
       <option name="METHOD_NAME" value="" />
       <option name="CLASS_NAME" value="" />
       <option name="PACKAGE_NAME" value="" />
-      <option name="EXTRA_OPTIONS" value="" />
       <option name="TARGET_SELECTION_MODE" value="SHOW_DIALOG" />
-      <option name="PREFERRED_AVD" value="" />
-      <option name="CLEAR_LOGCAT" value="false" />
-      <option name="SHOW_LOGCAT_AUTOMATICALLY" value="true" />
-      <option name="SKIP_NOOP_APK_INSTALLATIONS" value="true" />
-      <option name="FORCE_STOP_RUNNING_APP" value="true" />
       <option name="USE_LAST_SELECTED_DEVICE" value="false" />
       <option name="PREFERRED_AVD" value="" />
+      <option name="USE_COMMAND_LINE" value="true" />
+      <option name="COMMAND_LINE" value="" />
+      <option name="WIPE_USER_DATA" value="false" />
+      <option name="DISABLE_BOOT_ANIMATION" value="false" />
+      <option name="NETWORK_SPEED" value="full" />
+      <option name="NETWORK_LATENCY" value="none" />
+      <option name="CLEAR_LOGCAT" value="false" />
+      <option name="SHOW_LOGCAT_AUTOMATICALLY" value="true" />
+      <option name="FILTER_LOGCAT_AUTOMATICALLY" value="true" />
+      <option name="SELECTED_CLOUD_MATRIX_CONFIGURATION_ID" value="0" />
+      <option name="SELECTED_CLOUD_MATRIX_PROJECT_ID" value="" />
+      <option name="SELECTED_CLOUD_DEVICE_CONFIGURATION_ID" value="0" />
+      <option name="SELECTED_CLOUD_DEVICE_PROJECT_ID" value="" />
+      <option name="IS_VALID_CLOUD_MATRIX_SELECTION" value="false" />
+      <option name="INVALID_CLOUD_MATRIX_SELECTION_ERROR" value="" />
+      <option name="IS_VALID_CLOUD_DEVICE_SELECTION" value="false" />
+      <option name="INVALID_CLOUD_DEVICE_SELECTION_ERROR" value="" />
+      <option name="CLOUD_DEVICE_SERIAL_NUMBER" value="" />
       <method />
     </configuration>
     <configuration default="true" type="Applet" factoryName="Applet">
@@ -340,65 +1111,6 @@
       <option name="PASS_PARENT_ENVS" value="true" />
       <module name="" />
       <envs />
-      <method />
-    </configuration>
-    <configuration default="true" type="ArquillianJUnit" factoryName="">
-      <extension name="coverage" enabled="false" merge="false" sample_coverage="true" runner="idea" />
-      <module name="" />
-      <option name="arquillianRunConfiguration">
-        <value>
-          <option name="containerStateName" value="" />
-        </value>
-      </option>
-      <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="false" />
-      <option name="ALTERNATIVE_JRE_PATH" />
-      <option name="PACKAGE_NAME" />
-      <option name="MAIN_CLASS_NAME" />
-      <option name="METHOD_NAME" />
-      <option name="TEST_OBJECT" value="class" />
-      <option name="VM_PARAMETERS" />
-      <option name="PARAMETERS" />
-      <option name="WORKING_DIRECTORY" />
-      <option name="ENV_VARIABLES" />
-      <option name="PASS_PARENT_ENVS" value="true" />
-      <option name="TEST_SEARCH_SCOPE">
-        <value defaultName="singleModule" />
-      </option>
-      <envs />
-      <patterns />
-      <method />
-    </configuration>
-    <configuration default="true" type="ArquillianTestNG" factoryName="">
-      <extension name="coverage" enabled="false" merge="false" sample_coverage="true" runner="idea" />
-      <module name="" />
-      <option name="arquillianRunConfiguration">
-        <value>
-          <option name="containerStateName" value="" />
-        </value>
-      </option>
-      <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="false" />
-      <option name="ALTERNATIVE_JRE_PATH" />
-      <option name="SUITE_NAME" />
-      <option name="PACKAGE_NAME" />
-      <option name="MAIN_CLASS_NAME" />
-      <option name="METHOD_NAME" />
-      <option name="GROUP_NAME" />
-      <option name="TEST_OBJECT" value="CLASS" />
-      <option name="VM_PARAMETERS" />
-      <option name="PARAMETERS" />
-      <option name="WORKING_DIRECTORY" />
-      <option name="OUTPUT_DIRECTORY" />
-      <option name="ANNOTATION_TYPE" />
-      <option name="ENV_VARIABLES" />
-      <option name="PASS_PARENT_ENVS" value="true" />
-      <option name="TEST_SEARCH_SCOPE">
-        <value defaultName="singleModule" />
-      </option>
-      <option name="USE_DEFAULT_REPORTERS" value="false" />
-      <option name="PROPERTIES_FILE" />
-      <envs />
-      <properties />
-      <listeners />
       <method />
     </configuration>
     <configuration default="true" type="CucumberJavaRunConfigurationType" factoryName="Cucumber java">
@@ -486,12 +1198,13 @@
       <method />
     </configuration>
     <configuration default="true" type="GrailsRunConfigurationType" factoryName="Grails">
+      <module name="" />
       <setting name="vmparams" value="" />
       <setting name="cmdLine" value="run-app" />
-      <setting name="passParentEnv" value="true" />
-      <setting name="launchBrowser" value="true" />
       <setting name="depsClasspath" value="false" />
+      <setting name="passParentEnv" value="true" />
       <extension name="coverage" enabled="false" merge="false" sample_coverage="true" runner="idea" />
+      <setting name="launchBrowser" value="true" />
       <method />
     </configuration>
     <configuration default="true" type="JUnit" factoryName="JUnit">
@@ -656,7 +1369,6 @@
       <method />
     </configuration>
     <configuration default="true" type="js.build_tools.gulp" factoryName="Gulp.js">
-      <node-interpreter>project</node-interpreter>
       <node-options />
       <gulpfile />
       <tasks />
@@ -667,7 +1379,6 @@
     <configuration default="true" type="js.build_tools.npm" factoryName="npm">
       <command value="run-script" />
       <scripts />
-      <node-interpreter value="project" />
       <envs />
       <method />
     </configuration>
@@ -686,65 +1397,37 @@
       </list>
     </recent_temporary>
   </component>
-  <component name="ShelveChangesManager" show_recycled="false">
-    <option name="remove_strategy" value="false" />
-  </component>
+  <component name="ShelveChangesManager" show_recycled="false" />
   <component name="SvnConfiguration" cleanupOnStartRun="true">
-    <configuration>C:\Users\ylx\AppData\Roaming\Subversion</configuration>
+    <configuration>C:\Users\huyis\AppData\Roaming\Subversion</configuration>
     <supportedVersion>125</supportedVersion>
-  </component>
-  <component name="SvnFileUrlMappingImpl">
-    <option name="myMappingRoots">
-      <list>
-        <SvnCopyRootSimple>
-          <option name="myVcsRoot" value="D:\code\xx" />
-          <option name="myCopyRoot" value="D:\code\xx" />
-        </SvnCopyRootSimple>
-        <SvnCopyRootSimple>
-          <option name="myVcsRoot" value="D:\code\xx\.idea" />
-          <option name="myCopyRoot" value="D:\code\xx\.idea" />
-        </SvnCopyRootSimple>
-      </list>
-    </option>
-    <option name="myMoreRealMappingRoots">
-      <list>
-        <SvnCopyRootSimple>
-          <option name="myVcsRoot" value="D:\code\xx" />
-          <option name="myCopyRoot" value="D:\code\xx" />
-        </SvnCopyRootSimple>
-      </list>
-    </option>
   </component>
   <component name="TaskManager">
     <task active="true" id="Default" summary="Default task">
       <changelist id="cc1066f9-7cd2-4ef7-a74d-8b53ca7e9716" name="Default" comment="" />
       <created>1568087311819</created>
       <option name="number" value="Default" />
-      <option name="presentableId" value="Default" />
       <updated>1568087311819</updated>
       <workItem from="1568087313137" duration="548000" />
       <workItem from="1570513167604" duration="193000" />
+      <workItem from="1578634367414" duration="208000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="741000" />
+    <option name="totallyTimeSpent" value="949000" />
   </component>
   <component name="ToolWindowManager">
-    <frame x="-8" y="-8" width="1936" height="1056" extended-state="7" />
-    <editor active="true" />
+    <frame x="-8" y="-8" width="1936" height="1056" extended-state="0" />
+    <editor active="false" />
     <layout>
       <window_info id="Palette" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
-      <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.1869469" sideWeight="0.5" order="-1" side_tool="false" content_ui="tabs" />
       <window_info id="Palette&#9;" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
-      <window_info id="Capture Analysis" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="true" content_ui="tabs" />
       <window_info id="Maven Projects" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
-      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.03634361" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
-      <window_info id="Capture Tool" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Designer" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Project" active="true" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.24973261" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
       <window_info id="Database" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
@@ -752,12 +1435,16 @@
       <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="UI Designer" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="true" content_ui="tabs" />
-      <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="Message" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Commander" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
-      <window_info id="Inspection" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
+      <window_info id="Capture Tool" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Hierarchy" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="2" side_tool="false" content_ui="combo" />
+      <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
+      <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.1869469" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
+      <window_info id="Capture Analysis" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
+      <window_info id="Inspection" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
+      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
     </layout>
   </component>
@@ -775,23 +1462,7 @@
   <component name="editorHistoryManager">
     <entry file="file://$PROJECT_DIR$/pom.xml">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/lx/pdf/Pdf.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="150">
-          <caret line="5" column="18" selection-start-line="5" selection-start-column="18" selection-end-line="5" selection-end-column="18" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/pom.xml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="30">
+        <state vertical-scroll-proportion="0.0">
           <caret line="6" column="17" selection-start-line="6" selection-start-column="17" selection-end-line="6" selection-end-column="17" />
           <folding />
         </state>
@@ -799,7 +1470,7 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/icon.txt">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="180">
+        <state vertical-scroll-proportion="0.0">
           <caret line="6" column="11" selection-start-line="6" selection-start-column="11" selection-end-line="6" selection-end-column="11" />
           <folding />
         </state>
@@ -807,7 +1478,7 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/com/lx/pdf/Pdf.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="210">
+        <state vertical-scroll-proportion="0.0">
           <caret line="7" column="0" selection-start-line="7" selection-start-column="0" selection-end-line="7" selection-end-column="0" />
           <folding />
         </state>
@@ -815,9 +1486,61 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/com/lx/thread/MyExecutor.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="191">
-          <caret line="15" column="43" selection-start-line="15" selection-start-column="43" selection-end-line="15" selection-end-column="43" />
+        <state vertical-scroll-proportion="0.0">
+          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding>
+            <element signature="imports" expanded="false" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/pom.xml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
           <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/lx/pdf/Pdf.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="5" column="18" selection-start-line="5" selection-start-column="18" selection-end-line="5" selection-end-column="18" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/pom.xml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="6" column="17" selection-start-line="6" selection-start-column="17" selection-end-line="6" selection-end-column="17" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/icon.txt">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="6" column="11" selection-start-line="6" selection-start-column="11" selection-end-line="6" selection-end-column="11" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/lx/pdf/Pdf.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="7" column="0" selection-start-line="7" selection-start-column="0" selection-end-line="7" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/lx/thread/MyExecutor.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.62283736">
+          <caret line="32" column="8" selection-start-line="32" selection-start-column="8" selection-end-line="32" selection-end-column="8" />
+          <folding>
+            <element signature="imports" expanded="false" />
+          </folding>
         </state>
       </provider>
     </entry>
