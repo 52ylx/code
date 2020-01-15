@@ -96,7 +96,7 @@ public class AC {
         public static Set<Class<?>> scan(String...scans) throws Exception {
             Set<Class<?>> beans = new HashSet<>();
             for (String page:scans){//多个包
-                if (page == null || page == "") continue;
+                if (page == null) continue;
                 Enumeration<URL> dirs = Thread.currentThread().getContextClassLoader().getResources(page.replace(".", "/"));//获取当前包的所有类信息
                 while (dirs.hasMoreElements()){
                     URL url = dirs.nextElement();// 获取下一个元素
