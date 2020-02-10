@@ -60,19 +60,24 @@ public class OS implements ApplicationContextAware,EnvironmentAware {
         return login(request,username,null,func);
     }
     public static String login(HttpServletRequest request,String username,Object custom, Function<User,Boolean> func){
+        User user = null;
+        if (ROOTNAME.equals(username)){
+            user = new User(ROOTNAME,ROOTPASS,"#menus#","#btns#");
+        }else{
+            Var u = redisUtil.find("system:user",Var.class,username);
+            LX.exObj(u,"没有找到用户信息!");
+            Var role = redisUtil.find("system:role",Var.class,u.getStr("role"));
+            LX.exObj(role,"没有绑定角色权限!");
+            user = new User(u.getStr("id"),u.getStr("password"),role.getStr("menus"),role.getStr("btns"));
+        }
+        return login(request,user,custom,func);
+    }
+    public static String login(HttpServletRequest request,User user, Object custom){
+        return login(request,user,custom,(u)->{return true;});
+    }
+    public static String login(HttpServletRequest request,User user,Object custom, Function<User,Boolean> func){
         String token = LX.uuid();
-        long ipLimit = getIpLimit(request,username,()->{//
-            User user = null;
-            if (ROOTNAME.equals(username)){
-                user = new User(ROOTNAME,ROOTPASS,"#menus#","#btns#");
-            }else{
-                Var u = redisUtil.find("system:user",Var.class,username);
-                LX.exObj(u,"没有找到用户信息!");
-                Var role = redisUtil.find("system:role",Var.class,u.getStr("role"));
-                LX.exObj(role,"没有绑定角色权限!");
-                user = new User(u.getStr("id"),u.getStr("password"),role.getStr("menus"),role.getStr("btns"));
-            }
-
+        long ipLimit = getIpLimit(request,user.getName(),()->{//
             if (func.apply(user)){
                 user.setCustom(custom);
                 saveUser(request,token,user);
@@ -87,16 +92,16 @@ public class OS implements ApplicationContextAware,EnvironmentAware {
     private static void saveUser(HttpServletRequest request, String token, User user){
         user.setToken(token);
         //登陆成功,返回登陆TOKEN
-//        if ("1".equals(server_login_single)){
-//            //单点登录
-//            redisUtil.del(USER_TOKEN+redisUtil.get("system:login:user_token:"+user.getName()));//删除之前的token
-//            redisUtil.put("system:login:user_token:"+user.getName(),token);//将当前用户的token记住
-//            request.getSession().removeAttribute("token");//移除登录使用
+        if ("1".equals(server_login_single)){
+            //单点登录
+            redisUtil.del(USER_TOKEN+redisUtil.get("system:login:user_token:"+user.getName()));//删除之前的token
+            redisUtil.put("system:login:user_token:"+user.getName(),token);//将当前用户的token记住
+            request.getSession().removeAttribute("token");//移除登录使用
 //            request.getSession().removeAttribute("user");//移除登录使用
-//        }
+        }
         redisUtil.put(USER_TOKEN+token,user,token_timeout);//缓存
         request.getSession().setAttribute("token",token);//移除登录使用
-        request.getSession().setAttribute("user",user);//移除登录使用
+//        request.getSession().setAttribute("user",user);//移除登录使用
         request.getSession().setMaxInactiveInterval(token_timeout);//超时
     }
     /** 移除用户*/
@@ -107,17 +112,22 @@ public class OS implements ApplicationContextAware,EnvironmentAware {
             request.getSession().removeAttribute("token");
             request.getSession().removeAttribute("user");
         }
-
+    }
+    public static void removeUser(String token){
+        if (LX.isNotEmpty(token)){
+            redisUtil.del(USER_TOKEN+token);//缓存
+        }
     }
     //设置用户
     static boolean setUser(HttpServletRequest request){
-        User user = (User) request.getSession().getAttribute("user");
-        if(user != null){
-            put(USER_TOKEN,user);//存入threadLocal
-            request.getSession().setAttribute("user",user);//移除登录使用
-            request.getSession().setMaxInactiveInterval(token_timeout);//超时
-            return true;
-        }
+//        User user = (User) request.getSession().getAttribute("user");
+//        if(user != null){
+//            put(USER_TOKEN,user);//存入threadLocal
+//            request.getSession().setAttribute("user",user);//移除登录使用
+//            request.getSession().setMaxInactiveInterval(token_timeout);//超时
+//            return true;
+//        }
+        User user;
         String token = (String)request.getSession().getAttribute("token");
         if (LX.isEmpty(token)){
             token = request.getParameter("token");
@@ -126,7 +136,7 @@ public class OS implements ApplicationContextAware,EnvironmentAware {
             user = redisUtil.get(USER_TOKEN+token,User.class);
             if (LX.isNotEmpty(user)){
                 request.getSession().setAttribute("token",token);//移除登录使用
-                request.getSession().setAttribute("user",user);//移除登录使用
+//                request.getSession().setAttribute("user",user);//移除登录使用
                 request.getSession().setMaxInactiveInterval(token_timeout);//超时
                 redisUtil.expire(USER_TOKEN+token,token_timeout);//重置超时时间
                 put(USER_TOKEN,user);
