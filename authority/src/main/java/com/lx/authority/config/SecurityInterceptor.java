@@ -3,8 +3,10 @@ package com.lx.authority.config;
 import com.lx.util.LX;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.slf4j.MDC;
 import org.springframework.web.method.HandlerMethod;
 import org.springframework.web.servlet.HandlerInterceptor;
+import org.springframework.web.servlet.ModelAndView;
 
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
@@ -27,6 +29,7 @@ public class SecurityInterceptor implements HandlerInterceptor {
         if (!(handler instanceof HandlerMethod)) {//不是方法
             return true;
         }
+        MDC.put("requestId", LX.uuid32());
         HandlerMethod handlerMethod = (HandlerMethod) handler;
         //获取方法上或者类上的注解
         Authority authority = Optional.ofNullable(handlerMethod.getMethod().getAnnotation(Authority.class))
@@ -55,9 +58,14 @@ public class SecurityInterceptor implements HandlerInterceptor {
             return false;
         }
     }
+    @Override
+    public void postHandle(HttpServletRequest httpServletRequest, HttpServletResponse httpServletResponse, Object o, ModelAndView modelAndView) throws Exception {
+        MDC.remove("requestId");
+    }
 
     @Override
     public void afterCompletion(HttpServletRequest request, HttpServletResponse response, Object handler, Exception ex) throws Exception {
         OS.remove();
+        MDC.remove("requestId");
     }
 }
