@@ -15,7 +15,7 @@ import java.util.concurrent.FutureTask;
  * Created by 游林夕 on 2019/9/15.
  */
 public class TextToVoiceUtil1 {
-    public static void main(String[]args){
+    public static void main1(String[]args){
         String s = "实现共义根本基础=社会生产力高度发展\n";
         char[] chars = s.toCharArray();
         for (char c : chars){
@@ -23,62 +23,9 @@ public class TextToVoiceUtil1 {
             System.out.println(a.length);
         }
     }
-    public static void main1(String[]args) throws Exception {
-        String str = "实现共义根本基础=社会生产力高度发展\n" +
-                "认识论的根本方法=矛盾分析法\n" +
-                "马义根本方法=理论联系实际\n" +
-                "马义根本要求=从实际出发\n" +
-                "马义最高品质=与时俱进\n" +
-                "马义活的灵魂=具体问题具体分析\n" +
-                "马义政党产生=工人运动与科学社会主义传播\n" +
-                "社义核心=马义政党\n" +
-                "社义政权阶级基础=工农联盟\n" +
-                "党思想路线核心=实事求是\n" +
-                "党宗旨=全心全意为人民服务\n" +
-                "党原则=民主集中制\n" +
-                "党领导方法=来和去\n" +
-                "共义本质=人民自由全面发展\n" +
-                "共义标志=各尽所能，按需分配\n" +
-                "资义为社义准备=社会是无产阶级，精神是马义理论，物质是大生产\n" +
-                "垄断资义输出资本基础=过剩资本\n" +
-                "垄断企业组织=某个环节是卡特尔，统一是辛迪迦 ，全部是托拉斯，多个母子公司是康采恩\n" +
-                "资义银行利润（和农业）=相当于平均利润\n" +
-                "资义利润率=剩余价值/总资本（利润=剩价）\n" +
-                "剩余价值率=mv（剩余价值率/可变资本）\n" +
-                "有机构成=CV（不变资本/可变资本）\n" +
-                "资义规律=剩余价值规律\n" +
-                "商品规律=价值规律\n" +
-                "资本周转=生产至流通时间\n" +
-                "加快资本周转速度=提高年剩余价值率\n" +
-                "提高劳动生产率目的=获取超额剩余价值\n" +
-                "无革根因=生产力发展水平\n" +
-                "垄断利润因素=价率形式变化\n" +
-                "商品经济基本矛盾=私人劳动和社会劳动\n" +
-                "商品二重性矛盾=价值与使用价值\n" +
-                "经济社会形式标准=生产关系\n" +
-                "地理环环境社会作用=发展速度\n" +
-                "决定人口发展方向和趋势=物质生产\n" +
-                "社会资本再生产出发点=商品资本\n" +
-                "社会资本在生产的核心=社会总产品的实现\n" +
-                "社会产品总实现=商品转为货币（价值补偿），货币转为商品（实物补偿）\n" +
-                "社会产品=生产资料和消费资料\n" +
-                "资本有机构成提高前提=生产资本增大\n" +
-                "生产资料和劳动力构成=实物 技术，\n" +
-                "职能资本=商业资本和产业资本（含农业资本）\n" +
-                "金融寡头=掌握经济政治统治权限的资本家，经济上实行参与制，政治上实行个人联合\n" +
-                "\n" +
-                "具体劳动和抽象劳动=自然属性和社会属性\n" +
-                "价值的唯一源泉=抽象劳动\n" +
-                "社会必要劳动时间客=平均熟练度和劳动强度\n" +
-                "社会发展根本动力=社会基本矛盾\n" +
-                "\n" +
-                "物质与质和量=质与物质直接同一，量与物质不直接同一\n" +
-                "实践检验真理唯一标准因=主观客观联系起来\n" +
-                "主体对客体=能动反映 辩证，直接反映 旧唯物\n" +
-                "两条根本的对立=哲学是唯物主义与唯心主义，发展观是辩证主义与形而上学，认识论是唯物的反映论和唯心的认识论\n" +
-                "\n" +
-                "列宁=提出新经济政策\n" +
-                "斯大林=社会主义苏联模式";
+
+    public static void main(String[]args) throws Exception {
+        String str = "";
         str = str.replace("=",";1秒;;1秒;;1秒;;1秒;;1秒;;1秒;;1秒;;1秒;;1秒;").replace("\n",";1秒;");
         TextToVoiceUtil1.getInstance(str,new Var("{spd=4,pit=6,per=111}"));
 
@@ -118,9 +65,10 @@ public class TextToVoiceUtil1 {
     public static byte[] add(String text){
         byte[] byteDemo = new byte[0];
         if (LX.isEmpty(text)) return byteDemo;
-        LX.sleep(500);
+        System.out.println(text);
+        LX.sleep(200);
         //根据每500个字就划分出一个文件
-        int singlePage = 500;
+        int singlePage = 1000;
         int articleLength = text.length();
         int number =articleLength%singlePage>0?articleLength/singlePage+1:articleLength/singlePage;  //记得这里是从1开始
         String[] singleArticle = new String[number]; //生成指定个数的String数组
