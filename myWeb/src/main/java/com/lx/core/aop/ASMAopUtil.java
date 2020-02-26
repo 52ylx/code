@@ -1,0 +1,324 @@
+package com.lx.core.aop;
+
+import org.objectweb.asm.*;
+
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
+
+/**
+ * Created by rzy on 2020/1/19.
+ */
+public class ASMAopUtil implements Opcodes{
+    public static void main(String[]args) throws Exception {
+        byte[] dump = dump();
+        new FileOutputStream("TestBean.class").write(dump);
+    }
+    public static byte[] dump() throws Exception {
+
+        ClassWriter cw = new ClassWriter(0);
+        FieldVisitor fv;
+        MethodVisitor mv;
+        AnnotationVisitor av0;
+
+        cw.visit(V1_7, ACC_PUBLIC + ACC_SUPER, "org/util/test1/TestBean$1", null, "org/util/test1/TestBean", null);
+
+        cw.visitSource("TestBean$1.java", null);
+
+        {
+            fv = cw.visitField(ACC_PUBLIC, "obj", "Lorg/util/test1/TestBean;", null, null);
+            fv.visitEnd();
+        }
+        {
+            fv = cw.visitField(ACC_PUBLIC, "chain", "Lcom/lx/core/aop/AOPChain;", null, null);
+            fv.visitEnd();
+        }
+        {
+            mv = cw.visitMethod(ACC_PUBLIC, "<init>", "()V", null, null);
+            mv.visitCode();
+            Label l0 = new Label();
+            mv.visitLabel(l0);
+            mv.visitLineNumber(8, l0);
+            mv.visitVarInsn(ALOAD, 0);
+            mv.visitMethodInsn(INVOKESPECIAL, "org/util/test1/TestBean", "<init>", "()V", false);
+            mv.visitInsn(RETURN);
+            Label l1 = new Label();
+            mv.visitLabel(l1);
+            mv.visitLocalVariable("this", "Lorg/util/test1/TestBean$1;", null, l0, l1, 0);
+            mv.visitMaxs(1, 1);
+            mv.visitEnd();
+        }
+        {
+            mv = cw.visitMethod(ACC_PUBLIC, "halloAop", "()V", null, null);
+            mv.visitCode();
+            Label l0 = new Label();
+            Label l1 = new Label();
+            Label l2 = new Label();
+            mv.visitTryCatchBlock(l0, l1, l2, "java/lang/Exception");
+            Label l3 = new Label();
+            mv.visitLabel(l3);
+            mv.visitLineNumber(13, l3);
+            mv.visitVarInsn(ALOAD, 0);
+            mv.visitFieldInsn(GETFIELD, "org/util/test1/TestBean$1", "chain", "Lcom/lx/core/aop/AOPChain;");
+            mv.visitInsn(ICONST_0);
+            mv.visitTypeInsn(ANEWARRAY, "java/lang/Object");
+            mv.visitMethodInsn(INVOKEVIRTUAL, "com/lx/core/aop/AOPChain", "beforeing", "([Ljava/lang/Object;)V", false);
+            mv.visitLabel(l0);
+            mv.visitLineNumber(15, l0);
+            mv.visitVarInsn(ALOAD, 0);
+            mv.visitFieldInsn(GETFIELD, "org/util/test1/TestBean$1", "obj", "Lorg/util/test1/TestBean;");
+            mv.visitMethodInsn(INVOKEVIRTUAL, "org/util/test1/TestBean", "halloAop", "()V", false);
+            mv.visitLabel(l1);
+            mv.visitLineNumber(18, l1);
+            Label l4 = new Label();
+            mv.visitJumpInsn(GOTO, l4);
+            mv.visitLabel(l2);
+            mv.visitLineNumber(16, l2);
+            mv.visitFrame(Opcodes.F_SAME1, 0, null, 1, new Object[]{"java/lang/Exception"});
+            mv.visitVarInsn(ASTORE, 1);
+            Label l5 = new Label();
+            mv.visitLabel(l5);
+            mv.visitLineNumber(17, l5);
+            mv.visitVarInsn(ALOAD, 0);
+            mv.visitFieldInsn(GETFIELD, "org/util/test1/TestBean$1", "chain", "Lcom/lx/core/aop/AOPChain;");
+            mv.visitVarInsn(ALOAD, 1);
+            mv.visitMethodInsn(INVOKEVIRTUAL, "com/lx/core/aop/AOPChain", "afterThrowing", "(Ljava/lang/Exception;)V", false);
+            mv.visitLabel(l4);
+            mv.visitLineNumber(19, l4);
+            mv.visitFrame(Opcodes.F_SAME, 0, null, 0, null);
+            mv.visitVarInsn(ALOAD, 0);
+            mv.visitFieldInsn(GETFIELD, "org/util/test1/TestBean$1", "chain", "Lcom/lx/core/aop/AOPChain;");
+            mv.visitInsn(ACONST_NULL);
+            mv.visitInsn(ICONST_0);
+            mv.visitTypeInsn(ANEWARRAY, "java/lang/Object");
+            mv.visitMethodInsn(INVOKEVIRTUAL, "com/lx/core/aop/AOPChain", "aftering", "(Ljava/lang/Object;[Ljava/lang/Object;)Ljava/lang/Object;", false);
+            mv.visitInsn(POP);
+            Label l6 = new Label();
+            mv.visitLabel(l6);
+            mv.visitLineNumber(20, l6);
+            mv.visitInsn(RETURN);
+            Label l7 = new Label();
+            mv.visitLabel(l7);
+            mv.visitLocalVariable("e", "Ljava/lang/Exception;", null, l5, l4, 1);
+            mv.visitLocalVariable("this", "Lorg/util/test1/TestBean$1;", null, l3, l7, 0);
+            mv.visitMaxs(3, 2);
+            mv.visitEnd();
+        }
+        {
+            mv = cw.visitMethod(ACC_PUBLIC, "halloAop", "(Ljava/lang/String;)V", null, null);
+            mv.visitCode();
+            Label l0 = new Label();
+            Label l1 = new Label();
+            Label l2 = new Label();
+            mv.visitTryCatchBlock(l0, l1, l2, "java/lang/Exception");
+            Label l3 = new Label();
+            mv.visitLabel(l3);
+            mv.visitLineNumber(22, l3);
+            mv.visitVarInsn(ALOAD, 0);
+            mv.visitFieldInsn(GETFIELD, "org/util/test1/TestBean$1", "chain", "Lcom/lx/core/aop/AOPChain;");
+            mv.visitInsn(ICONST_1);
+            mv.visitTypeInsn(ANEWARRAY, "java/lang/Object");
+            mv.visitInsn(DUP);
+            mv.visitInsn(ICONST_0);
+            mv.visitVarInsn(ALOAD, 1);
+            mv.visitInsn(AASTORE);
+            mv.visitMethodInsn(INVOKEVIRTUAL, "com/lx/core/aop/AOPChain", "beforeing", "([Ljava/lang/Object;)V", false);
+            mv.visitLabel(l0);
+            mv.visitLineNumber(24, l0);
+            mv.visitVarInsn(ALOAD, 0);
+            mv.visitFieldInsn(GETFIELD, "org/util/test1/TestBean$1", "obj", "Lorg/util/test1/TestBean;");
+            mv.visitVarInsn(ALOAD, 1);
+            mv.visitMethodInsn(INVOKEVIRTUAL, "org/util/test1/TestBean", "halloAop", "(Ljava/lang/String;)V", false);
+            mv.visitLabel(l1);
+            mv.visitLineNumber(27, l1);
+            Label l4 = new Label();
+            mv.visitJumpInsn(GOTO, l4);
+            mv.visitLabel(l2);
+            mv.visitLineNumber(25, l2);
+            mv.visitFrame(Opcodes.F_SAME1, 0, null, 1, new Object[]{"java/lang/Exception"});
+            mv.visitVarInsn(ASTORE, 2);
+            Label l5 = new Label();
+            mv.visitLabel(l5);
+            mv.visitLineNumber(26, l5);
+            mv.visitVarInsn(ALOAD, 0);
+            mv.visitFieldInsn(GETFIELD, "org/util/test1/TestBean$1", "chain", "Lcom/lx/core/aop/AOPChain;");
+            mv.visitVarInsn(ALOAD, 2);
+            mv.visitMethodInsn(INVOKEVIRTUAL, "com/lx/core/aop/AOPChain", "afterThrowing", "(Ljava/lang/Exception;)V", false);
+            mv.visitLabel(l4);
+            mv.visitLineNumber(28, l4);
+            mv.visitFrame(Opcodes.F_SAME, 0, null, 0, null);
+            mv.visitVarInsn(ALOAD, 0);
+            mv.visitFieldInsn(GETFIELD, "org/util/test1/TestBean$1", "chain", "Lcom/lx/core/aop/AOPChain;");
+            mv.visitInsn(ACONST_NULL);
+            mv.visitInsn(ICONST_1);
+            mv.visitTypeInsn(ANEWARRAY, "java/lang/Object");
+            mv.visitInsn(DUP);
+            mv.visitInsn(ICONST_0);
+            mv.visitVarInsn(ALOAD, 1);
+            mv.visitInsn(AASTORE);
+            mv.visitMethodInsn(INVOKEVIRTUAL, "com/lx/core/aop/AOPChain", "aftering", "(Ljava/lang/Object;[Ljava/lang/Object;)Ljava/lang/Object;", false);
+            mv.visitInsn(POP);
+            Label l6 = new Label();
+            mv.visitLabel(l6);
+            mv.visitLineNumber(29, l6);
+            mv.visitInsn(RETURN);
+            Label l7 = new Label();
+            mv.visitLabel(l7);
+            mv.visitLocalVariable("e", "Ljava/lang/Exception;", null, l5, l4, 2);
+            mv.visitLocalVariable("this", "Lorg/util/test1/TestBean$1;", null, l3, l7, 0);
+            mv.visitLocalVariable("a", "Ljava/lang/String;", null, l3, l7, 1);
+            mv.visitMaxs(6, 3);
+            mv.visitEnd();
+        }
+        {
+            mv = cw.visitMethod(ACC_PUBLIC, "halloAop", "(Ljava/lang/String;Lorg/util/test1/TestBean;)V", null, null);
+            mv.visitCode();
+            Label l0 = new Label();
+            Label l1 = new Label();
+            Label l2 = new Label();
+            mv.visitTryCatchBlock(l0, l1, l2, "java/lang/Exception");
+            Label l3 = new Label();
+            mv.visitLabel(l3);
+            mv.visitLineNumber(33, l3);
+            mv.visitVarInsn(ALOAD, 0);
+            mv.visitFieldInsn(GETFIELD, "org/util/test1/TestBean$1", "chain", "Lcom/lx/core/aop/AOPChain;");
+            mv.visitInsn(ICONST_2);
+            mv.visitTypeInsn(ANEWARRAY, "java/lang/Object");
+            mv.visitInsn(DUP);
+            mv.visitInsn(ICONST_0);
+            mv.visitVarInsn(ALOAD, 1);
+            mv.visitInsn(AASTORE);
+            mv.visitInsn(DUP);
+            mv.visitInsn(ICONST_1);
+            mv.visitVarInsn(ALOAD, 2);
+            mv.visitInsn(AASTORE);
+            mv.visitMethodInsn(INVOKEVIRTUAL, "com/lx/core/aop/AOPChain", "beforeing", "([Ljava/lang/Object;)V", false);
+            mv.visitLabel(l0);
+            mv.visitLineNumber(35, l0);
+            mv.visitVarInsn(ALOAD, 0);
+            mv.visitFieldInsn(GETFIELD, "org/util/test1/TestBean$1", "obj", "Lorg/util/test1/TestBean;");
+            mv.visitVarInsn(ALOAD, 1);
+            mv.visitVarInsn(ALOAD, 2);
+            mv.visitMethodInsn(INVOKEVIRTUAL, "org/util/test1/TestBean", "halloAop", "(Ljava/lang/String;Lorg/util/test1/TestBean;)V", false);
+            mv.visitLabel(l1);
+            mv.visitLineNumber(38, l1);
+            Label l4 = new Label();
+            mv.visitJumpInsn(GOTO, l4);
+            mv.visitLabel(l2);
+            mv.visitLineNumber(36, l2);
+            mv.visitFrame(Opcodes.F_SAME1, 0, null, 1, new Object[]{"java/lang/Exception"});
+            mv.visitVarInsn(ASTORE, 3);
+            Label l5 = new Label();
+            mv.visitLabel(l5);
+            mv.visitLineNumber(37, l5);
+            mv.visitVarInsn(ALOAD, 0);
+            mv.visitFieldInsn(GETFIELD, "org/util/test1/TestBean$1", "chain", "Lcom/lx/core/aop/AOPChain;");
+            mv.visitVarInsn(ALOAD, 3);
+            mv.visitMethodInsn(INVOKEVIRTUAL, "com/lx/core/aop/AOPChain", "afterThrowing", "(Ljava/lang/Exception;)V", false);
+            mv.visitLabel(l4);
+            mv.visitLineNumber(39, l4);
+            mv.visitFrame(Opcodes.F_SAME, 0, null, 0, null);
+            mv.visitVarInsn(ALOAD, 0);
+            mv.visitFieldInsn(GETFIELD, "org/util/test1/TestBean$1", "chain", "Lcom/lx/core/aop/AOPChain;");
+            mv.visitInsn(ACONST_NULL);
+            mv.visitInsn(ICONST_2);
+            mv.visitTypeInsn(ANEWARRAY, "java/lang/Object");
+            mv.visitInsn(DUP);
+            mv.visitInsn(ICONST_0);
+            mv.visitVarInsn(ALOAD, 1);
+            mv.visitInsn(AASTORE);
+            mv.visitInsn(DUP);
+            mv.visitInsn(ICONST_1);
+            mv.visitVarInsn(ALOAD, 2);
+            mv.visitInsn(AASTORE);
+            mv.visitMethodInsn(INVOKEVIRTUAL, "com/lx/core/aop/AOPChain", "aftering", "(Ljava/lang/Object;[Ljava/lang/Object;)Ljava/lang/Object;", false);
+            mv.visitInsn(POP);
+            Label l6 = new Label();
+            mv.visitLabel(l6);
+            mv.visitLineNumber(40, l6);
+            mv.visitInsn(RETURN);
+            Label l7 = new Label();
+            mv.visitLabel(l7);
+            mv.visitLocalVariable("e", "Ljava/lang/Exception;", null, l5, l4, 3);
+            mv.visitLocalVariable("this", "Lorg/util/test1/TestBean$1;", null, l3, l7, 0);
+            mv.visitLocalVariable("str", "Ljava/lang/String;", null, l3, l7, 1);
+            mv.visitLocalVariable("testBean", "Lorg/util/test1/TestBean;", null, l3, l7, 2);
+            mv.visitMaxs(6, 4);
+            mv.visitEnd();
+        }
+        {
+            mv = cw.visitMethod(ACC_PUBLIC, "halloAop", "(I)Lorg/util/test1/TestBean;", null, null);
+            mv.visitCode();
+            Label l0 = new Label();
+            Label l1 = new Label();
+            Label l2 = new Label();
+            mv.visitTryCatchBlock(l0, l1, l2, "java/lang/Exception");
+            Label l3 = new Label();
+            mv.visitLabel(l3);
+            mv.visitLineNumber(42, l3);
+            mv.visitVarInsn(ALOAD, 0);
+            mv.visitFieldInsn(GETFIELD, "org/util/test1/TestBean$1", "chain", "Lcom/lx/core/aop/AOPChain;");
+            mv.visitInsn(ICONST_1);
+            mv.visitTypeInsn(ANEWARRAY, "java/lang/Object");
+            mv.visitInsn(DUP);
+            mv.visitInsn(ICONST_0);
+            mv.visitVarInsn(ILOAD, 1);
+            mv.visitMethodInsn(INVOKESTATIC, "java/lang/Integer", "valueOf", "(I)Ljava/lang/Integer;", false);
+            mv.visitInsn(AASTORE);
+            mv.visitMethodInsn(INVOKEVIRTUAL, "com/lx/core/aop/AOPChain", "beforeing", "([Ljava/lang/Object;)V", false);
+            Label l4 = new Label();
+            mv.visitLabel(l4);
+            mv.visitLineNumber(43, l4);
+            mv.visitInsn(ACONST_NULL);
+            mv.visitVarInsn(ASTORE, 2);
+            mv.visitLabel(l0);
+            mv.visitLineNumber(45, l0);
+            mv.visitVarInsn(ALOAD, 0);
+            mv.visitFieldInsn(GETFIELD, "org/util/test1/TestBean$1", "obj", "Lorg/util/test1/TestBean;");
+            mv.visitVarInsn(ILOAD, 1);
+            mv.visitMethodInsn(INVOKEVIRTUAL, "org/util/test1/TestBean", "halloAop", "(I)Lorg/util/test1/TestBean;", false);
+            mv.visitVarInsn(ASTORE, 2);
+            mv.visitLabel(l1);
+            mv.visitLineNumber(48, l1);
+            Label l5 = new Label();
+            mv.visitJumpInsn(GOTO, l5);
+            mv.visitLabel(l2);
+            mv.visitLineNumber(46, l2);
+            mv.visitFrame(Opcodes.F_FULL, 3, new Object[]{"org/util/test1/TestBean$1", Opcodes.INTEGER, "java/lang/Object"}, 1, new Object[]{"java/lang/Exception"});
+            mv.visitVarInsn(ASTORE, 3);
+            Label l6 = new Label();
+            mv.visitLabel(l6);
+            mv.visitLineNumber(47, l6);
+            mv.visitVarInsn(ALOAD, 0);
+            mv.visitFieldInsn(GETFIELD, "org/util/test1/TestBean$1", "chain", "Lcom/lx/core/aop/AOPChain;");
+            mv.visitVarInsn(ALOAD, 3);
+            mv.visitMethodInsn(INVOKEVIRTUAL, "com/lx/core/aop/AOPChain", "afterThrowing", "(Ljava/lang/Exception;)V", false);
+            mv.visitLabel(l5);
+            mv.visitLineNumber(49, l5);
+            mv.visitFrame(Opcodes.F_SAME, 0, null, 0, null);
+            mv.visitVarInsn(ALOAD, 0);
+            mv.visitFieldInsn(GETFIELD, "org/util/test1/TestBean$1", "chain", "Lcom/lx/core/aop/AOPChain;");
+            mv.visitVarInsn(ALOAD, 2);
+            mv.visitInsn(ICONST_1);
+            mv.visitTypeInsn(ANEWARRAY, "java/lang/Object");
+            mv.visitInsn(DUP);
+            mv.visitInsn(ICONST_0);
+            mv.visitVarInsn(ILOAD, 1);
+            mv.visitMethodInsn(INVOKESTATIC, "java/lang/Integer", "valueOf", "(I)Ljava/lang/Integer;", false);
+            mv.visitInsn(AASTORE);
+            mv.visitMethodInsn(INVOKEVIRTUAL, "com/lx/core/aop/AOPChain", "aftering", "(Ljava/lang/Object;[Ljava/lang/Object;)Ljava/lang/Object;", false);
+            mv.visitTypeInsn(CHECKCAST, "org/util/test1/TestBean");
+            mv.visitInsn(ARETURN);
+            Label l7 = new Label();
+            mv.visitLabel(l7);
+            mv.visitLocalVariable("e", "Ljava/lang/Exception;", null, l6, l5, 3);
+            mv.visitLocalVariable("this", "Lorg/util/test1/TestBean$1;", null, l3, l7, 0);
+            mv.visitLocalVariable("a", "I", null, l3, l7, 1);
+            mv.visitLocalVariable("o", "Ljava/lang/Object;", null, l0, l7, 2);
+            mv.visitMaxs(6, 4);
+            mv.visitEnd();
+        }
+        cw.visitEnd();
+
+        return cw.toByteArray();
+    }
+}
