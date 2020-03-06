@@ -34,8 +34,9 @@ public class PDFUtil {
     private WebContorller webContorller;
 
     public static void main(String[]args) throws IOException {
-        String name = "行政史";
+        String name = "近代史";
         String str = getPdfFileText("C:\\Users\\huyis\\Desktop\\资料\\"+name+"白皮书.pdf");
+//        System.out.println(str);
         str = str.replace("\n","");
         Pattern pattern = Pattern.compile("\\d+\\.");
         Matcher matcher = pattern.matcher(str);

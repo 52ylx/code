@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1"/>
+    <meta name="x5-fullscreen" content="true">
+
+<title>开心斗地主-我爱h5游戏源码</title>
+
+<style>
+    html,body{height:100%;overflow:hidden}
+    body {
+        padding: 0;
+        margin: 0;
+        height: 100%;
+        background-color: #eee;
+    }
+
+</style>
+
+<script type="text/javascript" src="./douzizhu_files/casual-0.1.min.js"></script>
+<script type="text/javascript" src="./douzizhu_files/ddz2.js"></script>
+
+<script type="text/javascript">
+function startGame() {
+	if (!document.createElement('canvas').getContext) {
+		alert("Sorry, your browser doesn't support canvas, please use Firefox3.6+, Safari5+, Chrome, IE9+ etc.");
+		return;
+	}
+    // // 利用 CSS3 旋转 对根容器逆时针旋转 90 度
+    var width = document.documentElement.clientWidth,
+        height =  document.documentElement.clientHeight
+    //     $wrapper =  document.getElementById("canvas"),
+    //     style = "";
+    // if( width < height ){ // 竖屏
+    //     style += "width:" + height + "px;";
+    //     style += "height:" + width + "px;";
+    //     style += "-webkit-transform: rotate(90deg); transform: rotate(90deg);";
+    //     // 注意旋转中点的处理
+    //     style += "-webkit-transform-origin: " + width / 2 + "px " + width / 2 + "px;";
+    //     style += "transform-origin: " + width / 2 + "px " + width / 2 + "px;";
+    //     $wrapper.style.cssText = style;
+    //     ddz.startup(height,width);
+    // }else{
+        ddz.startup(width,height);
+    // }
+	// playAudio();
+}
+
+var audioObj;
+function playAudio() {
+	audioObj = createAudio("myAudioObj");
+	fakeClick(function() {
+		audioObj.play();
+	});
+}
+//暂停
+function onPause() {
+    !audioObj.paused && audioObj.pause()
+}
+//继续
+function onResume() {
+    audioObj.paused && audioObj.play()
+}
+
+function createAudio(id) {
+	var audio = new Audio("sounds/bg.mp3");
+	audio.loop = true;
+	audio.autoPlay = true;
+	audio.id = id;
+	document.body.appendChild(audio);
+	return audio;
+}
+
+function fakeClick(callback) {
+	var aTag = document.createElement("a");
+	aTag.id = "fakeClickLink";
+	aTag.addEventListener("click", function(e) {
+		e.preventDefault();
+		callback();
+	}, false);
+	document.body.appendChild(aTag);
+	if (document.createEvent) {
+		var evt = document.createEvent("MouseEvents");
+		if (evt.initMouseEvent) {
+			evt.initMouseEvent("click", true, true, window, 0, 0, 0, 0, 0, false, false, false, false, 0, null);
+			aTag.dispatchEvent(evt);
+		}
+	}	
+	document.body.removeChild(aTag);
+}
+</script>
+</head>
+<body onload="startGame();">
+    <canvas id="canvas" width="1280" height="666" style="background-image: url(images/bg.png); background-position: 50% 50%;"  horizontalScrollPolicy="off" verticalScrollPolicy="off" >Sorry, your browser doesn't support canvas, please use Firefox3.6+, Safari5+, Chrome, IE9+ etc.</canvas>
+    <audio preload="auto" src="sounds/bg.mp3" loop="" id="myAudioObj"></audio>
+</body>
+</html>
