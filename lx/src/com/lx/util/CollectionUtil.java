@@ -2,10 +2,7 @@ package com.lx.util;//说明:
 
 
 
-import com.google.gson.Gson;
-import com.google.gson.GsonBuilder;
-import com.google.gson.JsonObject;
-import com.google.gson.JsonParser;
+import com.google.gson.*;
 
 import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
@@ -128,9 +125,14 @@ class CollectionUtil {
     //说明:格式化输出json字符串
     /**{ ylx } 2019/8/12 10:04 */
     static String toFormatJson(Object json) {
-        JsonObject jsonObject = new JsonParser().parse(toJSONString(json)).getAsJsonObject();
-        Gson gson = new GsonBuilder().setPrettyPrinting().create();
-        return gson.toJson(jsonObject);
+        JsonElement jsonElement = null;
+        if (json instanceof List || json.toString().trim().startsWith("[")){
+            jsonElement = new JsonParser().parse(toJSONString(json)).getAsJsonArray();
+        }else{
+            jsonElement = new JsonParser().parse(toJSONString(json)).getAsJsonObject();
+        }
+        Gson gson = new GsonBuilder().disableHtmlEscaping().setPrettyPrinting().create();
+        return gson.toJson(jsonElement);
     }
     /**将map中的指定字段为null设置为字符串*/
     static void nullToString(Map pd , String str){
