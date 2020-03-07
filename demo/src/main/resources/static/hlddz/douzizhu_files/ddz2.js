@@ -151,17 +151,34 @@ ddz.anniu=function(){
                 if (ls.length == 1 && ls[0].num==14){
                     ddz.socket.send(JSON.stringify({ls:ls}));
                 }
-            }else if (ddz.state == 3){//反
+            }else if (ddz.state == 3){//扣牌
                 if (ls.length == 8){//反牌
                     ddz.socket.send(JSON.stringify({ls:ls}));
                 }
-            }else if (ddz.state == 4){//出牌
-
+            }else if (ddz.state == 4){//反牌
+                if (ls.length == 2 && ls[0].type == ls[1].type && ls[0].num == ls[1].num && ls[0].num>=14){//反牌类型一样 大于等于 7
+                    ddz.socket.send(JSON.stringify({ls:ls}));
+                }
+            }else if (ddz.state == 5){//开始出牌
+                if (ls.length>0){
+                    ddz.socket.send(JSON.stringify({ls:ls}));
+                }
             }
+
         }
     });
     i.addImg(this.images[2].image,[185, 34, 50, 28],20,10,40,33)//开始
     this.splash.addChild(i);
+
+    if (ddz.state == 4){//是否反地主
+        var i = new MyImg(this.images[2].image,[15, 78, 98, 58],this.width-100,this.height-200,80,60,function(a) {
+            if (a.type == "mousedown") {
+                ddz.socket.send(JSON.stringify({ls:[]}));//不反
+            }
+        });
+        i.addImg(this.images[2].image,[185, 34, 50, 28],20,10,40,33)//开始
+        this.splash.addChild(i);
+    }
 }
 ddz.rePoker = function(json) {
     this.splash.removeAllChildren();

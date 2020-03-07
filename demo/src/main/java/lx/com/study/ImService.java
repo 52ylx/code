@@ -32,10 +32,12 @@ public class ImService {
     private Session session;
     /**接收userId*/
     private String userId="";
+    private static Object[] cp = new Object[14];//当前牌  0先手 1 右 2 对 3 左 4 底牌 5主 6 先手 7 当前第几手  8出了几张 10 0号分 11 1号分 12 2号分 13 3号分
 //    房间
     private final static ConcurrentHashMap<String,Object> fj = new ConcurrentHashMap<>();
     static {
         fj.put("state",0);//准备
+        cp[6] = 0;
     }
     public static void main(String[]args) throws IOException {
         new ImService().start();
@@ -99,49 +101,92 @@ public class ImService {
         System.out.println(fj.get("ls4"));
     }
 
+    private String getMyMsg(int i){
+        i = i%4;
+        int xs = (int) cp[6];//先手者
+        String self = (String) fj.get("self");//当前操作者
+        return LX.toJSONString(new Var(new Object[][]{{"xf",fj.get("ls"+i)}
+        ,{"an",self==null || (i+"").equals(self) ?1 : 0}
+        ,{"state",fj.get("state")}
+        ,{"zhu",cp[5]}
+        ,{"bf",cp[i]}
+        ,{"yf",cp[(i+1)%4]}
+        ,{"sf",cp[(i+2)%4]}
+        ,{"zf",cp[(i+3)%4]}
+        }));
+    }
     private void pushMsg() throws IOException {
-        sendInfo(LX.toJSONString(new Var(new Object[][]{{"xf",fj.get("ls"+0)},{"an",1},{"state",fj.get("state")}})), (String) fj.get("0"));
-        sendInfo(LX.toJSONString(new Var(new Object[][]{{"xf",fj.get("ls"+1)},{"an",1},{"state",fj.get("state")}})), (String) fj.get("1"));
-        sendInfo(LX.toJSONString(new Var(new Object[][]{{"xf",fj.get("ls"+2)},{"an",1},{"state",fj.get("state")}})), (String) fj.get("2"));
-        sendInfo(LX.toJSONString(new Var(new Object[][]{{"xf",fj.get("ls"+3)},{"an",1},{"state",fj.get("state")}})), (String) fj.get("3"));
+        for (int i =0;i<4;i++){
+            MyArrayList ls = (MyArrayList) fj.get("ls"+i);
+            ls.sort(ls.c);
+        }
+        String self = (String) fj.get("self");//当前操作者
+        sendInfo(getMyMsg(0), (String) fj.get("0"));
+        sendInfo(getMyMsg(1), (String) fj.get("1"));
+        sendInfo(getMyMsg(2), (String) fj.get("2"));
+        sendInfo(getMyMsg(3), (String) fj.get("3"));
     }
-    private void pushMsg(String i) throws IOException {
-        sendInfo(LX.toJSONString(new Var(new Object[][]{{"xf",fj.get("ls"+0)},{"an","0".equals(i)?1:0},{"state",fj.get("state")}})), (String) fj.get("0"));
-        sendInfo(LX.toJSONString(new Var(new Object[][]{{"xf",fj.get("ls"+1)},{"an","1".equals(i)?1:0},{"state",fj.get("state")}})), (String) fj.get("1"));
-        sendInfo(LX.toJSONString(new Var(new Object[][]{{"xf",fj.get("ls"+2)},{"an","2".equals(i)?1:0},{"state",fj.get("state")}})), (String) fj.get("2"));
-        sendInfo(LX.toJSONString(new Var(new Object[][]{{"xf",fj.get("ls"+3)},{"an","3".equals(i)?1:0},{"state",fj.get("state")}})), (String) fj.get("3"));
+    boolean moni = false;//模拟点击
+    private void thread(int i){
+        new Thread(new Runnable() {
+            @Override
+            public void run() {
+                try {
+                    moni = false;
+                    for (int i = 0;i<1500;i++){
+                        if (moni){
+                            return;
+                        }
+                        LX.sleep(10);//休眠1秒
+                    }
+                    String self = (String) fj.get("self");
+                    if ((i+"").equals(self)){//操作者15秒没有反应
+                        getMsg("{'ls':[]}", (String) fj.get(self));
+                    }
+                    pushMsg();
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+            }
+        }).start();
     }
-    private void pushMsg1(String i) throws IOException {
-        sendInfo(LX.toJSONString(new Var(new Object[][]{{"xf",fj.get("ls"+0)},{"an",!"0".equals(i)?1:0},{"state",fj.get("state")}})), (String) fj.get("0"));
-        sendInfo(LX.toJSONString(new Var(new Object[][]{{"xf",fj.get("ls"+1)},{"an",!"1".equals(i)?1:0},{"state",fj.get("state")}})), (String) fj.get("1"));
-        sendInfo(LX.toJSONString(new Var(new Object[][]{{"xf",fj.get("ls"+2)},{"an",!"2".equals(i)?1:0},{"state",fj.get("state")}})), (String) fj.get("2"));
-        sendInfo(LX.toJSONString(new Var(new Object[][]{{"xf",fj.get("ls"+3)},{"an",!"3".equals(i)?1:0},{"state",fj.get("state")}})), (String) fj.get("3"));
-    }
-    private void getMsg(String msg) throws IOException {
+    private void getMsg(String msg,String  userId) throws IOException {
         synchronized (this){
+            String self = (String) fj.get("self");
+            String userCode = (String) fj.get(userId);//当前用户
+            if (self != null && !self.equals(userCode)){//不是当前操作者
+                sendInfo(getMyMsg(Integer.parseInt(userCode)), userId);
+            }
+            moni = true;//当前操作者操作了
             int state = (int) fj.get("state");
+
             Var var = LX.toMap(msg);
             List<Var> ls = var.getList("ls");
             if (state == 2){//叫
                 if (ls.size() == 1 && LX.compareTo(14,ls.get(0).getStr("num"), MathUtil.Type.EQ)){//是7
                     fj.put("state",3);//抢庄成功 待扣底
-                    List pai = (List) fj.get("ls"+fj.get(userId));//当前抢庄
-                    for (Object o : (List)fj.get("ls4")){
+                    fj.put("zhuang",userCode);//记录庄
+                    fj.put("kou",userCode);//当前扣牌者
+                    fj.put("self",userCode);//当前操作者
+                    fj.put("fan",0);//当前未有人反牌
+                    fj.put("jiao",ls.get(0).get("type"));//庄家叫的7
+                    List pai = (List) fj.get("ls"+userCode);//当前抢庄的所有牌
+                    for (Object o : (List)fj.get("ls4")){//加入底牌
                         pai.add(o);
                     }
-                    fj.put("ls4",new MyArrayList());
-                    pushMsg((String) fj.get(userId));
+                    fj.put("ls4",new MyArrayList());//将底牌滞空
+                    pushMsg();//发送牌
                 }
             }else if (state == 3){//扣底
                 if (ls.size() == 8){
-                    MyArrayList dp = (MyArrayList) fj.get("ls4");
-                    MyArrayList sl = (MyArrayList) fj.get("ls"+fj.get(userId));
+                    MyArrayList dp = (MyArrayList) fj.get("ls4");//获取底牌
+                    MyArrayList sl = (MyArrayList) fj.get("ls"+fj.get(userId));//获取当前扣牌着的牌
                     for (Var v : ls){
-                        dp.add(new Object[]{(int)Double.parseDouble(v.getStr("num")),v.getStr("type")});
+                        dp.add(new Object[]{(int)Double.parseDouble(v.getStr("num")),v.getStr("type")});//添加到底牌
                         boolean ex = true;
-                        for (Iterator<Object[]> it = sl.iterator();it.hasNext();){
+                        for (Iterator<Object[]> it = sl.iterator();it.hasNext();){//遍历扣牌着的牌
                             Object[] o = it.next();
-                            if (LX.compareTo(o[0],v.getStr("num"), MathUtil.Type.EQ)&&v.getStr("type").equals(o[1])){
+                            if (LX.compareTo(o[0],v.getStr("num"), MathUtil.Type.EQ)&&v.getStr("type").equals(o[1])){//移除扣牌
                                 it.remove();
                                 ex = false;
                                 break;
@@ -151,11 +196,93 @@ public class ImService {
                             LX.exMsg("出现错误!");
                         }
                     }
-                    pushMsg1((String) fj.get(userId));
+                    int i = (Integer.parseInt(self)+1)%4;//当前下一位
+                    fj.put("self",i+"");//下一位
+                    fj.put("state",4);//等待反牌
+                    pushMsg();
+                    thread(i);//给当前操作者加时间
                 }
             }else if (state == 4){//反牌
+                if (LX.isEmpty(ls)){//不反
+                    String kou = (String) fj.get("kou");//最后扣牌者
+                    int i = (Integer.parseInt(self)+1)%4;//当前下一位
+                    int s = (int) fj.get("fan");//当前主
+                    if (kou.equals(i+"") || s == 6){//没人反牌 开始庄出牌  或者大王
+                        fj.put("state",5);//开始出牌
+                        fj.put("self",fj.get("zhuang"));//庄出牌
+                        cp[5] = s==0?fj.get("jiao"):s==1?"A":s==2?"B":s==3?"C":s==4?"D":s==5?"E":"F";//当前主
+                        cp[6] = Integer.parseInt((String) fj.get("zhuang"));//当前牌局先手
+                        cp[7] = 0;//当前第0手
+                    }else{
+                        fj.put("self",i+"");//下一位反
+                        thread(i);//给当前操作者加时间
+                    }
+                }else{
+                    int s = (int) fj.get("fan");
+                    if (ls.size() == 2 && ls.get(0).getStr("type").equals(ls.get(1).getStr("type"))){
+                        int i = 0;
+                        switch (ls.get(0).getStr("type")){
+                            case "A" : i=1; break;
+                            case "B" : i=2; break;
+                            case "C" : i=3; break;
+                            case "D" : i=4; break;
+                            case "E" : i=5; break;
+                            case "F" : i=6; break;
+                            default: LX.exMsg("反牌类型不对");
+                        }
+                        if (i>s){//大于反牌类型
+                            List pai = (List) fj.get("ls"+self);//当前反牌的所有牌
+                            for (Object o : (List)fj.get("ls4")){//加入底牌
+                                pai.add(o);
+                            }
+                            fj.put("ls4",new MyArrayList());//将底牌滞空
+                            fj.put("fan",i);//反牌
+                            fj.put("state",3);//等待当前扣牌
+                        }
+                    }
+                }
+                pushMsg();//发送牌
+            }else if (state == 5){//出牌
+                String zhu = (String) cp[5];//主
+                int xs = (int) cp[6];//先手者
+                int i = (int) cp[7];//当前第几手
+                int u = (xs+i)%4;//当前出牌者
 
-            }
+                if (ChuPai.check(cp,ls)){//出牌正确
+                    cp[8]=ls.size();//出了几张
+                    MyArrayList pa = new MyArrayList();
+                    MyArrayList sl = (MyArrayList) fj.get("ls"+fj.get(userId));//获取当前打牌着的牌
+                    for (Var v : ls){
+                        pa.add(new Object[]{(int)Double.parseDouble(v.getStr("num")),v.getStr("type")});
+                        boolean ex = true;
+                        for (Iterator<Object[]> it = sl.iterator();it.hasNext();){//遍历扣牌着的牌
+                            Object[] o = it.next();
+                            if (LX.compareTo(o[0],v.getStr("num"), MathUtil.Type.EQ)&&v.getStr("type").equals(o[1])){//移除扣牌
+                                it.remove();
+                                ex = false;
+                                break;
+                            }
+                        }
+                        if (ex){
+                            LX.exMsg("出现错误!");
+                        }
+                    }
+                    cp[u]=pa;
+                    if (i==3){//最后一手
+                        //1.判断谁大
+
+                        //2.记分
+                        //3.等待一秒 清空出牌
+
+                    }else{//不是
+                        cp[7] = 1 + i;//下一手
+                        fj.put("self",u+1+"");//下一位
+                    }
+                    pushMsg();
+                }else{//出牌不对
+                    sendInfo(LX.toJSONString(new Var(new Object[][]{{"xf",fj.get("ls"+userId)},{"an",self==null ?1 : 0},{"state",fj.get("state")} ,{"fan",fj.get("fan")}})), userId);
+                }
+            }//出牌结束
         }
     }
     class MyArrayList extends ArrayList<Object[]>{
@@ -171,7 +298,7 @@ public class ImService {
             }
             if ((int) a[0] == 14){
                 i+=100;
-            }else if (((String)a[1]).equals(fj.get("zhu"))){
+            }else if (((String)a[1]).equals(cp[5])){//主
                 i +=80;
             }
             return (int) a[0] + i;
@@ -183,12 +310,12 @@ public class ImService {
             }
         }
         MyCompare c = new MyCompare();
-        @Override
-        public boolean add(Object[] objects) {
-            boolean b = super.add(objects);
-            this.sort(c);
-            return b;
-        }
+//        @Override
+//        public boolean add(Object[] objects) {
+//            boolean b = super.add(objects);
+//            this.sort(c);
+//            return b;
+//        }
     }
     /**
      * 连接建立成功调用的方法*/
@@ -210,12 +337,12 @@ public class ImService {
                 addOnlineCount();
                 //在线数加1
             }
-            log.info("用户连接:"+userId+",当前在线人数为:" + getOnlineCount());
+            log.info("用户连接:"+fj.get(userId)+",当前在线人数为:" + getOnlineCount());
             try {
                 if (fj.contains(userId)){
                     if ((int)fj.get("state")>0){//恢复断线
-                        String i = (String) fj.get(userId);
-                        sendInfo(LX.toJSONString(new Var(new Object[][]{{"xf",fj.get("ls"+i)},{"an","1"},{"state",fj.get("state")}})), userId);
+                        String i = (String) fj.get(userId);//用户
+                        sendInfo(getMyMsg(Integer.parseInt(i)), userId);
                     }
                 }else{
                     sendMessage("{userId:\""+userId+"\",msg:\"连接成功\"}");
@@ -257,9 +384,13 @@ public class ImService {
      *
      * @param message 客户端发送过来的消息*/
     @OnMessage
-    public void onMessage(String message, Session session) throws IOException {
-        log.info("用户消息:"+userId+",报文:"+message);
-        getMsg(message);
+    public void onMessage(String message, Session session) {
+        log.info("用户消息:"+fj.get(userId)+",报文:"+message);
+        try {
+            getMsg(message,userId);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 
     /**
