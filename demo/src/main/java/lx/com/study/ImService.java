@@ -182,8 +182,8 @@ public class ImService {
                     fj.put("fan",0);//当前未有人反牌
                     fj.put("jiao",ls.get(0).get("type"));//庄家叫的7
                     List pai = (List) fj.get("ls"+userCode);//当前抢庄的所有牌
-                    for (Object o : (List)fj.get("ls4")){//加入底牌
-                        pai.add(o);
+                    for (Object[] o : (MyArrayList)fj.get("ls4")){//加入底牌
+                        pai.add(new Object[]{o[0],o[1],0,1});//选中
                     }
                     fj.put("ls4",new MyArrayList());//将底牌滞空
                     pushMsg();//发送牌
@@ -197,6 +197,9 @@ public class ImService {
                         boolean ex = true;
                         for (Iterator<Object[]> it = sl.iterator();it.hasNext();){//遍历扣牌着的牌
                             Object[] o = it.next();
+                            if (o.length==4){
+                                o[3] = 0;
+                            }
                             if (LX.compareTo(o[0],v.getStr("num"), MathUtil.Type.EQ)&&v.getStr("type").equals(o[1])){//移除扣牌
                                 it.remove();
                                 ex = false;
@@ -251,8 +254,8 @@ public class ImService {
                         if (i>s){//大于反牌类型
                             fj.put("kou",userCode);//最后反的
                             List pai = (List) fj.get("ls"+self);//当前反牌的所有牌
-                            for (Object o : (List)fj.get("ls4")){//加入底牌
-                                pai.add(o);
+                            for (Object[] o : (MyArrayList)fj.get("ls4")){//加入底牌
+                                pai.add(new Object[]{o[0],o[1],0,1});//选中
                             }
                             fj.put("ls4",new MyArrayList());//将底牌滞空
                             fj.put("fan",i);//反牌
