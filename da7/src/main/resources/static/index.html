@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>打七儿</title>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta http-equiv="Access-Control-Allow-Origin" content="*">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="format-detection" content="telephone=no">
+    <link rel="stylesheet" href="/sys/layuiadmin/layui/css/layui.css" media="all">
+    <style>
+        body {background-image:url("/img/bg.jpg");height:100%;width:100%;}
+        #container{height:100%;width:100%;}
+        .admin-header {text-align:center;margin:200px 0 100px 0;color:#ffffff;font-weight:bold;font-size:40px}
+    </style>
+</head>
+<body>
+<div id="container">
+    <div></div>
+    <div class="admin-login-background">
+        <div class="admin-header">
+            <span id="bt">模式选择</span>
+        </div>
+        <div id="btns">
+            <div class="layui-btn-container" style="text-align:center;">
+                <button type="button" class="layui-btn layui-btn-lg layui-btn-radius layui-btn-normal layui-disabled" disabled onclick="create_room(4)">创建房间-4人</button>
+                <button type="button" class="layui-btn layui-btn-lg layui-btn-radius layui-btn-warm layui-disabled" disabled onclick="create_room(5)">创建房间-5人</button>
+            </div>
+            <div class="layui-btn-container" style="text-align:center;">
+                <button type="button" class="layui-btn layui-btn-lg layui-btn-radius layui-btn-normal layui-disabled" disabled onclick="add(4)">加入房间-4人</button>
+                <button type="button" class="layui-btn layui-btn-lg layui-btn-radius layui-btn-warm layui-disabled" disabled onclick="add(5)">加入房间-5人</button>
+            </div>
+            <div class="layui-btn-container" style="text-align:center;">
+                <button type="button" class="layui-btn layui-btn-lg layui-btn-radius layui-btn-normal" onclick="random(4)">随机匹配-4人</button>
+                <button type="button" class="layui-btn layui-btn-lg layui-btn-radius layui-btn-warm layui-disabled" disabled onclick="random(5)">随机匹配-5人</button>
+            </div>
+        </div>
+        <div id="content" style="margin: 0 10%">
+
+        </div>
+
+    </div>
+</div>
+<script src="/sys/layuiadmin/js/jquery.min.js" charset="utf-8"></script>
+<script src="/sys/layuiadmin/layui/layui.js" charset="utf-8"></script>
+<script src="/js/lx.js" charset="utf-8"></script>
+<script>
+    // localStorage.setItem("d7_username",'');
+    var socket = null,type,userId=$.cookie('token');
+    var username =  localStorage.getItem("d7_username");
+    if (!username) {//没登陆
+        notlogin();
+    }else if (!userId) {
+        lx.ajax("/sys/login?cls=CoreService",{username: data.username},function (d) {
+            $.cookie('token',d.entity.token);
+            userId = d.entity.token;
+        });
+    }else{
+        initSocket();
+    }
+    function add(i) {
+        type=1;
+        $("#bt").html("选择房间");
+        $("#btns").hide(500);
+    }
+    function random(i) {
+        type =2;
+        $("#bt").html("正在匹配...");
+        $("#btns").hide(500);
+        send({method:'CoreService.random',room:i,username:username})
+    }
+    function create_room(i) {
+        type = 3;
+        $("#bt").html("等待好友加入..");
+        $("#btns").hide(500);
+        $("#content").append("<div class='layui-input-block'><button class='layui-btn layui-btn-radius layui-btn-warm'>"+username+"</button></div>");
+    }
+    function onmessage(res) {
+        if (type == 1){//选择并加入了房间
+
+        }else if (type == 2){//等待匹配
+            if (1 == res.msg){
+                $("#bt").html("正在匹配"+res.num+"...");
+            }
+        } else if (type == 3){//创建房间
+            // send();
+        }
+    }
+    //发送消息到服务器
+    function send(data) {
+        socket.send(JSON.stringify(data));
+    }
+
+    function notlogin() {
+        $("#bt").html("请输入一个昵称");
+        $("#btns").hide(500);
+        $("#content").html(`
+           <div class="layui-form login-form" lay-filter="formTest1">
+            <div class="layui-form-item">
+                <input type="text" name="username" lay-verify="required|account" placeholder="输入一个昵称" autocomplete="off" class="layui-input" value="">
+            </div>
+            <div class="layui-form-item" style="text-align:center;">
+                <button class="layui-btn layui-btn-lg layui-btn-radius layui-btn-normal layui-btn-fluid" lay-submit="" lay-filter="login">登 入</button>
+            </div>
+        </div>`)
+        layui.use(['form'], function () {
+            var form = layui.form, layer = layui.layer;
+            layui.form.val("formTest1",{username: localStorage.getItem("d7_username")});
+            form.on('submit(login)', function (data) {
+                data = data.field;
+                username = data.username;
+                localStorage.setItem("d7_username",data.username);
+                lx.ajax("/sys/login?cls=CoreService",{username: data.username},function (d) {
+                    userId = d.entity.token;
+                    $.cookie('token',d.entity.token);
+                    $("#bt").html("模式选择");
+                    $("#btns").show(500);
+                    $("#content").html('')
+                    initSocket();
+                });
+            });
+        });
+    }
+    function initSocket() {
+        socket = new WebSocket("ws"+(lx.wwwroot.substring(4))+"WS/"+$.cookie('token'));
+        socket.onopen = function(event) {// 连接成功建立的回调方法
+            console.log("llws连接成功!");
+            // socket.send(JSON.stringify({method:'CoreService.',username:username}))
+        }
+        socket.onmessage = function(res) {// 接收到消息的回调方法
+            console.log("llws收到消息啦:" +res.data)
+            res = eval("("+res.data+")");
+            onmessage(res);
+        }
+        // 监听窗口关闭事件，当窗口关闭时，主动去关闭websocket连接，防止连接还没断开就关闭窗口，server端会抛异常。
+        window.onbeforeunload = function() {
+            socket.close();
+        }
+
+    }
+</script>
+</body>
+</html>
