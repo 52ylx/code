@@ -5,21 +5,70 @@
     <title>打七儿</title>
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
     <meta http-equiv="Access-Control-Allow-Origin" content="*">
-    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1"/>
     <meta name="apple-mobile-web-app-status-bar-style" content="black">
     <meta name="apple-mobile-web-app-capable" content="yes">
     <meta name="format-detection" content="telephone=no">
+
+    <META HTTP-EQUIV="pragma" CONTENT="no-cache">
+    <META HTTP-EQUIV="Cache-Control" CONTENT="no-cache, must-revalidate">
+    <META HTTP-EQUIV="expires" CONTENT="0">
     <link rel="stylesheet" href="/sys/layuiadmin/layui/css/layui.css" media="all">
     <style>
-        body {background-image:url("/img/bg.jpg");height:100%;width:100%;}
+        html{overflow:hidden;}
+        body {background-image:url("/img/bg.jpg");height:100%;width:100%;overflow:hidden;}
+        #canvas_c {padding: 0;margin: 0;}
         #container{height:100%;width:100%;}
         .admin-header {text-align:center;margin:200px 0 100px 0;color:#ffffff;font-weight:bold;font-size:40px}
     </style>
 </head>
 <body>
+<div id="canvas_c" style="display: none;">
+    <canvas id="canvas" width="1280" height="666" style=" background-image: url(/images/bg.png); background-position: 50% 50%;"  horizontalScrollPolicy="off" verticalScrollPolicy="off" >Sorry, your browser doesn't support canvas, please use Firefox3.6+, Safari5+, Chrome, IE9+ etc.</canvas>
+    <div id="canvas_c4" style="display: none">
+        <button type="button" id="user41" class="layui-btn layui-btn-normal" style="position:fixed; top: calc(50% - 50px); right: 10px;">右</button>
+        <span id="user_41" class="layui-badge" style="position:fixed; top: calc(50% - 60px); right: 1px;">60</span>
+        <button type="button" id="user42" class="layui-btn layui-btn-normal" style="position:fixed; top: 10px; left: calc(50% - 40px)">上</button>
+        <span id="user_42" class="layui-badge" style="position:fixed; top: 0px; left: calc(50% + 10px)">60</span>
+        <button type="button" id="user43" class="layui-btn layui-btn-normal" style="position:fixed; top: calc(50% - 50px); left: -1px">左</button>
+        <span id="user_43" class="layui-badge" style="position:fixed;top: calc(50% - 60px); left: 50px">60</span>
+        <button type="button" id="user40" class="layui-btn layui-btn-normal" style="position:fixed; bottom: 10px; left: 0px;">测试</button>
+        <span id="user_40" class="layui-badge" style="position:fixed; bottom: 40px; left: 55px;">60</span>
+    </div>
+
+    <div id="canvas_c5" style="display: none">
+        <button type="button" id="user51" class="layui-btn layui-btn-normal" style="position:fixed; top: calc(50% - 50px); right: 10px;">右</button>
+        <span id="user_51" class="layui-badge" style="position:fixed; top: calc(50% - 60px); right: 1px;">60</span>
+        <button type="button" id="user52" class="layui-btn layui-btn-normal" style="position:fixed; top: 10px; right:10px;">右上</button>
+        <span id="user_52" class="layui-badge" style="position:fixed; top: 0px; right: 1px;">60</span>
+        <button type="button" id="user53" class="layui-btn layui-btn-normal" style="position:fixed; top: 10px; left:0px">左上</button>
+        <span id="user_53" class="layui-badge" style="position:fixed; top: 0px; left:50px">60</span>
+        <button type="button" id="user54" class="layui-btn layui-btn-normal" style="position:fixed; top: calc(50% - 50px); left: -1px">左边</button>
+        <span id="user_54" class="layui-badge" style="position:fixed;top: calc(50% - 60px); left: 50px">60</span>
+        <button type="button" id="user50" class="layui-btn layui-btn-normal" style="position:fixed; bottom: 10px; left: 0px;">测试</button>
+        <span id="user_50" class="layui-badge" style="position:fixed; bottom: 40px; left: 55px;">60</span>
+    </div>
+
+
+
+    <button type="button" id="btn4" onclick="chupai(1)" class="layui-btn layui-btn-radius layui-btn-warm" style="display: none;position:fixed; bottom: 10px; left: calc(50% - 40px)">出牌</button>
+    <button type="button" id="btn5" onclick="chupai(0)" class="layui-btn layui-btn-radius layui-btn-danger" style="display: none;position:fixed; bottom: 10px; left: calc(50% + 40px)">不反</button>
+
+    <div id="jiaozzhu" style="">
+        <span id="btn_0" class="layui-badge layui-bg-black" style="position:fixed;top: calc(50% + 20px); left: calc(50% - 107px);">0</span>
+        <button type="button" id="btn0" disabled onclick="jiao7(0)" class="layui-btn layui-btn-radius layui-bg-gray" style="position:fixed; top: calc(50% + 40px); left: calc(50% - 120px);">♦</button>
+        <span id="btn_1" class="layui-badge" style="position:fixed;top: calc(50% + 20px); left: calc(50% - 47px);">0</span>
+        <button type="button" id="btn1" disabled onclick="jiao7(1)"  class="layui-btn layui-btn-radius layui-bg-gray" style="position:fixed; top: calc(50% + 40px); left: calc(50% - 60px);">♣</button>
+        <span id="btn_2" class="layui-badge layui-bg-black" style="position:fixed;top: calc(50% + 20px); left: calc(50% + 13px);">0</span>
+        <button type="button" id="btn2" disabled onclick="jiao7(2)" class="layui-btn layui-btn-radius layui-bg-gray" style="position:fixed; top: calc(50% + 40px); left: calc(50%);">♥</button>
+        <span id="btn_3" class="layui-badge" style="position:fixed;top: calc(50% + 20px); left: calc(50% + 73px);">0</span>
+        <button type="button" id="btn3" disabled  onclick="jiao7(3)" class="layui-btn layui-btn-radius layui-bg-gray" style="position:fixed; top: calc(50% + 40px); left: calc(50% + 60px);">♠</button>
+    </div>
+
+
+</div>
 <div id="container">
-    <div></div>
-    <div class="admin-login-background">
+    <div class="admin-login-background" id="main">
         <div class="admin-header">
             <span id="bt">模式选择</span>
         </div>
@@ -45,7 +94,9 @@
 </div>
 <script src="/sys/layuiadmin/js/jquery.min.js" charset="utf-8"></script>
 <script src="/sys/layuiadmin/layui/layui.js" charset="utf-8"></script>
-<script src="/js/lx.js" charset="utf-8"></script>
+<script src="/js/casual-0.1.min.js" charset="utf-8"></script>
+<script src="/js/ddz2.js?t=6" charset="utf-8"></script>
+<script src="/js/lx.js?t=1" charset="utf-8"></script>
 <script>
     // localStorage.setItem("d7_username",'');
     var socket = null,type,userId=$.cookie('token');
@@ -77,17 +128,126 @@
         $("#btns").hide(500);
         $("#content").append("<div class='layui-input-block'><button class='layui-btn layui-btn-radius layui-btn-warm'>"+username+"</button></div>");
     }
+    function jiao7(i) {
+        send({method:'CoreService.send','wz':ddz.wz,'roomID':ddz.roomID,msg:[i*13+5]});
+    }
+    function chupai(i) {//扣牌
+        if (i){//出牌
+            var ls = [];
+            for (var i in ddz.xf){
+                var p = ddz.xf[i];
+                if (p.selected){
+                    ls.push(p.num);
+                }
+            }
+            send({method:'CoreService.send','wz':ddz.wz,'roomID':ddz.roomID,msg:ls});
+        }else{//不出
+            send({method:'CoreService.send','wz':ddz.wz,'roomID':ddz.roomID});
+        }
+    }
+    window.paimousedown = function () {//牌被点击了
+        var cp = ddz.cp;
+        var ls = [];
+        for (var i in ddz.xf){
+            var p = ddz.xf[i];
+            if (p.selected){
+                ls.push(p.num);
+            }
+        }
+        $("#btn4").hide();
+        $("#btn5").hide();
+        if (cp[26] == ddz.wz && cp[5]>2){//轮到自己操作
+            if (cp[5]==3 && ls.length == 8){//扣牌牌
+                $("#btn4").show();
+            }else if (cp[5]==4) {//是否反牌
+                $("#btn5").show();//不返
+                if (ls.length ==2){
+                    $("#btn4").show();//反
+                }
+            }else if (cp[5] == 5 && ls.length >0 ){//出牌
+                $("#btn4").show();//出牌
+            }
+
+        }
+    }
+
     function onmessage(res) {
+        $("#btn4").hide();
+        $("#btn5").hide();
+        if (res.state == 'update'){
+            var cp = ddz.cp = res.msg;
+            ddz.updateInfo(res.msg);//更新界面
+            if (ddz.startPai && cp[30]==ddz.wz){//最后操作者
+                ddz.setDX(cp[ddz.wz]);//自己的牌
+            }
+            if (cp[5]==3){//有人叫庄
+                $("#jiaozzhu").hide();//隐藏抢地主按钮
+                if (ddz.startPai && cp[7] == ddz.wz){//开始发牌结束 且是自己叫的
+                    sort();
+                }
+            }else if (cp[5] == 4){//反牌
+                if (cp[26] == ddz.wz){
+                    $("#btn5").show();//不返
+                }
+            }else {
+
+            }
+            return;
+        }
         if (type == 1){//选择并加入了房间
 
         }else if (type == 2){//等待匹配
-            if (1 == res.msg){
-                $("#bt").html("正在匹配"+res.num+"...");
+            if (1 == res.state){
+                $("#bt").html("正在匹配"+res.msg+"...");
+            }else if (2 == res.state){//匹配成功 给牌
+                var cp = res.msg;
+                ddz.cp = cp;
+                $("#main").hide(500);
+                $("#canvas_c").show(500);//显示牌桌
+                ddz.initInfo(cp);//初始化
+                $("#canvas_c"+cp[28]).show();//显示牌桌
+                ddz.typeNum = [0,0,0,0];//方梅红黑的张数
+                ddz.startPai=0;//完成发牌
+                ddz.xfsplash.removeAllChildren();//清楚牌
+                ddz.asyncSet(cp[ddz.wz],[10 ,ddz.height-50 ,ddz.width-35 ,ddz.height ,30,50],[70,120,1],ddz.xfsplash,500,sort);//发牌
             }
         } else if (type == 3){//创建房间
             // send();
         }
     }
+    //获取底牌,并排序
+    function sort(){
+        var cp = ddz.cp;
+        if (cp[7] == ddz.wz){//如果叫主加入底牌
+            for (var i in cp[25]){//底牌
+                ddz.cp[ddz.wz].push([cp[25][i],1]);//选中
+            }
+        }
+        ddz.startPai=1;//完成发牌
+        ddz.setDX(cp[ddz.wz]);//自己的牌
+    }
+    $(function () {
+        var width = document.documentElement.clientWidth,
+            height =  document.documentElement.clientHeight
+        ddz.startup(width,height,function () {
+            // $("#main").hide(500);
+            // $("#canvas_c").show(500);//显示牌桌
+            // type = 2;
+            // var json = {"msg":[[46,8,25,51,10,14,26,34,37,22,12,20,19,17,16,33,8,6,11,14,48,10,39,50,30],[38,29,49,47,3,5,47,24,53,37,20,32,7,27,41,7,18,0,43,45,1,50,23,31,36],[18,46,26,49,40,9,45,51,15,0,38,41,4,5,36,21,35,42,23,33,11,24,28,32,9],[53,31,52,22,13,3,30,16,21,19,28,29,42,27,35,34,6,25,44,4,44,39,2,52,17],null,1,1,null,null,null
+            //         ,[46,8,25,51,10],[46,8,25,51,10],[46,8,25,51,10],[46,8,25,51,10],[46,8,25,51,10],null,null,null,null,null
+            //         ,50,60,10,20,26,[15,2,43,12,40,48,13,1,null,null],2
+            //         ,[
+            //             {"wz":0,"method":"CoreService.random","user":"9b478489-78cc-41e0-9c96-9402679e6280","room":5,"roomID":"47b8d","username":"林夕"}
+            //             ,{"wz":1,"method":"CoreService.random","user":"08967be1-5b71-4d98-8060-a0842f5fad2f","room":5,"roomID":"47b8d","username":"类型"}
+            //             ,{"wz":2,"method":"CoreService.random","user":"133a5bcc-c2bd-4417-a1e0-324ccd7c5a2c","room":5,"roomID":"47b8d","username":"测5"}
+            //             ,{"wz":3,"method":"CoreService.random","user":"bf57d925-6158-4122-99c8-06decf0b3b3a","room":5,"roomID":"47b8d","username":"测3"}
+            //             ,{"wz":4,"method":"CoreService.random","user":"bf57d925-6158-4122-99c8-06decf0b3b31","room":5,"roomID":"47b8d","username":"测4"}
+            //         ],4,null],"state":2}
+            //
+            // onmessage(json);
+        });
+
+    })
     //发送消息到服务器
     function send(data) {
         socket.send(JSON.stringify(data));

@@ -9,6 +9,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import javax.annotation.PostConstruct;
 import javax.websocket.*;
 import javax.websocket.server.PathParam;
 import javax.websocket.server.ServerEndpoint;
@@ -23,8 +24,13 @@ import java.util.concurrent.ConcurrentHashMap;
 @ServerEndpoint(value = "/WS/{userId}")
 public class WebSocketService {
 
-    @Autowired
-    private CoreService coreService;
+    private static CoreService coreService;
+
+    @PostConstruct
+    public void init(){
+        coreService = OS.getBean(CoreService.class);
+    }
+
     static Logger log= LoggerFactory.getLogger(WebSocketService.class);
     /**静态变量，用来记录当前在线连接数。应该把它设计成线程安全的。*/
     private static int onlineCount = 0;
@@ -111,8 +117,12 @@ public class WebSocketService {
     //说明:批量发送消息
     /**{ ylx } 2020/3/11 21:51 */
     public static void sendInfo(String msg,List<Var> ls){
-        for (Var var : ls){
-            sendInfo(msg,var.getStr("user"));
+        try {
+            for (Var var : ls){
+                sendInfo(msg,var.getStr("user"));
+            }
+        }catch (Exception e){
+            e.printStackTrace();
         }
     }
 
