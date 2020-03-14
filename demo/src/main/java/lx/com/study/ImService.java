@@ -37,6 +37,8 @@ public class ImService {
     // 10 [**,主,**,获取分数]
     // 11 先手牌型 12叫的庄 13 底牌 14 [在线,积分]
 //    房间
+    // 当前谁大 当前第几手 先手几张 先手类型 先手 当前操作者 主类型 叫主类型 叫主人 倍数
+    //  1           0           0       0       0       0       0       0       0
     public final static ConcurrentHashMap<String,Object> fj = new ConcurrentHashMap<>();
     static {
         fj.put("state",0);//准备
@@ -110,16 +112,17 @@ public class ImService {
         }
         fj.put("state",2);//发牌完成 开始抢庄
 //        cp[13] = fj.get("ls4");
-        pushMsg();
+        pushMsg(true);
     }
 
-    private String getMyMsg(int i){
+    private String getMyMsg(int i,boolean dong){
         i = i%4;
         if (!fj.contains(i+"")){
             return null;
         }
         int xs = (int) cp[6];//先手者
         String self = (String) fj.get("self");//当前操作者
+        int selfInt = Integer.parseInt((String) fj.get(userId));//当前点击
         MyArrayList ls = (MyArrayList) fj.get("ls"+i);
         if (ls != null) ls.sort(ls.c);
         MyArrayList lls = (MyArrayList) cp[i];//能看到自己叫的
@@ -138,7 +141,7 @@ public class ImService {
         cp14[1] = ((int[][])cp[14])[(i+1)%4];
         cp14[2] = ((int[][])cp[14])[(i+2)%4];
         cp14[3] = ((int[][])cp[14])[(i+3)%4];
-        return LX.toJSONString(new Var(new Object[][]{{"xf",ls}
+        return LX.toJSONString(new Var(new Object[][]{{"xf",selfInt == i || dong? ls : "budong"}
         ,{"an",self==null || i==Integer.parseInt(self)%4 ?1 : 0}
         ,{"state",fj.get("state")}
         ,{"zhu",new Object[]{cp[5],cp[12],cp[4]}}//主 叫主 倍数
@@ -151,11 +154,17 @@ public class ImService {
         ,{"cp14",cp14}
         }));
     }
+    private void pushMsg(boolean dong) throws IOException {
+        sendInfo(getMyMsg(0,dong), (String) fj.get("0"));
+        sendInfo(getMyMsg(1,dong), (String) fj.get("1"));
+        sendInfo(getMyMsg(2,dong), (String) fj.get("2"));
+        sendInfo(getMyMsg(3,dong), (String) fj.get("3"));
+    }
     private void pushMsg() throws IOException {
-        sendInfo(getMyMsg(0), (String) fj.get("0"));
-        sendInfo(getMyMsg(1), (String) fj.get("1"));
-        sendInfo(getMyMsg(2), (String) fj.get("2"));
-        sendInfo(getMyMsg(3), (String) fj.get("3"));
+        sendInfo(getMyMsg(0,false), (String) fj.get("0"));
+        sendInfo(getMyMsg(1,false), (String) fj.get("1"));
+        sendInfo(getMyMsg(2,false), (String) fj.get("2"));
+        sendInfo(getMyMsg(3,false), (String) fj.get("3"));
     }
     private void getMsg(String msg,String  userId) throws IOException {
         synchronized (this){
@@ -163,7 +172,7 @@ public class ImService {
             String userCode = (String) fj.get(userId);//当前用户
             int userCodeInt = Integer.parseInt(userCode);//用户数字
             if (self != null && !self.equals(userCode)){//不是当前操作者
-                sendInfo(getMyMsg(Integer.parseInt(userCode)), userId);
+                sendInfo(getMyMsg(Integer.parseInt(userCode),false), userId);
             }
             int state = (int) fj.get("state");
 
@@ -192,14 +201,16 @@ public class ImService {
                 if (ls.size() == 8){
                     MyArrayList dp = (MyArrayList) fj.get("ls4");//获取底牌
                     MyArrayList sl = (MyArrayList) fj.get("ls"+fj.get(userId));//获取当前扣牌着的牌
+                    for (int i=0;i<sl.size();i++){
+                        if (sl.get(i).length==4){//移除上升的牌
+                            sl.get(i)[3]=0;
+                        }
+                    }
                     for (Var v : ls){
                         dp.add(new Object[]{(int)Double.parseDouble(v.getStr("num")),v.getStr("type")});//添加到底牌
                         boolean ex = true;
                         for (Iterator<Object[]> it = sl.iterator();it.hasNext();){//遍历扣牌着的牌
                             Object[] o = it.next();
-                            if (o.length==4){
-                                o[3] = 0;
-                            }
                             if (LX.compareTo(o[0],v.getStr("num"), MathUtil.Type.EQ)&&v.getStr("type").equals(o[1])){//移除扣牌
                                 it.remove();
                                 ex = false;
@@ -328,7 +339,7 @@ public class ImService {
                     }
                     pushMsg();
                 }else{//出牌不对
-                    sendInfo(getMyMsg(Integer.parseInt(userCode)), userId);
+                    sendInfo(getMyMsg(Integer.parseInt(userCode),false), userId);
                 }
             }//出牌结束
         }
@@ -391,7 +402,7 @@ public class ImService {
                 if (fj.contains(userId)){
                     if ((int)fj.get("state")>0){//恢复断线
                         String i = (String) fj.get(userId);//用户
-                        sendInfo(getMyMsg(Integer.parseInt(i)), userId);
+                        sendInfo(getMyMsg(Integer.parseInt(i),false), userId);
                     }
                 }else{
                     sendMessage("{userId:\""+userId+"\",msg:\"连接成功\"}");
@@ -467,10 +478,14 @@ public class ImService {
     /**
      * 发送自定义消息
      * */
-    public static void sendInfo(String message,@PathParam("userId") String userId) throws IOException {
+    public static void sendInfo(String message,@PathParam("userId") String userId) {
         log.info("发送消息到:"+userId+"，报文:"+message);
         if(LX.isNotEmpty(userId)&&webSocketMap.containsKey(userId)){
-            webSocketMap.get(userId).sendMessage(message);
+            try {
+                webSocketMap.get(userId).sendMessage(message);
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
         }else{
             log.error("用户"+userId+",不在线！");
         }

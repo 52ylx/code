@@ -88,6 +88,8 @@ ddz.showSplash = function() {
     } else {
         this.splash = new Sprite;
         this.stage.addChild(this.splash);
+        this.xfsplash = new Sprite;
+        this.stage.addChild(this.xfsplash);
         ddz.webSocket();
         // this.logo = new MyImg(this.images[5].image,null,(this.width-this.images[5].image.width)/2 ,20 ,100,100);
         // this.splash.addChild(this.logo);
@@ -125,7 +127,7 @@ ddz.showSplash = function() {
         // this.splash.addChild(i);
     }
 };
-ddz.set = function(ls,j,p){//数组,
+ddz.set = function(ls,j,p,splash){//数组,
     if (!ls || ls.length == 0) return;
     //[开始x,开始y,结束x,结束y,x间隔,y间隔],[牌高,宽,是否点击]
     var start = j[2]-j[0]>ls.length*j[4]?j[0]+(j[2]-j[0]-(ls.length-1)*j[4]-p[0])/2:j[0];
@@ -139,7 +141,7 @@ ddz.set = function(ls,j,p){//数组,
             d.y-=15;
             d.selected = true;
         }
-        this.splash.addChild(d);
+        splash.addChild(d);
         list.push(d);
     }
     return list;
@@ -191,12 +193,15 @@ ddz.anniu=function(){
 ddz.rePoker = function(json) {
     this.splash.removeAllChildren();
     //正下方
-    this.xf =this.set(json.xf,[60 ,this.height ,this.width-25 ,this.height ,34,40],[60,80,1]);
-    this.set(json.bf,[this.width/2-150 ,this.height-150 ,(this.width/2)+150 ,this.height-200 ,25,40],[40,60,0]);
-    this.set(json.yf,[(this.width/2)+170 ,this.height-200 ,this.width-30 ,this.height-200 ,25,40],[40,60,0])
-    this.set(json.sf,[150 ,30+70 ,(this.width/2)+150 ,30+70 ,25,40],[40,60,0]);
-    this.set(json.zf,[25 ,this.height-200 ,this.width/2-200 ,this.height-200 ,25,40],[40,60,0]);
-    this.set(json.dp,[0,this.height/2-30 ,this.width ,this.height/2-30 ,25,40],[40,60,0])
+    if(json.xf != 'budong'){
+        this.xfsplash.removeAllChildren();
+        this.xf =this.set(json.xf,[60 ,this.height ,this.width-25 ,this.height ,34,40],[60,80,1],this.xfsplash);
+    }
+    this.set(json.bf,[this.width/2-150 ,this.height-150 ,(this.width/2)+150 ,this.height-200 ,25,40],[40,60,0],this.splash);
+    this.set(json.yf,[(this.width/2)+170 ,this.height-200 ,this.width-30 ,this.height-200 ,25,40],[40,60,0],this.splash)
+    this.set(json.sf,[150 ,30+70 ,(this.width/2)+150 ,30+70 ,25,40],[40,60,0],this.splash);
+    this.set(json.zf,[25 ,this.height-200 ,this.width/2-200 ,this.height-200 ,25,40],[40,60,0],this.splash);
+    this.set(json.dp,[0,this.height/2-30 ,this.width ,this.height/2-30 ,25,40],[40,60,0],this.splash)
     this.state = json.state;
     if (this.state && json.an){//显示按钮
         this.anniu();
@@ -207,7 +212,7 @@ ddz.rePoker = function(json) {
             i.addImg(ddz.images[1].image,poker[json.zhu[1]].frame,25,5)
         }
         this.splash.addChild(i);
-        var i = TP.getNum(json.zhu[2],20,55,25,15,1);//倍数
+        var i = TP.getNum(json.zhu[2],20,55,15,15);//倍数
         this.splash.addChild(i);
     }
     if (json.cp14){

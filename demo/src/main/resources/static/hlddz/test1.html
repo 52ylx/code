@@ -19,7 +19,7 @@
 </style>
 
 <script type="text/javascript" src="./douzizhu_files/casual-0.1.min.js"></script>
-<script type="text/javascript" src="./douzizhu_files/ddz2.js"></script>
+<script type="text/javascript" src="./douzizhu_files/ddz2.js?t=1"></script>
 
 <script type="text/javascript">
 function startGame() {
@@ -43,33 +43,61 @@ function startGame() {
     //     ddz.startup(height,width);
     // }else{
         ddz.startup(width,height);
-    // }
-	// playAudio();
+    // // }
+    // setCurEndTimeAndPlay("sounds/bg.mp3",true,0,100)
 }
 
-var audioObj;
-function playAudio() {
-	audioObj = createAudio("myAudioObj");
-	fakeClick(function() {
-		audioObj.play();
-	});
-}
 //暂停
 function onPause() {
-    !audioObj.paused && audioObj.pause()
+    !audioObj.paused && audioObj.pause();
+    !audioObj1.paused && audioObj1.pause();
 }
 //继续
 function onResume() {
-    audioObj.paused && audioObj.play()
+    audioObj.paused && audioObj.play();
+    audioObj1.paused && audioObj1.play();
 }
-
-function createAudio(id) {
-	var audio = new Audio("sounds/bg.mp3");
-	audio.loop = true;
+// myVid.duration
+function createAudio(src,loop) {
+	var audio = new Audio(src);
+	audio.loop = loop;
 	audio.autoPlay = true;
-	audio.id = id;
 	document.body.appendChild(audio);
+    fakeClick(function() {
+        audio.play();
+    });
 	return audio;
+}
+var audios = [];
+function setCurEndTimeAndPlay(src,loop,startTime,endTime){//地址 时间
+    var myAud = new Audio(src);
+    if (loop){//循环
+        if (audios[0]){
+            audios[0].pause();
+            document.body.removeChild(audios[0]);
+        }
+        audios[0] = myAud
+    }
+    myAud.autoPlay = true;
+    myAud.loop = loop;
+    document.body.appendChild(myAud);
+    myAud.currentTime=startTime || 0;
+    var addFunc = function () {
+        if(myAud.currentTime>endTime){
+            if (loop){
+                myAud.currentTime = startTime || 0;
+            } else{
+                myAud.pause();
+                delete audios[myAud];
+                myAud.removeEventListener('timeupdate',addFunc);
+                document.body.removeChild(myAud);
+            }
+        }
+    }
+    myAud.addEventListener('timeupdate', addFunc);
+    fakeClick(function() {
+        myAud.play();
+    });
 }
 
 function fakeClick(callback) {
@@ -93,6 +121,5 @@ function fakeClick(callback) {
 </head>
 <body onload="startGame();">
     <canvas id="canvas" width="1280" height="666" style="background-image: url(images/bg.png); background-position: 50% 50%;"  horizontalScrollPolicy="off" verticalScrollPolicy="off" >Sorry, your browser doesn't support canvas, please use Firefox3.6+, Safari5+, Chrome, IE9+ etc.</canvas>
-    <audio preload="auto" src="sounds/bg.mp3" loop="" id="myAudioObj"></audio>
 </body>
 </html>
