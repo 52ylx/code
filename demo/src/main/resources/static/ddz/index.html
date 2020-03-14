@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+    <meta name="apple-mobile-web-app-status-bar-style" content="black" />
+    <title>游戏大厅</title>
+    <script type="text/javascript" src="ResourceData.js" ></script>
+    <script type="text/javascript" src="Prototype.js" ></script>
+    <script type="text/javascript" src="JControls.js" ></script>
+    <script type="text/javascript" src="DJDDZ.js" ></script>
+
+    <style>
+        html,body{height:100%;overflow:hidden}
+        body {
+            padding: 0;
+            margin: 0;
+            height: 100%;
+            background-color: #eee;
+        }
+        @media screen and (orientation: portrait) {
+            html{
+                width : 100vmin;
+                height : 100vmax;
+            }
+            body{
+                width : 100vmin;
+                height : 100vmax;
+            }
+            #gyroContain{
+                width : 100vmax;
+                height : 100vmin;
+                transform-origin: top left;
+                transform: rotate(90deg) translate(0,-100vmin);
+            }
+        }
+        @media screen and (orientation: landscape) {
+            html{
+                width : 100vmax;
+                height : 100vmin;
+            }
+            body{
+                width : 100vmax;
+                height : 100vmin;
+            }
+            #gyroContain{
+                width : 100vmax;
+                height : 100vmin;
+            }
+        }
+
+    </style>
+</head>
+<body>
+<canvas id="canvas1"></canvas>
+<script type="text/javascript">
+    var width = document.documentElement.clientWidth,
+        height =  document.documentElement.clientHeight,
+        $wrapper =  document.getElementById("canvas1"),
+        style = "";
+    if( width < height ){ // 竖屏
+        style += "width:" + height + "px;";
+        style += "height:" + width + "px;";
+        style += "-webkit-transform: rotate(90deg); transform: rotate(90deg);";
+        // 注意旋转中点的处理
+        style += "-webkit-transform-origin: " + width / 2 + "px " + width / 2 + "px;";
+        style += "transform-origin: " + width / 2 + "px " + width / 2 + "px;";
+        $wrapper.style.cssText = style;
+        // ddz.startup(height,width);
+    }else{
+        // ddz.startup(width,height);
+    }
+    DJDDZ.Init("canvas1");
+</script>
+</body>
+</html>
