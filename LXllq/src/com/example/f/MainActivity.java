@@ -88,6 +88,7 @@ public class MainActivity extends Activity {
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.JELLY_BEAN_MR1) {
             webSettings.setMediaPlaybackRequiresUserGesture(false);
         }
+        webSettings.setDomStorageEnabled(true);//支持缓存
 		// 这里可以有很多设置
 //		webSettings.setSupportZoom(true); // 支持缩放
 //		webSettings.setBuiltInZoomControls(true); // 启用内置缩放装置

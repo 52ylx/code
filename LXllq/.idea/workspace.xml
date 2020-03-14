@@ -7,12 +7,6 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="2c9c0768-d23a-47af-beb1-50a3439ca1cc" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/.idea/encodings.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/modules.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/vcs.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/LXllq.iml" afterDir="false" />
       <change afterPath="$PROJECT_DIR$/../MyApplication/.gitignore" afterDir="false" />
       <change afterPath="$PROJECT_DIR$/../MyApplication/.idea/encodings.xml" afterDir="false" />
       <change afterPath="$PROJECT_DIR$/../MyApplication/.idea/gradle.xml" afterDir="false" />
@@ -62,33 +56,50 @@
       <change afterPath="$PROJECT_DIR$/../authority/doc/autoSql" afterDir="false" />
       <change afterPath="$PROJECT_DIR$/../ct/src/HttpServer.java" afterDir="false" />
       <change afterPath="$PROJECT_DIR$/../ct/src/MyServlet.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../demo/src/main/resources/static/hlddz/douzizhu_files/casual-0.1.min.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../demo/src/main/resources/static/hlddz/douzizhu_files/ddz.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../demo/src/main/resources/static/hlddz/douzizhu_files/ddz.min.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../demo/src/main/resources/static/hlddz/douzizhu_files/ddz1.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../demo/src/main/resources/static/hlddz/douzizhu_files/ddz2.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../demo/src/main/resources/static/hlddz/images/bg.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../demo/src/main/resources/static/hlddz/images/button.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../demo/src/main/resources/static/hlddz/images/hand1.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../demo/src/main/resources/static/hlddz/images/hand2.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../demo/src/main/resources/static/hlddz/images/logo.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../demo/src/main/resources/static/hlddz/images/lose.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../demo/src/main/resources/static/hlddz/images/number.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../demo/src/main/resources/static/hlddz/images/poker.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../demo/src/main/resources/static/hlddz/images/portrait.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../demo/src/main/resources/static/hlddz/images/win.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../demo/src/main/resources/static/hlddz/index.htm" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../demo/src/main/resources/static/hlddz/sounds/bg.mp3" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../demo/src/main/resources/static/hlddz/test.html" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../demo/src/main/resources/static/hlddz/test1.html" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../demo/src/main/resources/static/hlddz/test2.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../lx/.idea/libraries/Maven__com_fasterxml_classmate_1_5_1.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../lx/.idea/libraries/Maven__com_fasterxml_jackson_core_jackson_annotations_2_10_2.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../lx/.idea/libraries/Maven__com_fasterxml_jackson_core_jackson_core_2_10_2.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../lx/.idea/libraries/Maven__com_fasterxml_jackson_core_jackson_databind_2_10_2.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../lx/.idea/libraries/Maven__com_fasterxml_jackson_datatype_jackson_datatype_jdk8_2_10_2.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../lx/.idea/libraries/Maven__com_fasterxml_jackson_datatype_jackson_datatype_jsr310_2_10_2.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../lx/.idea/libraries/Maven__com_fasterxml_jackson_module_jackson_module_parameter_names_2_10_2.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../lx/.idea/libraries/Maven__jakarta_annotation_jakarta_annotation_api_1_3_5.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../lx/.idea/libraries/Maven__jakarta_validation_jakarta_validation_api_2_0_2.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../lx/.idea/libraries/Maven__org_apache_logging_log4j_log4j_api_2_12_1.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../lx/.idea/libraries/Maven__org_apache_logging_log4j_log4j_to_slf4j_2_12_1.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../lx/.idea/libraries/Maven__org_apache_tomcat_embed_tomcat_embed_core_9_0_30.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../lx/.idea/libraries/Maven__org_apache_tomcat_embed_tomcat_embed_el_9_0_30.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../lx/.idea/libraries/Maven__org_apache_tomcat_embed_tomcat_embed_websocket_9_0_30.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../lx/.idea/libraries/Maven__org_hibernate_validator_hibernate_validator_6_0_18_Final.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../lx/.idea/libraries/Maven__org_jboss_logging_jboss_logging_3_4_1_Final.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../lx/.idea/libraries/Maven__org_slf4j_jul_to_slf4j_1_7_30.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../lx/.idea/libraries/Maven__org_slf4j_slf4j_api_1_7_30.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../lx/.idea/libraries/Maven__org_springframework_boot_spring_boot_2_2_4_RELEASE.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../lx/.idea/libraries/Maven__org_springframework_boot_spring_boot_autoconfigure_2_2_4_RELEASE.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../lx/.idea/libraries/Maven__org_springframework_boot_spring_boot_starter_2_2_4_RELEASE.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../lx/.idea/libraries/Maven__org_springframework_boot_spring_boot_starter_json_2_2_4_RELEASE.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../lx/.idea/libraries/Maven__org_springframework_boot_spring_boot_starter_logging_2_2_4_RELEASE.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../lx/.idea/libraries/Maven__org_springframework_boot_spring_boot_starter_tomcat_2_2_4_RELEASE.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../lx/.idea/libraries/Maven__org_springframework_boot_spring_boot_starter_validation_2_2_4_RELEASE.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../lx/.idea/libraries/Maven__org_springframework_boot_spring_boot_starter_web_2_2_4_RELEASE.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../lx/.idea/libraries/Maven__org_springframework_boot_spring_boot_starter_websocket_2_1_7_RELEASE.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../lx/.idea/libraries/Maven__org_springframework_spring_aop_5_2_3_RELEASE.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../lx/.idea/libraries/Maven__org_springframework_spring_beans_5_2_3_RELEASE.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../lx/.idea/libraries/Maven__org_springframework_spring_context_5_2_3_RELEASE.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../lx/.idea/libraries/Maven__org_springframework_spring_core_5_2_3_RELEASE.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../lx/.idea/libraries/Maven__org_springframework_spring_expression_5_2_3_RELEASE.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../lx/.idea/libraries/Maven__org_springframework_spring_jcl_5_2_3_RELEASE.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../lx/.idea/libraries/Maven__org_springframework_spring_messaging_5_1_9_RELEASE.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../lx/.idea/libraries/Maven__org_springframework_spring_web_5_2_3_RELEASE.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../lx/.idea/libraries/Maven__org_springframework_spring_webmvc_5_2_3_RELEASE.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../lx/.idea/libraries/Maven__org_springframework_spring_websocket_5_1_9_RELEASE.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../lx/.idea/libraries/Maven__org_yaml_snakeyaml_1_25.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/com/example/f/MainActivity.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/example/f/MainActivity.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../authority/src/main/resources/META-INF/resources/sys/xx.html" beforeDir="false" afterPath="$PROJECT_DIR$/../authority/src/main/resources/META-INF/resources/sys/xx.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../demo/demo.iml" beforeDir="false" afterPath="$PROJECT_DIR$/../demo/demo.iml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../demo/src/main/java/lx/com/pdf/PDFUtil.java" beforeDir="false" afterPath="$PROJECT_DIR$/../demo/src/main/java/lx/com/pdf/PDFUtil.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../demo/src/main/java/lx/com/pdf/jds.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../demo/src/main/java/lx/com/pdf/mks.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../demo/src/main/java/lx/com/pdf/xx.html" beforeDir="false" afterPath="$PROJECT_DIR$/../demo/src/main/java/lx/com/pdf/xx.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../demo/src/main/java/lx/com/pdf/xzs.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../demo/src/main/java/lx/com/study/ChuPai.java" beforeDir="false" afterPath="$PROJECT_DIR$/../demo/src/main/java/lx/com/study/ChuPai.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../demo/src/main/java/lx/com/study/ImService.java" beforeDir="false" afterPath="$PROJECT_DIR$/../demo/src/main/java/lx/com/study/ImService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../demo/src/main/resources/static/hlddz/douzizhu_files/ddz2.js" beforeDir="false" afterPath="$PROJECT_DIR$/../demo/src/main/resources/static/hlddz/douzizhu_files/ddz2.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../lx/.idea/artifacts/authority_jar.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../lx/.idea/artifacts/authority_jar.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../lx/.idea/artifacts/authority_jar2.xml" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/../lx/.idea/compiler.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../lx/.idea/compiler.xml" afterDir="false" />
@@ -234,7 +245,6 @@
       <change beforePath="$PROJECT_DIR$/../wx2/src/main/java/com/lx/wx/service/KGService.java" beforeDir="false" afterPath="$PROJECT_DIR$/../wx2/src/main/java/com/lx/wx/service/KGService.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../xx/.idea/compiler.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../xx/.idea/compiler.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../xx/.idea/encodings.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../xx/.idea/encodings.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../xx/.idea/inspectionProfiles/Project_Default.xml" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/../xx/.idea/inspectionProfiles/profiles_settings.xml" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/../xx/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../xx/.idea/misc.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../xx/.idea/modules.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../xx/.idea/modules.xml" afterDir="false" />
@@ -248,6 +258,11 @@
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
     <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="ChangesViewManager">
+    <option name="groupingKeys">
+      <option value="directory" />
+    </option>
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
@@ -272,8 +287,8 @@
       <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/com/example/f/MainActivity.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="488">
-              <caret line="167" column="14" selection-start-line="167" selection-start-column="14" selection-end-line="167" selection-end-column="14" />
+            <state relative-caret-position="329">
+              <caret line="98" column="74" selection-start-line="98" selection-start-column="74" selection-end-line="98" selection-end-column="74" />
             </state>
           </provider>
         </entry>
@@ -341,8 +356,6 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
-      <pane id="PackagesPane" />
-      <pane id="AndroidView" />
       <pane id="ProjectPane">
         <subPane>
           <expand>
@@ -390,6 +403,8 @@
           <select />
         </subPane>
       </pane>
+      <pane id="AndroidView" />
+      <pane id="PackagesPane" />
       <pane id="Scope" />
     </panes>
   </component>
@@ -401,8 +416,8 @@
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="android.profiler.active" value="true" />
     <property name="aspect.path.notification.shown" value="true" />
-    <property name="com.android.tools.idea.instantapp.provision.ProvisionBeforeRunTaskProvider.myTimeStamp" value="1583463068491" />
-    <property name="device.picker.selection" value="DWT4C18717002657" />
+    <property name="com.android.tools.idea.instantapp.provision.ProvisionBeforeRunTaskProvider.myTimeStamp" value="1583667348231" />
+    <property name="device.picker.selection" value="A5R7N17C25008415" />
     <property name="last_opened_file_path" value="C:/Program Files/TortoiseSVN/bin/svn.exe" />
     <property name="nodejs_interpreter_path.stuck_in_default_project" value="undefined stuck path" />
     <property name="nodejs_npm_path_reset_for_default_project" value="true" />
@@ -494,16 +509,34 @@
       <option name="presentableId" value="Default" />
       <updated>1583460320385</updated>
       <workItem from="1583460322362" duration="2670000" />
-      <workItem from="1583463007210" duration="62000" />
+      <workItem from="1583463007210" duration="177000" />
+      <workItem from="1583495922609" duration="74000" />
+      <workItem from="1583636155726" duration="650000" />
+      <workItem from="1583662138235" duration="63000" />
+      <workItem from="1583667254212" duration="131000" />
     </task>
+    <task id="LOCAL-00001" summary="android浏览器">
+      <created>1583463116815</created>
+      <option name="number" value="00001" />
+      <option name="presentableId" value="LOCAL-00001" />
+      <option name="project" value="LOCAL" />
+      <updated>1583463116815</updated>
+    </task>
+    <task id="LOCAL-00002" summary="android浏览器">
+      <created>1583463169312</created>
+      <option name="number" value="00002" />
+      <option name="presentableId" value="LOCAL-00002" />
+      <option name="project" value="LOCAL" />
+      <updated>1583463169312</updated>
+    </task>
+    <option name="localTasksCounter" value="3" />
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="2732000" />
+    <option name="totallyTimeSpent" value="3765000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-7" y="-7" width="1550" height="838" extended-state="6" />
-    <editor active="true" />
     <layout>
       <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.25033468" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
@@ -521,13 +554,13 @@
       <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
       <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
       <window_info anchor="bottom" id="TODO" order="6" />
-      <window_info anchor="bottom" id="Android Profiler" order="7" show_stripe_button="false" weight="0.26760563" />
+      <window_info anchor="bottom" id="Android Profiler" order="7" weight="0.26760563" />
       <window_info anchor="bottom" id="Docker" order="8" show_stripe_button="false" />
       <window_info anchor="bottom" id="Event Log" order="9" side_tool="true" />
       <window_info anchor="bottom" id="Messages" order="10" />
       <window_info anchor="bottom" id="Logcat" order="11" />
       <window_info anchor="bottom" id="Database Changes" order="12" />
-      <window_info anchor="bottom" id="Version Control" order="13" />
+      <window_info anchor="bottom" id="Version Control" order="13" weight="0.32957748" />
       <window_info anchor="bottom" id="Terminal" order="14" />
       <window_info anchor="right" id="Commander" internal_type="SLIDING" order="0" type="SLIDING" weight="0.4" />
       <window_info anchor="right" id="Ant Build" order="1" weight="0.25" />
@@ -543,6 +576,10 @@
   </component>
   <component name="TypeScriptGeneratedFilesManager">
     <option name="version" value="1" />
+  </component>
+  <component name="VcsManagerConfiguration">
+    <MESSAGE value="android浏览器" />
+    <option name="LAST_COMMIT_MESSAGE" value="android浏览器" />
   </component>
   <component name="editorHistoryManager">
     <entry file="file://$PROJECT_DIR$/AndroidManifest.xml">
@@ -584,8 +621,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/com/example/f/MainActivity.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="488">
-          <caret line="167" column="14" selection-start-line="167" selection-start-column="14" selection-end-line="167" selection-end-column="14" />
+        <state relative-caret-position="329">
+          <caret line="98" column="74" selection-start-line="98" selection-start-column="74" selection-end-line="98" selection-end-column="74" />
         </state>
       </provider>
     </entry>
