@@ -14,6 +14,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.ApplicationContextAware;
 import org.springframework.context.EnvironmentAware;
+import org.springframework.context.annotation.Configuration;
 import org.springframework.core.env.Environment;
 import org.springframework.stereotype.Component;
 
@@ -23,7 +24,7 @@ import java.util.*;
 import java.util.function.Function;
 import java.util.function.Supplier;
 
-@Component
+@Configuration
 public class OS implements ApplicationContextAware,EnvironmentAware {
 
     private static Logger log = LoggerFactory.getLogger(OS.class);
@@ -220,6 +221,23 @@ public class OS implements ApplicationContextAware,EnvironmentAware {
     public static Var getMethod(String method){
         LX.exObj(method,"方法名不能为空!");
         return redisUtil.find("system:service",Var.class,method);
+    }
+    public static Object invoke(Var map) throws Exception {
+        LX.exMap(map,"method");
+        String[] arr = map.getStr("method").split("\\.");
+        if (arr.length != 2) LX.exMsg("接口不存在!");
+        Object cls = OS.getBean(arr[0]);
+        Method m;
+        try {
+             m = cls.getClass().getDeclaredMethod(arr[1], new Class[]{Var.class});
+        }catch (Exception e){
+            return LX.exMsg("不能查找到方法==>" + map.getStr("method"));
+        }
+        Object res = m.invoke(cls, map);
+        if (res instanceof List) return new OS.Page((List) res);
+        if (res instanceof OS.Page) return res;
+        if (res == null || res instanceof Map) return new OS.Page((Map) res);
+        return new OS.Page(LX.toMap(res));
     }
     /** 调用方法*/
     public static Object invokeMethod(Map map) throws Exception {

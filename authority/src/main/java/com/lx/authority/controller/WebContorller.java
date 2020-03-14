@@ -10,16 +10,14 @@ import com.sun.management.OperatingSystemMXBean;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.PostConstruct;
 import javax.servlet.http.HttpServletRequest;
 import java.io.*;
 import java.lang.management.ManagementFactory;
 import java.lang.management.ThreadMXBean;
+import java.lang.reflect.Method;
 import java.math.BigDecimal;
 import java.util.*;
 
@@ -33,6 +31,28 @@ public class WebContorller {
     Logger logger = LoggerFactory.getLogger(WebContorller.class);
     @Autowired
     private RedisUtil redis;
+
+    @RequestMapping(value = "/login")
+    @ResponseBody
+    @Authority(false)
+    public Object login(HttpServletRequest req) throws Exception {
+        Var pd = OS.getParameterMap(req);
+        OS.put("req",req);
+        logger.info("--start--" + pd);
+        LX.exMap(pd, "cls");
+        pd.put("method",pd.getStr("cls")+".login");
+        return OS.invoke(pd);
+    }
+
+    @RequestMapping(value = "/call")
+    @ResponseBody
+    public Object call(HttpServletRequest req) throws Exception {
+        Var pd = OS.getParameterMap(req);
+        logger.info("--start--" + pd);
+        LX.exMap(pd, "method");
+        return OS.invoke(pd);
+    }
+
     //说明:接口调用 token登陆令牌 method为方法名
     /**{ ylx } 2019/5/14 14:14 */
     @RequestMapping(value = "/service")
