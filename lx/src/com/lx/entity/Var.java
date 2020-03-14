@@ -23,11 +23,16 @@ public class Var extends HashMap {
     public String getStr(Object key){return LX.isEmpty(get(key))?"":get(key).toString();}
     public List getList(Object key){return getObj(key);}
     public Var getVar(Object key){return getObj(Var.class,key);}
-    public int getInt(Object key){return Integer.parseInt(getStr(key));}
+    public int getInt(Object key){return (int)getDouble(key);}
+    public double getDouble(Object key){return Double.parseDouble(getStr(key));}
     /** 获取值(可能强转不了)*/
     public <T> T getObj(Object key){return (T) get(key);}
     /** 获取指定类型值*/
     public <T> T getObj(Class<T> t,Object key){return LX.toObj(t,get(key));}
 
-
+    @Override
+    public Var put(Object key, Object value) {
+        super.put(key, value);
+        return this;
+    }
 }
