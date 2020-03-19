@@ -1,0 +1,414 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="mapper.T_Sys_UserMapper">
+
+
+    <!-- 添加系统字典表 -->
+    <insert id="insert" parameterType="map">
+        insert into t_sys_user
+        (
+        user_id
+        <if test="login_name != null and login_name != '' ">
+            , login_name
+        </if>
+        <if test="password != null and password != '' ">
+            , password
+        </if>
+        <if test="realname != null and realname != '' ">
+            , realname
+        </if>
+        <if test="sex != null and sex != '' ">
+            , sex
+        </if>
+        <if test="last_login_time != null and last_login_time != '' ">
+            , last_login_time
+        </if>
+        <if test="last_login_ip != null and last_login_ip != '' ">
+            , last_login_ip
+        </if>
+        <if test="is_enabled != null and is_enabled != '' ">
+            , is_enabled
+        </if>
+        <if test="opname != null and opname != '' ">
+            , opname
+        </if>
+        <if test="optime != null and optime != '' ">
+            , optime
+        </if>
+        <if test="user_type != null and user_type != '' ">
+            , user_type
+        </if>
+        <if test="doc_id != null and doc_id != '' ">
+            , doc_id
+        </if>
+        <if test="photo_url != null and photo_url != '' ">
+            , photo_url
+        </if>
+        <if test="user_code != null and user_code != '' ">
+            , user_code
+        </if>
+        <if test="tokent != null and tokent != '' ">
+            , tokent
+        </if>
+        <if test="tokent_expire != null and tokent_expire != '' ">
+            , tokent_expire
+        </if>
+        <if test="current_dept != null and current_dept != '' ">
+            , current_dept
+        </if>
+        <if test="business_code != null and business_code != '' ">
+            , business_code
+        </if>
+        <if test="is_esignature != null and is_esignature != '' ">
+            , is_esignature
+        </if>
+        <if test="esignatureway != null and esignatureway != '' ">
+            , esignatureway
+        </if>
+        <if test="last_upd_pwd_time != null and last_upd_pwd_time != '' ">
+            , last_upd_pwd_time
+        </if>
+        <if test="locknum != null and locknum != '' ">
+            , locknum
+        </if>
+        <if test="is_lock != null and is_lock != '' ">
+            , is_lock
+        </if>
+        <if test="last_logtime != null and last_logtime != '' ">
+            , last_logtime
+        </if>
+        <if test="id_no != null and id_no != '' ">
+            , id_no
+        </if>
+        <if test="birth_date != null and birth_date != '' ">
+            , birth_date
+        </if>
+        <if test="tel_no != null and tel_no != '' ">
+            , tel_no
+        </if>
+        <if test="address != null and address != '' ">
+            , address
+        </if>
+        <if test="wx_openid != null and wx_openid != '' ">
+            , wx_openid
+        </if>
+        <if test="wx_nickname != null and wx_nickname != '' ">
+            , wx_nickname
+        </if>
+        <if test="wx_sex != null and wx_sex != '' ">
+            , wx_sex
+        </if>
+        <if test="wx_language != null and wx_language != '' ">
+            , wx_language
+        </if>
+        <if test="wx_province != null and wx_province != '' ">
+            , wx_province
+        </if>
+        <if test="wx_city != null and wx_city != '' ">
+            , wx_city
+        </if>
+        <if test="wx_country != null and wx_country != '' ">
+            , wx_country
+        </if>
+        <if test="wx_headimgurl != null and wx_headimgurl != '' ">
+            , wx_headimgurl
+        </if>
+        <if test="wx_privilege != null and wx_privilege != '' ">
+            , wx_privilege
+        </if>
+        <if test="wx_unionid != null and wx_unionid != '' ">
+            , wx_unionid
+        </if>
+        <if test="jg_id != null and jg_id != '' ">
+            , jg_id
+        </if>
+        )values(
+        newid()
+        <if test="login_name != null  and login_name != '' ">
+            , #{login_name}
+        </if>
+        <if test="password != null  and password != '' ">
+            , #{password}
+        </if>
+        <if test="realname != null  and realname != '' ">
+            , #{realname}
+        </if>
+        <if test="sex != null  and sex != '' ">
+            , #{sex}
+        </if>
+        <if test="last_login_time != null  and last_login_time != '' ">
+            , #{last_login_time}
+        </if>
+        <if test="last_login_ip != null  and last_login_ip != '' ">
+            , #{last_login_ip}
+        </if>
+        <if test="is_enabled != null  and is_enabled != '' ">
+            , #{is_enabled}
+        </if>
+        <if test="opname != null  and opname != '' ">
+            , #{opname}
+        </if>
+        <if test="optime != null  and optime != '' ">
+            , #{optime}
+        </if>
+        <if test="user_type != null  and user_type != '' ">
+            , #{user_type}
+        </if>
+        <if test="doc_id != null  and doc_id != '' ">
+            , #{doc_id}
+        </if>
+        <if test="photo_url != null  and photo_url != '' ">
+            , #{photo_url}
+        </if>
+        <if test="user_code != null  and user_code != '' ">
+            , #{user_code}
+        </if>
+        <if test="tokent != null  and tokent != '' ">
+            , #{tokent}
+        </if>
+        <if test="tokent_expire != null  and tokent_expire != '' ">
+            , #{tokent_expire}
+        </if>
+        <if test="current_dept != null  and current_dept != '' ">
+            , #{current_dept}
+        </if>
+        <if test="business_code != null  and business_code != '' ">
+            , #{business_code}
+        </if>
+        <if test="is_esignature != null  and is_esignature != '' ">
+            , #{is_esignature}
+        </if>
+        <if test="esignatureway != null  and esignatureway != '' ">
+            , #{esignatureway}
+        </if>
+        <if test="last_upd_pwd_time != null  and last_upd_pwd_time != '' ">
+            , #{last_upd_pwd_time}
+        </if>
+        <if test="locknum != null  and locknum != '' ">
+            , #{locknum}
+        </if>
+        <if test="is_lock != null  and is_lock != '' ">
+            , #{is_lock}
+        </if>
+        <if test="last_logtime != null  and last_logtime != '' ">
+            , #{last_logtime}
+        </if>
+        <if test="id_no != null  and id_no != '' ">
+            , #{id_no}
+        </if>
+        <if test="birth_date != null  and birth_date != '' ">
+            , #{birth_date}
+        </if>
+        <if test="tel_no != null  and tel_no != '' ">
+            , #{tel_no}
+        </if>
+        <if test="address != null  and address != '' ">
+            , #{address}
+        </if>
+        <if test="wx_openid != null  and wx_openid != '' ">
+            , #{wx_openid}
+        </if>
+        <if test="wx_nickname != null  and wx_nickname != '' ">
+            , #{wx_nickname}
+        </if>
+        <if test="wx_sex != null  and wx_sex != '' ">
+            , #{wx_sex}
+        </if>
+        <if test="wx_language != null  and wx_language != '' ">
+            , #{wx_language}
+        </if>
+        <if test="wx_province != null  and wx_province != '' ">
+            , #{wx_province}
+        </if>
+        <if test="wx_city != null  and wx_city != '' ">
+            , #{wx_city}
+        </if>
+        <if test="wx_country != null  and wx_country != '' ">
+            , #{wx_country}
+        </if>
+        <if test="wx_headimgurl != null  and wx_headimgurl != '' ">
+            , #{wx_headimgurl}
+        </if>
+        <if test="wx_privilege != null  and wx_privilege != '' ">
+            , #{wx_privilege}
+        </if>
+        <if test="wx_unionid != null  and wx_unionid != '' ">
+            , #{wx_unionid}
+        </if>
+        <if test="doc_id != null  and doc_id != ''">
+            ,(SELECT jg_id from dic_doctor where doc_id = #{doc_id})
+        </if>
+        <if test="doc_id == null  or doc_id == ''">
+            ,#{jg_id}
+        </if>
+        )
+    </insert>
+    <!-- 修改系统字典表 -->
+    <update id="update" parameterType="map">
+        update t_sys_user
+        set
+        user_id = #{user_id}
+        <if test="login_name != null  and login_name != ''">
+            , login_name= #{login_name}
+        </if>
+        <if test="password != null  and password != ''">
+            , password= #{password}
+        </if>
+        <if test="realname != null  and realname != ''">
+            , realname= #{realname}
+        </if>
+        <if test="sex != null  and sex != ''">
+            , sex= #{sex}
+        </if>
+        <if test="last_login_time != null  and last_login_time != ''">
+            , last_login_time= #{last_login_time}
+        </if>
+        <if test="last_login_ip != null  and last_login_ip != ''">
+            , last_login_ip= #{last_login_ip}
+        </if>
+        <if test="is_enabled != null  and is_enabled != ''">
+            , is_enabled= #{is_enabled}
+        </if>
+        <if test="opname != null  and opname != ''">
+            , opname= #{opname}
+        </if>
+        <if test="optime != null  and optime != ''">
+            , optime= #{optime}
+        </if>
+        <if test="user_type != null  and user_type != ''">
+            , user_type= #{user_type}
+        </if>
+        <if test="user_type != null ">
+            , doc_id= case when #{doc_id} = '' then null else #{doc_id} end
+        </if>
+
+        <if test="photo_url != null  and photo_url != ''">
+            , photo_url= #{photo_url}
+        </if>
+        <if test="user_code != null  and user_code != ''">
+            , user_code= #{user_code}
+        </if>
+        <if test="tokent != null  and tokent != ''">
+            , tokent= #{tokent}
+        </if>
+        <if test="tokent_expire != null  and tokent_expire != ''">
+            , tokent_expire= #{tokent_expire}
+        </if>
+        <if test="current_dept != null  and current_dept != ''">
+            , current_dept= #{current_dept}
+        </if>
+        <if test="business_code != null  and business_code != ''">
+            , business_code= #{business_code}
+        </if>
+        <if test="is_esignature != null  and is_esignature != ''">
+            , is_esignature= #{is_esignature}
+        </if>
+        <if test="esignatureway != null  and esignatureway != ''">
+            , esignatureway= #{esignatureway}
+        </if>
+        <if test="last_upd_pwd_time != null  and last_upd_pwd_time != ''">
+            , last_upd_pwd_time= #{last_upd_pwd_time}
+        </if>
+        <if test="locknum != null  and locknum != ''">
+            , locknum= #{locknum}
+        </if>
+        <if test="is_lock != null  and is_lock != ''">
+            , is_lock= #{is_lock}
+        </if>
+        <if test="last_logtime != null  and last_logtime != ''">
+            , last_logtime= #{last_logtime}
+        </if>
+        <if test="id_no != null  and id_no != ''">
+            , id_no= #{id_no}
+        </if>
+        <if test="birth_date != null  and birth_date != ''">
+            , birth_date= #{birth_date}
+        </if>
+        <if test="tel_no != null  and tel_no != ''">
+            , tel_no= #{tel_no}
+        </if>
+        <if test="address != null  and address != ''">
+            , address= #{address}
+        </if>
+        <if test="wx_openid != null ">
+            , wx_openid= #{wx_openid}
+        </if>
+        <if test="wx_nickname != null  and wx_nickname != ''">
+            , wx_nickname= #{wx_nickname}
+        </if>
+        <if test="wx_sex != null  and wx_sex != ''">
+            , wx_sex= #{wx_sex}
+        </if>
+        <if test="wx_language != null  and wx_language != ''">
+            , wx_language= #{wx_language}
+        </if>
+        <if test="wx_province != null  and wx_province != ''">
+            , wx_province= #{wx_province}
+        </if>
+        <if test="wx_city != null  and wx_city != ''">
+            , wx_city= #{wx_city}
+        </if>
+        <if test="wx_country != null  and wx_country != ''">
+            , wx_country= #{wx_country}
+        </if>
+        <if test="wx_headimgurl != null  and wx_headimgurl != ''">
+            , wx_headimgurl= #{wx_headimgurl}
+        </if>
+        <if test="wx_privilege != null  and wx_privilege != ''">
+            , wx_privilege= #{wx_privilege}
+        </if>
+        <if test="wx_unionid != null  and wx_unionid != ''">
+            , wx_unionid= #{wx_unionid}
+        </if>
+        <if test="doc_id != null  and doc_id != ''">
+            ,jg_id = (SELECT jg_id from dic_doctor where doc_id = #{doc_id})
+        </if>
+        <if test="(doc_id == null  or doc_id == '' )and jg_id != null">
+            ,jg_id = #{jg_id}
+        </if>
+        where
+        user_id = #{user_id}
+    </update>
+    <select id="findWXInfo" parameterType="map" resultType="map">
+         select  [wx_openid], [wx_nickname], [wx_sex], [wx_language], [wx_province], [wx_city], [wx_country], [wx_headimgurl], [wx_privilege], [wx_unionid]
+        from sys_patient_user where wx_openid = #{wx_openid}
+    </select>
+    <!---->
+    <select id="findUserByLoginNameAndPassword" parameterType="map" resultType="var">
+        SELECT u.user_id,	u.login_name,doc_id,	u.PassWord,	u.RealName,u.is_lock,u.is_enabled,u.jg_id,u.user_type,dm.jg_grade,u.photo_url FROM [dbo].[T_Sys_User] u
+        LEFT JOIN dic_medicalInstitutions dm on dm.jg_id = u.jg_id
+         where u.login_name = #{login_name}
+         AND u.PassWord = #{PassWord}
+        AND  u.is_enabled  = '1'
+    </select>
+    <select id="findUserByLoginName" parameterType="map" resultType="var">
+        SELECT u.user_id,	u.login_name,doc_id,	u.PassWord,	u.RealName,u.is_lock,u.is_enabled,u.jg_id,u.user_type,dm.jg_grade,u.photo_url FROM [dbo].[T_Sys_User] u
+        LEFT JOIN dic_medicalInstitutions dm on dm.jg_id = u.jg_id
+        where u.login_name = #{login_name}
+        AND  u.is_enabled  = '1'
+    </select>
+    <select id="check" parameterType="map" resultType="var">
+        select ''
+        <if test="doc_id != null and doc_id != ''">
+            +isnull((
+            select '该医生已被其他用户绑定! ;' msg where EXISTS (select 1 from t_sys_user
+            where doc_id = #{doc_id}
+            <if test="user_id != null and user_id != ''">
+                and user_id != #{user_id}
+            </if>
+            )
+            ),'')
+        </if>
+        <if test="wx_openid != null and wx_openid != ''">
+            +isnull((
+            select '该微信已被其他用户绑定! ;' msg where EXISTS (select 1 from t_sys_user
+            where wx_openid = #{wx_openid}
+            <if test="user_id != null and user_id != ''">
+                and user_id != #{user_id}
+            </if>
+            )
+            ),'')
+        </if>
+        msg
+    </select>
+</mapper>

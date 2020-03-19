@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title></title>
+    <meta name="renderer" content="webkit">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=0">
+    <link rel="stylesheet" href="/sys/layuiadmin/layui/css/layui.css" media="all">
+</head>
+<body>
+
+<div class="layui-form" lay-filter="formTest1" id="formTest1" style="padding: 20px 30px 0 0;">
+
+    <div class="layui-form-item layui-hide">
+        <input type="button" lay-submit lay-filter="layuiadmin-app-form-submit" id="layuiadmin-app-form-submit" value="确认添加">
+        <input type="button" lay-submit lay-filter="layuiadmin-app-form-edit" id="layuiadmin-app-form-edit" value="确认编辑">
+    </div>
+</div>
+<script src="/sys/layuiadmin/js/jquery.min.js"></script>
+<script src="/sys/layuiadmin/layui/layui.all.js"></script>
+<script src="/admin/js/lx.js"></script>
+<script>
+
+
+
+
+    dataForm.flist =[
+        {field:"doc_code",title:"医生编码",verify:'required'}
+        ,{field:"doc_id",width:150,title:"医生ID",hide:1,val:''}
+        ,{field:"doc_name",title:"医师姓名",verify:'required'}
+        ,{field:"doc_prof",title:"医师职称",select:{option:'',id:'code',name:'meaning',url:'/admin/list/sys_code?lx_code_type=007&code=&meaning=&lx_is_enabled=1'}}
+        ,{field:"id_no",title:"身份证号"}
+        ,{field:"sex",title:"性别",radio_ls:[{name:'男',val:'1'},{name:'女',val:'2'}],checkval:'1'}
+        ,{field:"birth_date",title:"出生日期",cls:"s_data"}
+        ,{field:"doc_picture",title:"医生头像",img:1,width:100,height:100,id:"tx"}
+        ,{field:"doc_specialties",title:"医生特长"}
+        ,{field:"contact_way",title:"联系方式"}
+        ,{field:"doc_synopsis",title:"医生简介"}
+        ,{field:"ybbm",title:"医保编码"}
+        ,{field:"jg_id",title:"机构",verify:'required',id:'jg_id',select:{option:' ',id:'jg_id',name:'jgmc',url:'/admin/serviceK?method=adminService.dic_medicalInstitutionsList&jg_grade=2'}}
+        ,{field:"is_jyqy",title:"签约标志",radio_ls:[{name:'是',val:'1'},{name:'否',val:'0'}],checkval:'0'}
+        ,{field:"is_enabled",title:"是否有效",radio_ls:[{name:'有效',val:'1'},{name:'无效',val:'0'}],checkval:'1'}
+    ]
+    dataForm.primaryKey = "doc_id";
+    dataForm.submit_func= function(data){
+        var field = data.field; //获取提交的字段
+        if(!dataForm.id ){
+            field[dataForm.primaryKey] = lx.guid();
+        }
+        field['lx_'+dataForm.primaryKey] = field[dataForm.primaryKey] ;
+        if (!field.jg_id){
+            delete field.jg_id;
+        }
+        field.doc_picture = $("#imgTesttx img").attr('src');
+        var index = parent.layer.getFrameIndex(window.name); //先得到当前iframe层的索引
+        lx.ajax("admin/edit/dic_doctor",function () {
+            parent.layui.table.reload('table_temp_id'); //重载表格
+            parent.layer.close(index); //再执行关闭
+        },field);
+    }
+    dataForm.enableID_func=function(){
+        var para = {};
+        para["lx_"+dataForm.primaryKey]=dataForm.id ;
+        lx.ajax("admin/obj/dic_doctor",function (data) {
+            var v = data.entity;
+            $('#jg_id').attr("disabled",true);
+            $("#imgTesttx img").attr('src', v.doc_picture);
+            layui.form.val("formTest1",v);
+        },para);
+    }
+
+</script>
+</body>
+</html>

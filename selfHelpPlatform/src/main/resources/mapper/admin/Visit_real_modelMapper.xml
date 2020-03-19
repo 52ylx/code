@@ -1,0 +1,99 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="mapper.Visit_real_modelMapper">
+    <update id="add_visit_real" parameterType="map">
+        declare @i int
+        SELECT @i = config_value-1 FROM [dbo].[sys_config] where config_id='BDB4A967-A6FD-44C4-AEAE-F1D5EDD80480'
+        while @i>=0
+        begin
+            INSERT INTO visit_real ([real_id], [vm_id], [visit_date], [week], [apw], [jg_id], [doc_id], [stopType], [update_time], [update_user], [is_enabled])
+            select
+            NEWID(),vrm.vm_id
+            ,convert(varchar(10),DATEADD(dd, @i, getdate()),20) visit_date
+            ,vrm.week,vrm.apw ,vrm.jg_id ,vrm.doc_id,vrm.temporary_stop,GETDATE(),null,1
+            from visit_real_model vrm
+            join dic_doctor doc on doc.doc_id = vrm.doc_id and doc.is_enabled = '1'
+            LEFT JOIN visit_real vr on vr.vm_id = vrm.vm_id and DATEDIFF(dd, DATEADD(dd, @i, getdate()), vr.visit_date)=0
+            where vr.vm_id is NULL and vrm.apw is not null and datepart(weekday, DATEADD(dd, @i, getdate()) )-1 = vrm.week
+            set @i=@i-1
+        end
+    </update>
+    <select id="visit_real" parameterType="map" resultType="map">
+        SELECT
+        [real_id], convert(varchar(10),[visit_date],20)visit_date, [week],
+        case [apw] when 'A' then '上午' when 'P' then '下午' when 'Q' then '全天' when 'W' then '晚上' else '' end apw,
+         jgmc, doc_name, vr.[is_enabled], [stopType], vr.[update_time], t.realName [update_user]
+        FROM [dbo].[visit_real] vr
+        LEFT JOIN dic_doctor doc on doc.doc_id = vr.doc_id
+        LEFT JOIN dic_medicalInstitutions dm on dm.jg_id = vr.jg_id
+        left join t_sys_user t on t.user_id =  vr.[update_user]
+        <where>
+            <if test="jgmc != null and jgmc != ''">
+                and jgmc like '%'+#{jgmc}+'%'
+            </if>
+            <if test="doc_name != null and doc_name != ''">
+                and doc_name like '%'+#{doc_name}+'%'
+            </if>
+            <if test="visit_date != null and visit_date != ''">
+                and visit_date BETWEEN  LEFT (#{visit_date},19) and right(#{visit_date},19)
+            </if>
+            <if test="OS.user_type != 1">
+                and (vr.jg_id =#{OS.jg_id} or vr.jg_id in (select jg_id from dic_medicalInstitutions d where d.sjjg = #{OS.jg_id}))
+            </if>
+        </where>
+        ORDER BY visit_date desc
+    </select>
+    <!---->
+    <select id="visit_real_model_findByUser" parameterType="map" resultType="var">
+        declare @num int
+        select @num =count(1) from visit_real_model where doc_id = #{doc_id}
+        IF (@num = 0)
+        begin
+        INSERT into [visit_real_model] ([vm_id], [week], [apw], [jg_id], [doc_id], [is_enabled], [temporary_stop], [add_time], [add_user], [update_time], [update_user], [order_num])
+        select NEWID(),w.[key],'Q',jg_id,doc_id,1,0,GETDATE(),#{add_user},GETDATE(),null,w.[key] from dic_doctor doc , dbo.toMap('0,1,2,3,4,5,6',',','') w where doc_id = #{doc_id}
+        END
+
+        select [vm_id], [week], [apw], [temporary_stop], [order_num]
+        from visit_real_model where doc_id = #{doc_id}
+        <if test="OS.user_type != 1">
+            and (jg_id =#{OS.jg_id} or jg_id in (select jg_id from dic_medicalInstitutions d where d.sjjg = #{OS.jg_id}))
+        </if>
+         ORDER BY order_num
+    </select>
+    <update id="save" parameterType="map">
+        update visit_real_model
+        set
+        vm_id = #{vm_id}
+        <if test="week != null  and week!= ''  or week == 0">
+            , week= #{week}
+        </if>
+        <if test="apw != null  and apw!= ''  or apw == 0">
+            , apw= #{apw}
+        </if>
+        <if test="jg_id != null  and jg_id!= ''  or jg_id == 0">
+            , jg_id= #{jg_id}
+        </if>
+        <if test="doc_id != null  and doc_id!= ''  or doc_id == 0">
+            , doc_id= #{doc_id}
+        </if>
+        <if test="is_enabled != null  and is_enabled!= ''  or is_enabled == 0">
+            , is_enabled= #{is_enabled}
+        </if>
+        <if test="temporary_stop != null  and temporary_stop!= ''  or temporary_stop == 0">
+            , temporary_stop= #{temporary_stop}
+        </if>
+        <if test="add_time != null  and add_time!= ''  or add_time == 0">
+            , add_time= #{add_time}
+        </if>
+        <if test="add_user != null  and add_user!= ''  or add_user == 0">
+            , add_user= #{add_user}
+        </if>
+            , update_time= getdate()
+            , update_user= #{update_user}
+        <if test="order_num != null  and order_num!= ''  or order_num == 0">
+            , order_num= #{order_num}
+        </if>
+        where
+        vm_id = #{vm_id}
+    </update>
+</mapper>

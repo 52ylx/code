@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="mapper.Inquiry_orderMapper">
+    <select id="inquiry_order_detail" parameterType="map" resultType="map">
+        select [iod_num], [info_source_type], ISNULL(doc.doc_name, spu.name) [info_source], [info_content], iod.[is_enabled], iod.[add_time]
+        ,case [doc_terminal] when '0' then '公众号' when '1' then 'PC' else '' end doc_terminal
+        from inquiry_order_detail iod
+         LEFT JOIN dic_doctor doc on doc.doc_id = iod.info_source_id
+        LEFT JOIN sys_patient_user spu on spu.spu_id = iod.info_source_id
+        where io_id = #{io_id}
+        ORDER BY iod.[add_time]
+    </select>
+    <!---->
+    <select id="listPage" parameterType="map" resultType="var">
+        SELECT io.io_id,sop.name sop_name,spu.name spu_name,dm.jgmc	,doc.doc_name,io.inquiry_memo,io.is_enabled,io.add_time,io.update_time
+        FROM [dbo].[inquiry_order] io
+        left join dic_doctor doc  on doc.doc_id = io.doc_id
+        left join dic_medicalInstitutions dm  on dm.jg_id = io.jg_id
+        LEFT JOIN sys_of_patient sop  on sop.sop_id = io.sop_id
+        LEFT JOIN sys_patient_user spu  on spu.spu_id = io.spu_id
+        where  io.is_enabled  = '1'
+        <if test="sop_name != null and sop_name != ''">
+            and sop.name like '%'+#{sop_name}+'%'
+        </if>
+        <if test="spu_name != null and spu_name != ''">
+            and spu.name like '%'+#{spu_name}+'%'
+        </if>
+
+        <if test="jgmc != null and jgmc != ''">
+            and jgmc like '%'+#{jgmc}+'%'
+        </if>
+        <if test="doc_name != null and doc_name != ''">
+            and doc_name like '%'+#{doc_name}+'%'
+        </if>
+        <if test="OS.user_type != 1">
+            and (io.jg_id =#{OS.jg_id} or io.jg_id in (select jg_id from dic_medicalInstitutions d where d.sjjg = #{OS.jg_id}))
+        </if>
+        order by io.add_time
+    </select>
+</mapper>

@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="mapper.MenuMapper">
+    <!---->
+    <select id="admin_menu" parameterType="map" resultType="var">
+        SELECT [MENU_ID], [MENU_NAME], [MENU_URL], [PARENT_ID], [MENU_ORDER], [MENU_TYPE] FROM [dbo].[SYS_MENU]
+    </select>
+    <select id="SYS_MENU_listPage" parameterType="map" resultType="map">
+        SELECT menu.[MENU_ID], menu.[MENU_NAME], menu.[MENU_URL], menu.[PARENT_ID], menu.[MENU_ORDER], menu.[MENU_TYPE] ,p.MENU_NAME PARENT_NAME
+        FROM [dbo].[SYS_MENU] menu
+        LEFT JOIN [dbo].[SYS_MENU] p on p.MENU_ID = menu.PARENT_ID
+        ORDER BY menu.MENU_ID
+    </select>
+    <select id="SYS_MENU_findByID" parameterType="map" resultType="map">
+        SELECT [MENU_ID], [MENU_NAME], [MENU_URL], [PARENT_ID], [MENU_ORDER], [MENU_TYPE] FROM [dbo].[SYS_MENU] where MENU_ID = #{MENU_ID}
+    </select>
+    <!-- 添加系统菜单表 -->
+    <insert id="saveSYSMENU" parameterType="map">
+        insert into SYS_MENU
+        (
+        MENU_ID
+        <if test="MENU_NAME != null and MENU_NAME != '' or MENU_NAME == 0 ">
+            , MENU_NAME
+        </if>
+        <if test="MENU_URL != null and MENU_URL != '' or MENU_URL == 0 ">
+            , MENU_URL
+        </if>
+        <if test="PARENT_ID != null and PARENT_ID != '' or PARENT_ID == 0 ">
+            , PARENT_ID
+        </if>
+        <if test="MENU_ORDER != null and MENU_ORDER != '' or MENU_ORDER == 0 ">
+            , MENU_ORDER
+        </if>
+        <if test="MENU_TYPE != null and MENU_TYPE != '' or MENU_TYPE == 0 ">
+            , MENU_TYPE
+        </if>
+        )values(
+        #{MENU_ID}
+        <if test="MENU_NAME != null  and MENU_NAME != ''  or MENU_NAME == 0">
+            , #{MENU_NAME}
+        </if>
+        <if test="MENU_URL != null  and MENU_URL != ''  or MENU_URL == 0">
+            , #{MENU_URL}
+        </if>
+        <if test="PARENT_ID != null  and PARENT_ID != ''  or PARENT_ID == 0">
+            , #{PARENT_ID}
+        </if>
+        <if test="MENU_ORDER != null  and MENU_ORDER != ''  or MENU_ORDER == 0">
+            , #{MENU_ORDER}
+        </if>
+        <if test="MENU_TYPE != null  and MENU_TYPE != ''  or MENU_TYPE == 0">
+            , #{MENU_TYPE}
+        </if>
+        )
+    </insert>
+    <!-- 修改系统菜单表 -->
+    <update id="updateSYSMENU" parameterType="map">
+        update SYS_MENU
+        set
+        MENU_ID = #{MENU_ID}
+        <if test="MENU_NAME != null  and MENU_NAME!= ''  or MENU_NAME == 0">
+            , MENU_NAME= #{MENU_NAME}
+        </if>
+        <if test="MENU_URL != null  and MENU_URL!= ''  or MENU_URL == 0">
+            , MENU_URL= #{MENU_URL}
+        </if>
+        <if test="PARENT_ID != null  and PARENT_ID!= ''  or PARENT_ID == 0">
+            , PARENT_ID= #{PARENT_ID}
+        </if>
+        <if test="MENU_ORDER != null  and MENU_ORDER!= ''  or MENU_ORDER == 0">
+            , MENU_ORDER= #{MENU_ORDER}
+        </if>
+        <if test="MENU_TYPE != null  and MENU_TYPE!= ''  or MENU_TYPE == 0">
+            , MENU_TYPE= #{MENU_TYPE}
+        </if>
+        where
+        MENU_ID = #{MENU_ID}
+    </update>
+    <update id="SYS_MENU_del" parameterType="map">
+        delete SYS_MENU where MENU_ID = #{MENU_ID}
+    </update>
+</mapper>

@@ -1,0 +1,97 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="mapper.T_Sys_ServiceMapper">
+    <!---->
+    <select id="findMethod" parameterType="map" resultType="var">
+        SELECT [SERVICE_METHOD], [SERVICE_CLASS] FROM T_Sys_Service where SERVICE_KEY = #{method}
+    </select>
+    <select id="T_Sys_Service_listPage" parameterType="map" resultType="map">
+        SELECT [SERVICE_KEY], [SERVICE_METHOD], [SERVICE_CLASS], [MODULE_NAME], [FUNC_NAME], [AUTH_CODE], [Is_Enabled] FROM T_Sys_Service
+         <where>
+             <if test="SERVICE_KEY != null  and SERVICE_KEY != ''  or SERVICE_KEY == 0">
+                 and  SERVICE_KEY like '%'+#{SERVICE_KEY}+'%'
+             </if>
+             <if test="MODULE_NAME != null  and MODULE_NAME != ''  or MODULE_NAME == 0">
+                 and MODULE_NAME LIKE  '%'+#{MODULE_NAME}+'%'
+             </if>
+         </where>
+         order by SERVICE_KEY
+    </select>
+    <select id="T_Sys_Service_findByID" parameterType="map" resultType="map">
+        SELECT [SERVICE_KEY], [SERVICE_METHOD], [SERVICE_CLASS], [MODULE_NAME], [FUNC_NAME], [AUTH_CODE], [Is_Enabled] FROM T_Sys_Service where SERVICE_KEY = #{SERVICE_KEY}
+    </select>
+    <update id="T_Sys_Service_del" parameterType="map">
+        delete T_Sys_Service where SERVICE_KEY = #{SERVICE_KEY}
+    </update>
+    <!-- 添加系统接口表 -->
+    <insert id="saveTSysService" parameterType="map">
+        insert into T_Sys_Service
+        (
+        SERVICE_KEY
+        <if test="SERVICE_METHOD != null and SERVICE_METHOD != '' or SERVICE_METHOD == 0 ">
+            , SERVICE_METHOD
+        </if>
+        <if test="SERVICE_CLASS != null and SERVICE_CLASS != '' or SERVICE_CLASS == 0 ">
+            , SERVICE_CLASS
+        </if>
+        <if test="MODULE_NAME != null and MODULE_NAME != '' or MODULE_NAME == 0 ">
+            , MODULE_NAME
+        </if>
+        <if test="FUNC_NAME != null and FUNC_NAME != '' or FUNC_NAME == 0 ">
+            , FUNC_NAME
+        </if>
+        <if test="AUTH_CODE != null and AUTH_CODE != '' or AUTH_CODE == 0 ">
+            , AUTH_CODE
+        </if>
+        <if test="Is_Enabled != null and Is_Enabled != '' or Is_Enabled == 0 ">
+            , Is_Enabled
+        </if>
+        )values(
+        #{SERVICE_KEY}
+        <if test="SERVICE_METHOD != null  and SERVICE_METHOD != ''  or SERVICE_METHOD == 0">
+            , #{SERVICE_METHOD}
+        </if>
+        <if test="SERVICE_CLASS != null  and SERVICE_CLASS != ''  or SERVICE_CLASS == 0">
+            , #{SERVICE_CLASS}
+        </if>
+        <if test="MODULE_NAME != null  and MODULE_NAME != ''  or MODULE_NAME == 0">
+            , #{MODULE_NAME}
+        </if>
+        <if test="FUNC_NAME != null  and FUNC_NAME != ''  or FUNC_NAME == 0">
+            , #{FUNC_NAME}
+        </if>
+        <if test="AUTH_CODE != null  and AUTH_CODE != ''  or AUTH_CODE == 0">
+            , #{AUTH_CODE}
+        </if>
+        <if test="Is_Enabled != null  and Is_Enabled != ''  or Is_Enabled == 0">
+            , #{Is_Enabled}
+        </if>
+        )
+    </insert>
+    <!-- 修改系统接口表 -->
+    <update id="updateTSysService" parameterType="map">
+        update T_Sys_Service
+        set
+        SERVICE_KEY = #{SERVICE_KEY}
+        <if test="SERVICE_METHOD != null  and SERVICE_METHOD!= ''  or SERVICE_METHOD == 0">
+            , SERVICE_METHOD= #{SERVICE_METHOD}
+        </if>
+        <if test="SERVICE_CLASS != null  and SERVICE_CLASS!= ''  or SERVICE_CLASS == 0">
+            , SERVICE_CLASS= #{SERVICE_CLASS}
+        </if>
+        <if test="MODULE_NAME != null  and MODULE_NAME!= ''  or MODULE_NAME == 0">
+            , MODULE_NAME= #{MODULE_NAME}
+        </if>
+        <if test="FUNC_NAME != null  and FUNC_NAME!= ''  or FUNC_NAME == 0">
+            , FUNC_NAME= #{FUNC_NAME}
+        </if>
+        <if test="AUTH_CODE != null  and AUTH_CODE!= ''  or AUTH_CODE == 0">
+            , AUTH_CODE= #{AUTH_CODE}
+        </if>
+        <if test="Is_Enabled != null  and Is_Enabled!= ''  or Is_Enabled == 0">
+            , Is_Enabled= #{Is_Enabled}
+        </if>
+        where
+        SERVICE_KEY = #{SERVICE_KEY}
+    </update>
+</mapper>

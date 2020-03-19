@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title></title>
+    <meta name="renderer" content="webkit">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=0">
+    <link rel="stylesheet" href="/sys/layuiadmin/layui/css/layui.css" media="all">
+    <link rel="stylesheet" href="/sys/layuiadmin/style/admin.css" media="all">
+</head>
+<body>
+
+<div class="layui-fluid">
+    <div class="layui-card">
+        <div class="layui-form layui-card-header layuiadmin-card-header-auto">
+            <div class="layui-form-item">
+                <div class="layui-inline">
+                    <label class="layui-form-label">医生</label>
+                    <div class="layui-input-inline">
+                        <input type="text" name="doc_name" placeholder="请输入" autocomplete="off" class="layui-input">
+                    </div>
+                </div>
+                <div class="layui-inline">
+                    <button class="layui-btn layuiadmin-btn-list" lay-submit lay-filter="table_temp_id">
+                        <i class="layui-icon layui-icon-search layuiadmin-button-btn"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <div class="layui-card-body">
+            <div style="padding-bottom: 10px;">
+                <button class="layui-btn layuiadmin-btn-list" data-type="batchdel">删除</button>
+                <button class="layui-btn layuiadmin-btn-list" data-type="add">添加</button>
+                <!--<span class="layui-inline ">-->
+                    <!--<input type="text" placeholder="搜索..." id="table_temp_search_id" autocomplete="off" class="layui-input layui-input-search" onchange="dataObj.search()">-->
+                <!--</span>-->
+            </div>
+            <table id="table_temp_id" lay-filter="table_temp_id"></table>
+        </div>
+    </div>
+</div>
+<script type="text/html" id="table-content-list">
+    <a class="layui-btn layui-btn-normal layui-btn-xs" lay-event="edit"><i class="layui-icon layui-icon-edit"></i>编辑</a>
+    <a class="layui-btn layui-btn-danger layui-btn-xs" lay-event="del"><i class="layui-icon layui-icon-delete"></i>删除</a>
+</script>
+<script src="/sys/layuiadmin/js/jquery.min.js"></script>
+<script src="/sys/layuiadmin/layui/layui.all.js"></script>
+<script src="/admin/js/lx.js"></script>
+<script>
+    var primaryKey = "doc_id";
+    dataObj.table_temp.url = lx.wwwroot+'/admin/serviceK?method=adminService.dicDoctorListPage';
+    dataObj.table_temp.cols=[[
+        {type:"checkbox",fixed:"left"}
+        ,{field:"jgmc",width:150,title:"机构",sort:!0}
+        ,{field:"doc_code",width:150,title:"医生编码",sort:!0}
+        ,{field:"doc_name",width:150,title:"医师姓名",sort:!0}
+        ,{field:"doc_prof",width:150,title:"医师职称",sort:!0}
+//        ,{field:"id_no",width:150,title:"身份证号",sort:!0}
+        ,{field:"sex",width:150,title:"性别",sort:!0}
+        ,{field:"birth_date",width:150,title:"出生日期",sort:!0}
+        ,{field:"doc_picture",width:150,title:"医生头像",sort:!0}
+        ,{field:"doc_specialties",width:150,title:"医生特长",sort:!0}
+        ,{field:"contact_way",width:150,title:"联系方式",sort:!0}
+        ,{field:"doc_synopsis",width:150,title:"医生简介",sort:!0}
+        ,{field:"ybbm",width:150,title:"医保编码",sort:!0}
+        ,{field:"is_jyqy",width:150,title:"签约标志",sort:!0}
+        ,{field:"is_enabled",title:"状态",width:100,align:"center",t1:'有效',t2:'无效',templet:temp_fun.sex_func,sort:!0}
+        ,{title:"操作",width:250,align:"center",fixed:"right",toolbar:"#table-content-list"}
+    ]];
+    window.dataObj.table_temp.limit=15;
+    dataObj.del=function (data) {
+        var para = {};
+        para["lx_"+primaryKey]=data[primaryKey];
+        lx.ajax("admin/del/dic_doctor",dataObj.del_success,para);
+    };
+    dataObj.edit = function (data) {
+        return 'edit.html?'+primaryKey+'='+data[primaryKey];
+    };
+    dataObj.add_content='edit.html';
+    dataObj.delAll = function (checkData) {
+        var ls = [];
+        for(var i in checkData){
+            var v = checkData[i];
+            var para = {};
+            para["lx_"+primaryKey]=v[primaryKey];
+            ls.push(para);
+        }
+        layer.confirm('确定删除吗？', function(index) {
+            lx.ajax("admin/delAll/dic_doctor",function () {
+                layui.table.reload('table_temp_id');
+                layer.msg('已删除');
+            },{ls:JSON.stringify(ls)});
+        });
+    }
+</script>
+</body>
+</html>

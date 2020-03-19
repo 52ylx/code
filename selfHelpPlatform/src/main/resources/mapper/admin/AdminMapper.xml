@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="mapper.AdminMapper">
+
+    <select id="t_sys_userListPage" resultType="map" parameterType="map">
+        select doc.doc_name,dm.jgmc ,u.[user_id], u.[login_name], u.[password], u.[realname], u.[sex], u.[last_login_time], u.[last_login_ip], u.[is_enabled],u.[opname], u.[optime], u.[user_type], u.[doc_id], u.[photo_url], u.[user_code], u.[tokent], u.[tokent_expire], u.[current_dept], u.[business_code], u.[is_esignature], u.[esignatureway], u.[last_upd_pwd_time], u.[locknum], u.[is_lock], u.[last_logtime], u.[id_no], u.[birth_date], u.[tel_no], u.[address], u.[wx_openid], u.[wx_nickname], [wx_sex], [wx_language], [wx_province], [wx_city], [wx_country], [wx_headimgurl], [wx_privilege], [wx_unionid], u.[jg_id]
+        from t_sys_user u
+        LEFT JOIN dic_medicalInstitutions dm on dm.jg_id = u.jg_id
+        left join dic_doctor doc on doc.doc_id = u.doc_id
+        <where>
+            <if test="OS.user_type != 1">
+                and (u.jg_id =#{OS.jg_id} or u.jg_id in (select jg_id from dic_medicalInstitutions d where d.sjjg = #{OS.jg_id}))
+            </if>
+        </where>
+        order by login_name
+    </select>
+    <select id="dicDoctorListPage" parameterType="map" resultType="map">
+        SELECT doc_id,jgmc,doc_code	,doc_name	,sc1.meaning doc_prof	,id_no	,sc.meaning sex	,birth_date		,doc_specialties	,doc.contact_way	,doc_synopsis	,doc.ybbm	,case is_jyqy when '1' then '是' else '否' end is_jyqy	,doc.is_enabled
+        FROM [dbo].[dic_doctor] doc
+        LEFT JOIN dic_medicalInstitutions dm on dm.jg_id = doc.jg_id
+        left join sys_code sc ON sc.code_type = '002' and sc.code = doc.sex
+        left join sys_code sc1 ON sc1.code_type = '007' and sc1.code = doc.doc_prof
+        <where>
+            <if test="doc_name != null and doc_name != ''">
+                and doc.doc_name LIKE  '%'+#{doc_name}+'%'
+            </if>
+            <if test="OS.user_type != 1">
+                and (dm.jg_id =#{OS.jg_id} or dm.jg_id in (select jg_id from dic_medicalInstitutions d where d.sjjg = #{OS.jg_id}))
+            </if>
+        </where>
+        ORDER BY doc_code
+    </select>
+    <select id="dic_medicalInstitutionsListPage" resultType="map" parameterType="map">
+        select t1.realname add_user,t2.realname update_user,
+        dm.[jg_id], dm.[jg_num], dm.[jgbm], dm.[jgmc], dm.[jg_memo]
+        ,case dm.[jg_grade] when 1 then '一级' when '2' then '二级' else '' end jg_grade, dm.[address_memo], dm.[contact_way]
+        , pdm.jgmc  [sjjg], dm.[ybbm], dm.[add_time], dm.[update_time],dm.[is_enabled]
+         from dic_medicalInstitutions dm
+        LEFT JOIN t_sys_user t1 on t1.user_id = dm.add_user
+        LEFT JOIN t_sys_user t2 on t2.user_id = dm.update_user
+        LEFT JOIN dic_medicalInstitutions pdm on dm.sjjg = pdm.jg_id
+        <where>
+            <if test="jgmc != null and jgmc != ''">
+                and dm.jgmc like '%'+#{jgmc}+'%'
+            </if>
+            <if test="jg_grade != null and jg_grade != ''">
+                and dm.jg_grade = #{jg_grade}
+            </if>
+
+            <if test="OS.user_type != 1">
+                and (dm.jg_id =#{OS.jg_id} or dm.jg_id in (select jg_id from dic_medicalInstitutions d where d.sjjg = #{OS.jg_id}))
+            </if>
+        </where>
+        ORDER BY dm.jg_num
+    </select>
+    <select id="sys_patient_userListPage" resultType="map" parameterType="map">
+         select  is_enabled,add_time,update_time,[spu_id], [name], [id_no], [sex], [birth_date], [address], [tel_no],[wx_openid], [wx_nickname], [wx_sex], [wx_language], [wx_province], [wx_city], [wx_country], [wx_headimgurl], [wx_privilege], [wx_unionid]
+        from sys_patient_user
+        <where>
+            <if test="name != null and name != ''">
+                and name like '%'+#{name}+'%'
+            </if>
+            <if test="wx_nickname != null and wx_nickname != ''">
+                and wx_nickname like '%'+#{wx_nickname}+'%'
+            </if>
+
+            <if test="id_no != null and id_no != ''">
+                and id_no like '%'+#{id_no}+'%'
+            </if>
+            <if test="tel_no != null and tel_no != ''">
+                and tel_no like '%'+#{tel_no}+'%'
+            </if>
+            and wx_openid is not null
+        </where>
+        ORDER BY [name]
+    </select>
+</mapper>
